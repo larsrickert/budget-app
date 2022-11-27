@@ -14,6 +14,7 @@ export default defineNuxtConfig({
       titleTemplate: "Budget App - %s",
     },
   },
+  css: ["~/assets/styles/index.scss"],
   vite: {
     plugins: [
       VueI18nVitePlugin({
