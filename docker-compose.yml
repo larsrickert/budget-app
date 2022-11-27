@@ -8,10 +8,21 @@ services:
     # ports:
     #   - "8090:8090"
     environment:
-      VIRTUAL_HOST: "${BACKEND_DOMAIN}"
-      LETSENCRYPT_HOST: "${BACKEND_DOMAIN}"
+      VIRTUAL_HOST: ${BACKEND_DOMAIN:?}
+      LETSENCRYPT_HOST: ${BACKEND_DOMAIN:?}
     volumes:
       - ./docker-data/pocketbase:/app/pb_data
+
+  frontend:
+    build: ./frontend
+    image: larsrickert/budget-app-frontend
+    restart: unless-stopped
+    # ports:
+    #   - "80:3000"
+    environment:
+      VIRTUAL_HOST: ${FRONTEND_DOMAIN:?}
+      LETSENCRYPT_HOST: ${FRONTEND_DOMAIN:?}
+      NUXT_PUBLIC_API_HOST: ${BACKEND_DOMAIN:?}
 
 networks:
   default:
