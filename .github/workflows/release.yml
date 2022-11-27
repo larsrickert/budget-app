@@ -4,6 +4,7 @@ on:
     branches: [alpha]
     paths:
       - "backend/**"
+      - "frontend/**"
   workflow_dispatch:
 
 jobs:
