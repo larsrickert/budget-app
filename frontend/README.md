@@ -1,42 +1,63 @@
-# Nuxt 3 Minimal Starter
+# Vue.js TypeScript Template
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This template is based on the official vue starter app but is extended by common libraries:
 
-## Setup
+- [Pinia](https://pinia.vuejs.org)
+- [Vue I18n](https://vue-i18n.intlify.dev)
+- [Sass](https://sass-lang.com)
+- Linting and formatting before committing
 
-Make sure to install the dependencies:
+## Recommended IDE Setup
 
-```bash
-# yarn
-yarn install
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-# npm
-npm install
+## Project Setup
 
-# pnpm
-pnpm install --shamefully-hoist
+### Install dependencies
+
+```sh
+npm ci
 ```
 
-## Development Server
+### Compile and Hot-Reload for Development
 
-Start the development server on http://localhost:3000
-
-```bash
+```sh
 npm run dev
 ```
 
-## Production
+### Type-Check, Compile and Minify for Production
 
-Build the application for production:
-
-```bash
+```sh
 npm run build
 ```
 
-Locally preview production build:
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-```bash
-npm run preview
+```sh
+npm run test:unit
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Lint and fix file with [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
+
+```sh
+npm run lint
+```
+
+## Type Support for `.vue` Imports in TS with VS Code
+
+TypeScript cannot handle type information for `.vue` imports by default. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+
+1. Disable the built-in TypeScript Extension
+   1. Open VS Code extensions
+   2. Enter `@builtin typescript` in search box, find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload VS Code
+
+## Deploying for production with Docker
+
+To start the application for production using Docker, just run
+
+```sh
+docker-compose up -d
+```
