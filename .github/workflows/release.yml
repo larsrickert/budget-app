@@ -3,6 +3,7 @@ on:
   push:
     branches: [alpha]
     paths:
+      - "frontend/**"
       - "backend/**"
   workflow_dispatch:
 
