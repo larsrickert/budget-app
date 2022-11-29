@@ -74,7 +74,6 @@ const handleItemClick = (href: string) => {
       direction="ltr"
       :close-on-press-escape="false"
       :with-header="false"
-      size="25%"
       class="drawer"
       @close="isDrawerOpenModel = false"
     >
@@ -88,6 +87,14 @@ const handleItemClick = (href: string) => {
 
 :global(.el-drawer__body) {
   --el-drawer-padding-primary: var(--app-space-3);
+}
+
+:global(.el-drawer) {
+  width: 25% !important;
+
+  @include breakpoint(l) {
+    width: 300px !important;
+  }
 }
 
 .side-menu {
