@@ -14,7 +14,7 @@ const router = useRouter();
 const navItems = computed<VueProps<typeof SideMenuTemplate>["navItems"]>(() => {
   return [
     {
-      label: "Nav Item 1",
+      label: t("home.pageName"),
       icon: HomeFilled,
       href: "/",
     },

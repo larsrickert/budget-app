@@ -1,18 +1,15 @@
 <script lang="ts" setup>
-import { provideIsDrawerOpenSymbol } from "@/types";
-import { ElButton } from "element-plus";
-import { inject } from "vue";
+import HeaderOrganism from "@/components/organisms/HeaderOrganism.vue";
+import { useI18n } from "vue-i18n";
 
-const isDrawerOpen = inject(provideIsDrawerOpenSymbol);
+const { t } = useI18n();
 </script>
 
 <template>
   <div>
-    <el-button
-      v-if="isDrawerOpen != null"
-      @click="isDrawerOpen != null ? (isDrawerOpen = true) : undefined"
-      >Open drawer</el-button
-    >
+    <HeaderOrganism :headline="t('home.pageName')" />
+
+    <div class="page__content">WIP</div>
   </div>
 </template>
 
