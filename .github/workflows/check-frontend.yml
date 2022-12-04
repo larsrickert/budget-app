@@ -3,8 +3,8 @@ on:
   pull_request:
 
 jobs:
-  release:
-    name: Release
+  check:
+    name: Check frontend
     runs-on: ubuntu-latest
     defaults:
       run:
