@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import HelloWorld from "@/components/HelloWorld.vue";
+import HeaderOrganism from "@/components/organisms/HeaderOrganism.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -7,7 +7,9 @@ const { t } = useI18n();
 
 <template>
   <div>
-    <HelloWorld :msg="t('message')" />
+    <HeaderOrganism :headline="t('home.pageName')" />
+
+    <div class="page__content">WIP</div>
   </div>
 </template>
 

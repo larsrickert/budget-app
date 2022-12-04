@@ -1,0 +1,9 @@
+{
+  "app": {
+    "title": "Budget App",
+    "subtitle": "Persönliche Finanzen"
+  },
+  "home": {
+    "pageName": "Übersicht"
+  }
+}

@@ -1,7 +1,30 @@
-@import "@fontsource/open-sans/latin";
-@import "mixins";
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "primary": (
+      "base": #72afd3,
+    ),
+  )
+);
+
+@use "element-plus/theme-chalk/src/index.scss" as *;
+
+@use "@fontsource/montserrat/latin";
+@use "mixins";
+@use "variables";
+@use "fonts";
+@use "layouts";
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: Montserrat, sans-serif;
+  color: var(--el-text-color-regular);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--el-text-color-primary);
 }

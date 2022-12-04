@@ -1,6 +1,7 @@
 import type { VueProps } from "@/types/vue";
+import { House } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Component from "./HelloWorld.vue";
+import Component from "./SideMenuItemAtom.vue";
 
 type Args = VueProps<typeof Component>;
 
@@ -10,6 +11,14 @@ export default {
 
 export const Primary: StoryObj<Args> = {
   args: {
-    msg: "Hello World!",
+    label: "Nav Item 1",
+    icon: House,
+  },
+};
+
+export const Active: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    active: true,
   },
 };

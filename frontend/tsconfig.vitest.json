@@ -4,6 +4,6 @@
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": ["node", "jsdom", "@intlify/vite-plugin-vue-i18n/client"]
+    "types": ["node", "jsdom"]
   }
 }

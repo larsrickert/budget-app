@@ -14,14 +14,20 @@
     "prepare": "cd .. && husky install frontend/.husky"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^4.5.13",
+    "@element-plus/icons-vue": "^2.0.10",
+    "@fontsource/montserrat": "^4.5.13",
+    "@vueuse/core": "^9.6.0",
+    "element-plus": "^2.2.25",
     "pinia": "^2.0.27",
     "vue": "^3.2.45",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^6.0.3",
+    "@intlify/unplugin-vue-i18n": "^0.8.0",
+    "@storybook/addon-essentials": "^7.0.0-alpha.54",
+    "@storybook/addon-interactions": "^7.0.0-alpha.54",
+    "@storybook/addon-links": "^7.0.0-alpha.54",
     "@storybook/vue3": "^7.0.0-alpha.54",
     "@storybook/vue3-vite": "^7.0.0-alpha.54",
     "@types/jsdom": "^20.0.1",
@@ -41,6 +47,7 @@
     "sass": "^1.56.1",
     "storybook": "^7.0.0-alpha.54",
     "typescript": "~4.9.3",
+    "unplugin-element-plus": "^0.4.1",
     "vite": "^3.2.4",
     "vitest": "^0.25.3",
     "vue-tsc": "^1.0.9"

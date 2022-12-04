@@ -1,3 +1,9 @@
 {
-  "message": "Hello World"
+  "app": {
+    "title": "Budget App",
+    "subtitle": "Personal finances"
+  },
+  "home": {
+    "pageName": "Overview"
+  }
 }
