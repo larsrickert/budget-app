@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { fileURLToPath, URL } from "url";
 
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
@@ -22,5 +24,8 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
+  },
+  test: {
+    passWithNoTests: true,
   },
 });
