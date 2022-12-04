@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
-    "@fontsource/open-sans": "^4.5.13",
+    "@fontsource/montserrat": "^4.5.13",
     "@vueuse/core": "^9.6.0",
     "element-plus": "^2.2.25",
     "pinia": "^2.0.27",

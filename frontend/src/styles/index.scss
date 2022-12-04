@@ -8,13 +8,13 @@
 
 @use "element-plus/theme-chalk/src/index.scss" as *;
 
-@use "@fontsource/open-sans/latin";
+@use "@fontsource/montserrat/latin";
 @use "mixins";
 @use "variables";
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: Montserrat, sans-serif;
   color: var(--el-text-color-regular);
 }
 
