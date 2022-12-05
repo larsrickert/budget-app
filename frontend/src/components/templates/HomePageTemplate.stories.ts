@@ -36,14 +36,13 @@ export const Loading: StoryObj<Args> = {
     isAccountsLoading: true,
     isMonthlyLoading: true,
     isBudgetDevelopmentLoading: true,
+    budgetDevelopment: undefined,
   },
 };
 
 export const Empty: StoryObj<Args> = {
   args: {
     accounts: [],
-    budgetDevelopment: {
-      items: [],
-    },
+    budgetDevelopment: undefined,
   },
 };

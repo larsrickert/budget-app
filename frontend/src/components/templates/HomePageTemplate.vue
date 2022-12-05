@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { VueProps } from "@/types/vue";
 import { Money, PieChart, PriceTag } from "@element-plus/icons-vue";
-import { ElDivider, ElEmpty } from "element-plus";
+import { ElContainer, ElDivider, ElEmpty } from "element-plus";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
@@ -94,13 +94,17 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
       <section>
         <HeadlineAtom :headline="t('home.chart.headline')" />
 
-        <LineChartAtom
+        <el-container
           v-if="chartItems.length || isBudgetDevelopmentLoading"
-          :items="chartItems"
-          :y-ticks-formatter="(value) => n(value, 'currencyShort')"
-          :max-x-ticks="12"
-          class="chart"
-        />
+          v-loading="isBudgetDevelopmentLoading"
+        >
+          <LineChartAtom
+            :items="chartItems"
+            :y-ticks-formatter="(value) => n(value, 'currencyShort')"
+            :max-x-ticks="12"
+            class="chart"
+          />
+        </el-container>
 
         <el-empty v-else :description="t('home.chart.noItems')" class="empty" />
       </section>
@@ -130,5 +134,6 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
 .chart {
   margin-top: var(--app-space-2);
   max-height: 500px;
+  width: 100%;
 }
 </style>
