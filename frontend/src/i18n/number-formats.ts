@@ -7,6 +7,12 @@ const numberFormats: NumberFormats = {
       currency: "USD",
     },
   },
+  de: {
+    currency: {
+      style: "currency",
+      currency: "EUR",
+    },
+  },
 };
 
 export default numberFormats;

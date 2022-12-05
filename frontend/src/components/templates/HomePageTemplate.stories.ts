@@ -12,6 +12,9 @@ export default {
 export const Primary: StoryObj<Args> = {
   args: {
     accounts: FinanceItemListStory.args?.items ?? [],
+    income: 59.99,
+    outcome: 19.99,
+    budget: 49,
   },
 };
 
@@ -19,12 +22,12 @@ export const Loading: StoryObj<Args> = {
   args: {
     ...Primary.args,
     isAccountsLoading: true,
+    isMonthlyLoading: true,
   },
 };
 
 export const Empty: StoryObj<Args> = {
   args: {
-    ...Primary.args,
     accounts: [],
   },
 };

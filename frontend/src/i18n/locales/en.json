@@ -1,6 +1,8 @@
 {
   "global": {
-    "accounts": "Account | Accounts"
+    "accounts": "Account | Accounts",
+    "income": "Income | Incomes",
+    "outcome": "Outcome | Outcomes"
   },
   "app": {
     "title": "Budget App",
@@ -8,6 +10,10 @@
   },
   "home": {
     "pageName": "Overview",
-    "noAccounts": "No accounts found."
+    "noAccounts": "No accounts found.",
+    "monthly": {
+      "headline": "Monthly overview",
+      "Budget": "Budget"
+    }
   }
 }

@@ -1,6 +1,8 @@
 {
   "global": {
-    "accounts": "Konto | Konten"
+    "accounts": "Konto | Konten",
+    "income": "Einnahme | Einnahmen",
+    "outcome": "Ausgabe | Ausgaben"
   },
   "app": {
     "title": "Budget App",
@@ -8,6 +10,10 @@
   },
   "home": {
     "pageName": "Übersicht",
-    "noAccounts": "Keine Konten gefunden."
+    "noAccounts": "Keine Konten gefunden.",
+    "monthly": {
+      "headline": "Monatsübersicht",
+      "budget": "Budget"
+    }
   }
 }
