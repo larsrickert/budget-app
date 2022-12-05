@@ -1,9 +1,13 @@
 {
+  "global": {
+    "accounts": "Konto | Konten"
+  },
   "app": {
     "title": "Budget App",
     "subtitle": "Persönliche Finanzen"
   },
   "home": {
-    "pageName": "Übersicht"
+    "pageName": "Übersicht",
+    "noAccounts": "Keine Konten gefunden."
   }
 }
