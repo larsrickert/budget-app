@@ -127,14 +127,14 @@ const handleItemClick = (href: string) => {
   &__title {
     margin: 0;
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   &__subtitle {
     margin: 0;
     margin-top: 4px;
     color: var(--el-text-color-secondary);
-    font-weight: 300;
+    font-weight: 400;
   }
 
   &__items {
