@@ -15,6 +15,18 @@ export const Primary: StoryObj<Args> = {
     income: 59.99,
     outcome: 19.99,
     budget: 49,
+    budgetDevelopment: {
+      items: [
+        {
+          date: new Date().toISOString(),
+          budget: 100,
+        },
+        {
+          date: new Date().toISOString(),
+          budget: -100,
+        },
+      ],
+    },
   },
 };
 
@@ -23,11 +35,15 @@ export const Loading: StoryObj<Args> = {
     ...Primary.args,
     isAccountsLoading: true,
     isMonthlyLoading: true,
+    isBudgetDevelopmentLoading: true,
   },
 };
 
 export const Empty: StoryObj<Args> = {
   args: {
     accounts: [],
+    budgetDevelopment: {
+      items: [],
+    },
   },
 };

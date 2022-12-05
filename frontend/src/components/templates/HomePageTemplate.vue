@@ -2,13 +2,15 @@
 import type { VueProps } from "@/types/vue";
 import { Money, PieChart, PriceTag } from "@element-plus/icons-vue";
 import { ElDivider, ElEmpty } from "element-plus";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
+import LineChartAtom from "../atoms/LineChartAtom.vue";
 import TileMolecule from "../molecules/TileMolecule.vue";
 import FinanceItemListOrganism from "../organisms/FinanceItemListOrganism.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
-defineProps<{
+const props = defineProps<{
   modelValue?: unknown;
   accounts: VueProps<typeof FinanceItemListOrganism>["items"];
   isAccountsLoading?: boolean;
@@ -16,13 +18,28 @@ defineProps<{
   outcome?: number;
   budget?: number;
   isMonthlyLoading?: boolean;
+  budgetDevelopment?: {
+    items: { date: string; budget: number }[];
+  };
+  isBudgetDevelopmentLoading?: boolean;
 }>();
 
 const emit = defineEmits<{
   (event: "itemClick", id: string): void;
 }>();
 
-const { t, n } = useI18n();
+const { t, n, d } = useI18n();
+
+const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
+  if (!props.budgetDevelopment) return [];
+  return props.budgetDevelopment.items.map((item) => {
+    return {
+      label: d(item.date, "date"),
+      value: item.budget,
+      tooltipLabel: n(item.budget, "currency"),
+    };
+  });
+});
 </script>
 
 <template>
@@ -74,7 +91,19 @@ const { t, n } = useI18n();
 
       <el-divider border-style="dashed" />
 
-      <section>Chart...</section>
+      <section>
+        <HeadlineAtom :headline="t('home.chart.headline')" />
+
+        <LineChartAtom
+          v-if="chartItems.length || isBudgetDevelopmentLoading"
+          :items="chartItems"
+          :y-ticks-formatter="(value) => n(value, 'currencyShort')"
+          :max-x-ticks="12"
+          class="chart"
+        />
+
+        <el-empty v-else :description="t('home.chart.noItems')" class="empty" />
+      </section>
     </div>
   </div>
 </template>
@@ -96,5 +125,10 @@ const { t, n } = useI18n();
   .tile {
     min-width: 128px;
   }
+}
+
+.chart {
+  margin-top: var(--app-space-2);
+  max-height: 500px;
 }
 </style>

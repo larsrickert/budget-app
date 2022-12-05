@@ -14,6 +14,10 @@
     "monthly": {
       "headline": "Monthly overview",
       "Budget": "Budget"
+    },
+    "chart": {
+      "headline": "Budget development",
+      "noItems": "Add bookings to see your daily available budget for the next {n} months."
     }
   }
 }
