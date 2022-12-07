@@ -1,4 +1,4 @@
-import type { VueProps } from "@/types";
+import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./HeadlineAtom.vue";
 
