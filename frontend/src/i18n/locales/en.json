@@ -1,9 +1,23 @@
 {
+  "global": {
+    "accounts": "Account | Accounts",
+    "income": "Income | Incomes",
+    "outcome": "Outcome | Outcomes"
+  },
   "app": {
     "title": "Budget App",
     "subtitle": "Personal finances"
   },
   "home": {
-    "pageName": "Overview"
+    "pageName": "Overview",
+    "noAccounts": "No accounts found.",
+    "monthly": {
+      "headline": "Monthly overview",
+      "Budget": "Budget"
+    },
+    "chart": {
+      "headline": "Budget development",
+      "noItems": "Add bookings to see your daily available budget for the next {n} months."
+    }
   }
 }

@@ -1,6 +1,7 @@
 import "@/styles/index.scss";
 
 import { setup } from "@storybook/vue3";
+import { ElLoading } from "element-plus";
 import i18n from "../src/i18n";
 
 export const parameters = {
@@ -26,5 +27,5 @@ export const parameters = {
 };
 
 setup((app) => {
-  app.use(i18n);
+  app.use(i18n).use(ElLoading);
 });
