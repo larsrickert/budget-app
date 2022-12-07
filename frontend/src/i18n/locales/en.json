@@ -19,5 +19,25 @@
       "headline": "Budget development",
       "noItems": "Add bookings to see your daily available budget for the next {n} months."
     }
+  },
+  "profile": {
+    "createPageName": "Registration",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirm": "Confirm password",
+    "actions": {
+      "create": "Register"
+    },
+    "toasts": {
+      "created": "Successfully created profile"
+    }
+  },
+  "validations": {
+    "required": "Value is required.",
+    "minLength": "Value must be at least {min} characters long.",
+    "maxLength": "Value must be at most {max} characters long.",
+    "email": "Value must be a valid email address.",
+    "sameAs": "Value must be identical to \"{otherName}\"."
   }
 }

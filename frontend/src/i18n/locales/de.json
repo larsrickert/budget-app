@@ -19,5 +19,25 @@
       "headline": "Budgetentwicklung",
       "noItems": "Füge Buchungen hinzu, um hier dein tägliches zur Verfügung stehende Budget für die nächsten {n} Monate zu sehen."
     }
+  },
+  "profile": {
+    "createPageName": "Registrieren",
+    "username": "Benutzername",
+    "email": "E-Mail Adresse",
+    "password": "Passwort",
+    "passwordConfirm": "Passwort bestätigen",
+    "actions": {
+      "create": "Registrieren"
+    },
+    "toasts": {
+      "created": "Profil erfolgreich erstellt"
+    }
+  },
+  "validations": {
+    "required": "Wert wird benötigt.",
+    "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
+    "maxLength": "Wert darf maximal {max} Zeichen lang sein.",
+    "email": "Wert muss eine gültige E-Mail Adresse sein.",
+    "sameAs": "Wert muss identisch zu \"{otherName}\" sein."
   }
 }
