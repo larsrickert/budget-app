@@ -2,7 +2,8 @@
   "global": {
     "accounts": "Account | Accounts",
     "income": "Income | Incomes",
-    "outcome": "Outcome | Outcomes"
+    "outcome": "Outcome | Outcomes",
+    "update": "Update"
   },
   "app": {
     "title": "Budget App",
@@ -19,5 +20,45 @@
       "headline": "Budget development",
       "noItems": "Add bookings to see your daily available budget for the next {n} months."
     }
+  },
+  "profile": {
+    "createPageName": "Registration",
+    "myProfilePageName": "My profile",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirm": "Confirm password",
+    "oldPassword": "Old password",
+    "notLoggedIn": "You are not logged in.",
+    "registeredSince": "Registered since",
+    "login": "Already registered? Login now",
+    "logout": "Logout",
+    "emailStatus": {
+      "label": "Email status",
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    },
+    "actions": {
+      "create": "Register"
+    },
+    "toasts": {
+      "created": "Profile created",
+      "updated": "Profile updated",
+      "updatedWithEmail": "Profile updated. We have sent a confirmation email to your new email address.",
+      "requestedEmailVerification": "We have sent you an email to confirm your email address."
+    }
+  },
+  "login": {
+    "pageName": "Login",
+    "usernameOrEmail": "Username or email",
+    "submit": "Login",
+    "register": "No profile yet? Register now"
+  },
+  "validations": {
+    "required": "Value is required.",
+    "minLength": "Value must be at least {min} characters long.",
+    "maxLength": "Value must be at most {max} characters long.",
+    "email": "Value must be a valid email address.",
+    "sameAs": "Value must be identical to \"{otherName}\"."
   }
 }

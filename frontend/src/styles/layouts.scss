@@ -12,3 +12,16 @@
     }
   }
 }
+
+.grid {
+  display: grid;
+  column-gap: var(--app-space-4);
+
+  &--2 {
+    grid-template-columns: 1fr 1fr;
+
+    @include breakpoint(m, max) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -15,6 +15,7 @@ export const Primary: StoryObj<Args> = {
     income: 59.99,
     outcome: 19.99,
     budget: 49,
+    budgetPercentage: 40,
     budgetDevelopment: {
       items: [
         {

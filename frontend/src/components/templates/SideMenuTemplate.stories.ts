@@ -23,7 +23,7 @@ export const Primary: StoryObj<Args> = {
       },
       {
         label: "Nav Item 2",
-        icon: House,
+        img: "https://picsum.photos/100",
         href: "/test1",
       },
     ],

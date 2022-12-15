@@ -1,4 +1,5 @@
 import type { VueProps } from "@/types/vue";
+import { Search } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./HeaderOrganism.vue";
 
@@ -11,6 +12,8 @@ export default {
 export const Primary: StoryObj<Args> = {
   args: {
     headline: "Headline",
+    rightIcon: Search,
+    rightIconText: "Custom text",
   },
 };
 

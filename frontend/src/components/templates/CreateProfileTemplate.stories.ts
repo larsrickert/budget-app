@@ -1,7 +1,6 @@
 import type { VueProps } from "@/types/vue";
-import { House } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Component from "./SideMenuItemAtom.vue";
+import Component from "./CreateProfileTemplate.vue";
 
 type Args = VueProps<typeof Component>;
 
@@ -10,22 +9,19 @@ export default {
 } as Meta<Args>;
 
 export const Primary: StoryObj<Args> = {
+  args: {},
+};
+
+export const Disabled: StoryObj<Args> = {
   args: {
-    label: "Nav Item 1",
-    icon: House,
+    ...Primary.args,
+    disabled: true,
   },
 };
 
-export const WithImage: StoryObj<Args> = {
+export const Loading: StoryObj<Args> = {
   args: {
     ...Primary.args,
-    img: "https://picsum.photos/200/100",
-  },
-};
-
-export const Active: StoryObj<Args> = {
-  args: {
-    ...Primary.args,
-    active: true,
+    loading: true,
   },
 };

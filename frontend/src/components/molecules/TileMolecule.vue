@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ElIcon } from "element-plus";
+import { ElIcon, ElProgress } from "element-plus";
 import type { DefineComponent } from "vue";
 import SkeletonAtom from "../atoms/SkeletonAtom.vue";
 
@@ -9,23 +9,37 @@ defineProps<{
   icon?: DefineComponent;
   color?: "success" | "danger";
   loading?: boolean;
+  percentage?: number;
 }>();
+
+const percentageColors = [
+  { color: "var(--el-color-danger)", percentage: 25 },
+  { color: "var(--el-color-warning)", percentage: 60 },
+  { color: "var(--el-color-success)", percentage: 60 },
+];
 </script>
 
 <template>
   <div class="tile">
-    <slot>
-      <el-icon
-        v-if="icon"
-        :size="32"
-        :class="{
-          'tile__icon--success': color === 'success',
-          'tile__icon--danger': color === 'danger',
-        }"
-      >
-        <component :is="icon" />
-      </el-icon>
-    </slot>
+    <ElProgress
+      v-if="percentage != null"
+      type="dashboard"
+      :percentage="percentage"
+      :color="percentageColors"
+      :width="32"
+      :stroke-width="4"
+    />
+
+    <el-icon
+      v-else-if="icon"
+      :size="32"
+      :class="{
+        'tile__icon--success': color === 'success',
+        'tile__icon--danger': color === 'danger',
+      }"
+    >
+      <component :is="icon" />
+    </el-icon>
 
     <SkeletonAtom :loaded="!loading" :width="96" class="tile__title">
       <p class="tile__title font--truncated">{{ title }}</p>
@@ -65,6 +79,14 @@ defineProps<{
 
     &--danger {
       color: var(--el-color-danger);
+    }
+  }
+
+  .el-progress {
+    width: fit-content;
+
+    :deep(.el-progress__text) {
+      left: -8px;
     }
   }
 }

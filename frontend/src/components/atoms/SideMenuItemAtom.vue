@@ -5,13 +5,16 @@ import type { DefineComponent } from "vue";
 defineProps<{
   label: string;
   active?: boolean;
-  icon: DefineComponent;
+  icon?: DefineComponent;
+  /** If img and icon are defined, img will be used. */
+  img?: string;
 }>();
 </script>
 
 <template>
   <div class="nav-item" :class="{ 'nav-item--active': active }">
-    <el-icon :size="24">
+    <img v-if="img" :src="img" :alt="label" />
+    <el-icon v-else :size="24">
       <component :is="icon" />
     </el-icon>
     <span>{{ label }}</span>
@@ -30,6 +33,13 @@ defineProps<{
   span {
     color: var(--el-text-color-primary);
     font-weight: 500;
+  }
+
+  img {
+    height: 24px;
+    width: 24px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   &:hover {

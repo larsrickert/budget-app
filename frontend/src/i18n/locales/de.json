@@ -2,7 +2,8 @@
   "global": {
     "accounts": "Konto | Konten",
     "income": "Einnahme | Einnahmen",
-    "outcome": "Ausgabe | Ausgaben"
+    "outcome": "Ausgabe | Ausgaben",
+    "update": "Aktualisieren"
   },
   "app": {
     "title": "Budget App",
@@ -19,5 +20,45 @@
       "headline": "Budgetentwicklung",
       "noItems": "Füge Buchungen hinzu, um hier dein tägliches zur Verfügung stehende Budget für die nächsten {n} Monate zu sehen."
     }
+  },
+  "profile": {
+    "createPageName": "Registrieren",
+    "myProfilePageName": "Mein Profil",
+    "username": "Benutzername",
+    "email": "E-Mail Adresse",
+    "password": "Passwort",
+    "passwordConfirm": "Passwort bestätigen",
+    "oldPassword": "Altes Passwort",
+    "notLoggedIn": "Du bist nicht angemeldet.",
+    "registeredSince": "Registriert seit",
+    "login": "Bereits registriert? Jetzt anmelden",
+    "logout": "Abmelden",
+    "emailStatus": {
+      "label": "E-Mail Status",
+      "verified": "Bestätigt",
+      "notVerified": "Nicht bestätigt"
+    },
+    "actions": {
+      "create": "Registrieren"
+    },
+    "toasts": {
+      "created": "Profil erstellt",
+      "updated": "Profil aktualisiert",
+      "updatedWithEmail": "Profil aktualisiert. Wir haben eine Bestätigung an deine neue E-Mail Adresse geschickt.",
+      "requestedEmailVerification": "Wir haben dir eine E-Mail zur Bestätigung deiner E-Mail Adresse geschickt."
+    }
+  },
+  "login": {
+    "pageName": "Anmelden",
+    "usernameOrEmail": "Benutzername oder E-Mail Adresse",
+    "submit": "Anmelden",
+    "register": "Noch kein Konto? Jetzt registrieren"
+  },
+  "validations": {
+    "required": "Wert wird benötigt.",
+    "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
+    "maxLength": "Wert darf maximal {max} Zeichen lang sein.",
+    "email": "Wert muss eine gültige E-Mail Adresse sein.",
+    "sameAs": "Wert muss identisch zu \"{otherName}\" sein."
   }
 }
