@@ -110,7 +110,7 @@ const handleSubmit = async () => {
   if (!formRef.value || !hasDataChanged.value) return;
   await formRef.value.validate((valid) => {
     if (!valid) return;
-    emit("submit", state.value);
+    emit("submit", { ...state.value });
   });
 };
 

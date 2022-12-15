@@ -74,7 +74,7 @@ const handleSubmit = async () => {
   if (!formRef.value) return;
   await formRef.value.validate((valid) => {
     if (!valid) return;
-    emit("submit", state.value, reset);
+    emit("submit", { ...state.value }, reset);
   });
 };
 

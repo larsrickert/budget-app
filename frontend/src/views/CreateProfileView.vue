@@ -22,7 +22,16 @@ const handleSubmit = async (dto: CreateUserDto, reset: () => void) => {
       type: "success",
       duration: 3000,
     });
-    await router.replace("/");
+
+    try {
+      await authStore.login({
+        usernameOrEmail: dto.email,
+        password: dto.password,
+      });
+      await router.push("/");
+    } catch {
+      await router.push("/login");
+    }
   } finally {
     isLoading.value = false;
   }
