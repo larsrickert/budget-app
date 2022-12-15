@@ -10,7 +10,7 @@ import {
   type FormInstance,
   type FormItemRule,
 } from "element-plus";
-import { computed, reactive, ref, useSlots, type UnwrapRef } from "vue";
+import { computed, reactive, ref, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
@@ -25,7 +25,6 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
-const slots = useSlots();
 
 const state = ref<CreateUserDto>({
   username: "",
@@ -85,10 +84,6 @@ const reset = () => formRef.value?.resetFields();
     <HeaderOrganism :headline="t('profile.createPageName')" />
 
     <div class="page__content">
-      <div class="slot--before" v-if="!!slots.default">
-        <slot></slot>
-      </div>
-
       <el-form
         label-position="top"
         :disabled="disabled"
@@ -163,10 +158,4 @@ const reset = () => formRef.value?.resetFields();
   </div>
 </template>
 
-<style lang="scss" scoped>
-.slot {
-  &--before {
-    margin-bottom: var(--app-space-3);
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -2,7 +2,8 @@
   "global": {
     "accounts": "Account | Accounts",
     "income": "Income | Incomes",
-    "outcome": "Outcome | Outcomes"
+    "outcome": "Outcome | Outcomes",
+    "update": "Update"
   },
   "app": {
     "title": "Budget App",
@@ -22,15 +23,27 @@
   },
   "profile": {
     "createPageName": "Registration",
+    "myProfilePageName": "My profile",
     "username": "Username",
     "email": "Email",
     "password": "Password",
     "passwordConfirm": "Confirm password",
+    "oldPassword": "Old password",
+    "notLoggedIn": "You are not logged in.",
+    "registeredSince": "Registered since",
+    "emailStatus": {
+      "label": "Email status",
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    },
     "actions": {
       "create": "Register"
     },
     "toasts": {
-      "created": "Successfully created profile"
+      "created": "Profile created",
+      "updated": "Profile updated",
+      "updatedWithEmail": "Profile updated. We have sent a confirmation email to your new email address.",
+      "requestedEmailVerification": "We have sent you an email to confirm your email address."
     }
   },
   "validations": {

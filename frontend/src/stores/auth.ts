@@ -18,8 +18,14 @@ export interface CreateUserDto {
   passwordConfirm: string;
 }
 
-export interface UpdateUserDto extends CreateUserDto {
-  oldPassword: string;
+export interface UpdateUserDto {
+  username: string;
+  email: string;
+  password?: string;
+  passwordConfirm?: string;
+  oldPassword?: string;
+  /** Set to null to remove current avatar. */
+  avatar?: File | null;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -42,7 +48,7 @@ export const useAuthStore = defineStore("auth", () => {
     client.authStore.clear();
   };
 
-  const sendEmailVerification = async () => {
+  const requestEmailVerification = async () => {
     if (!user.value) return;
     return await client
       .collection("users")
@@ -67,9 +73,9 @@ export const useAuthStore = defineStore("auth", () => {
 
     const record = await client
       .collection("users")
-      .update<User>(user.value.id, dto);
-    if (record.email) {
-      await client.collection("users").requestVerification(record.email);
+      .update<User>(user.value.id, { ...dto, email: undefined });
+    if (dto.email && record.email !== dto.email) {
+      await client.collection("users").requestEmailChange(dto.email);
     }
   };
 
@@ -78,7 +84,7 @@ export const useAuthStore = defineStore("auth", () => {
     login,
     logout,
     user,
-    sendEmailVerification,
+    requestEmailVerification,
     createUser,
     updateUser,
   };

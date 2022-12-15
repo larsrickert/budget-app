@@ -16,6 +16,13 @@ export const Primary: StoryObj<Args> = {
   },
 };
 
+export const WithImage: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    img: "https://picsum.photos/200/100",
+  },
+};
+
 export const Active: StoryObj<Args> = {
   args: {
     ...Primary.args,
