@@ -1,5 +1,12 @@
 import HomeView from "@/views/HomeView.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import authGuard from "./auth-guard";
+
+declare module "vue-router" {
+  interface RouteMeta {
+    requiresAuth?: boolean;
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +15,7 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: { requiresAuth: true },
     },
     {
       path: "/profile",
@@ -16,6 +24,7 @@ const router = createRouter({
           path: "",
           name: "profile",
           component: () => import("@/views/MyProfileView.vue"),
+          meta: { requiresAuth: true },
         },
         {
           path: "new",
@@ -31,5 +40,7 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach(authGuard);
 
 export default router;

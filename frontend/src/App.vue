@@ -18,6 +18,8 @@ const isDrawerOpen = ref(false);
 provide(provideIsDrawerOpenSymbol, isDrawerOpen);
 
 const navItems = computed<VueProps<typeof SideMenuTemplate>["navItems"]>(() => {
+  if (!authStore.isAuthenticated) return [];
+
   return [
     {
       label: t("home.pageName"),

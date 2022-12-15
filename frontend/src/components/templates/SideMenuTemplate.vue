@@ -45,15 +45,16 @@ const handleItemClick = (href: string) => {
           <p class="side-menu__subtitle">{{ subtitle }}</p>
 
           <SideMenuItemGroupOrganism
+            v-if="navItems.length"
             :items="navItems"
             :active-href="activeHref"
             class="side-menu__items"
             @item-click="handleItemClick"
           />
 
-          <template v-if="subItems?.length">
-            <el-divider />
+          <el-divider v-if="navItems.length && subItems?.length" />
 
+          <template v-if="subItems?.length">
             <SideMenuItemGroupOrganism
               :items="subItems"
               :active-href="activeHref"
