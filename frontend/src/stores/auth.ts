@@ -2,6 +2,7 @@ import type { BaseRecord } from "@/pocketbase";
 import client from "@/pocketbase";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
+import { CustomError } from "./errors";
 
 export interface User extends BaseRecord {
   email: string;
@@ -15,6 +16,10 @@ export interface CreateUserDto {
   email: string;
   password: string;
   passwordConfirm: string;
+}
+
+export interface UpdateUserDto extends CreateUserDto {
+  oldPassword: string;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -53,6 +58,21 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const updateUser = async (dto: UpdateUserDto) => {
+    if (!user.value?.id) {
+      throw new CustomError(
+        "Unable to update user because you are not logged in"
+      );
+    }
+
+    const record = await client
+      .collection("users")
+      .update<User>(user.value.id, dto);
+    if (record.email) {
+      await client.collection("users").requestVerification(record.email);
+    }
+  };
+
   return {
     isAuthenticated,
     login,
@@ -60,5 +80,6 @@ export const useAuthStore = defineStore("auth", () => {
     user,
     sendEmailVerification,
     createUser,
+    updateUser,
   };
 });

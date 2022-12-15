@@ -8,18 +8,16 @@ import {
   ElFormItem,
   ElInput,
   type FormInstance,
+  type FormItemRule,
 } from "element-plus";
-import { reactive, ref, useSlots, watchEffect, type UnwrapRef } from "vue";
+import { computed, reactive, ref, useSlots, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
-const props = defineProps<{
-  headline: string;
-  submitLabel: string;
+defineProps<{
   disabled?: boolean;
   readonly?: boolean;
   loading?: boolean;
-  initialValue?: Omit<CreateUserDto, "password" | "passwordConfirm">;
 }>();
 
 const emit = defineEmits<{
@@ -36,12 +34,13 @@ const state = ref<CreateUserDto>({
   passwordConfirm: "",
 });
 
-watchEffect(() => {
-  if (!props.initialValue) return;
-  state.value = { ...props.initialValue, password: "", passwordConfirm: "" };
-});
+const passwordRules = reactive<FormItemRule[]>([
+  { required: true, message: t("validations.required") },
+  { min: 8, message: t("validations.minLength", { min: 8 }) },
+  { max: 72, message: t("validations.maxLength", { max: 72 }) },
+]);
 
-const rules = reactive<FormValidation<UnwrapRef<typeof state>>>({
+const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
   username: [
     { required: true, message: t("validations.required") },
     { min: 3, message: t("validations.minLength", { min: 3 }) },
@@ -52,15 +51,9 @@ const rules = reactive<FormValidation<UnwrapRef<typeof state>>>({
     { type: "email", message: t("validations.email") },
     { max: 255, message: t("validations.maxLength", { max: 255 }) },
   ],
-  password: [
-    { required: true, message: t("validations.required") },
-    { min: 8, message: t("validations.minLength", { min: 8 }) },
-    { max: 72, message: t("validations.maxLength", { max: 72 }) },
-  ],
+  password: passwordRules,
   passwordConfirm: [
-    { required: true, message: t("validations.required") },
-    { min: 8, message: t("validations.minLength", { min: 8 }) },
-    { max: 72, message: t("validations.maxLength", { max: 72 }) },
+    ...passwordRules,
     {
       validator: (rule, value, callback) => {
         if (!value || value === state.value.password) callback();
@@ -72,7 +65,7 @@ const rules = reactive<FormValidation<UnwrapRef<typeof state>>>({
       },
     },
   ],
-});
+}));
 
 const formRef = ref<FormInstance | null>(null);
 
@@ -89,7 +82,7 @@ const reset = () => formRef.value?.resetFields();
 
 <template>
   <div>
-    <HeaderOrganism :headline="headline" />
+    <HeaderOrganism :headline="t('profile.createPageName')" />
 
     <div class="page__content">
       <div class="slot--before" v-if="!!slots.default">
@@ -101,9 +94,10 @@ const reset = () => formRef.value?.resetFields();
         :disabled="disabled"
         require-asterisk-position="right"
         :model="state"
-        :rules="readonly ? undefined : rules"
+        :rules="rules"
         status-icon
         scroll-to-error
+        :validate-on-rule-change="false"
         ref="formRef"
       >
         <div class="grid grid--2">
@@ -154,9 +148,14 @@ const reset = () => formRef.value?.resetFields();
           </el-form-item>
         </div>
 
-        <el-form-item>
-          <el-button type="primary" :loading="loading" @click="handleSubmit">
-            {{ submitLabel }}
+        <el-form-item v-if="!readonly">
+          <el-button
+            type="primary"
+            :loading="loading"
+            @click="handleSubmit"
+            :disabled="disabled"
+          >
+            {{ t("profile.actions.create") }}
           </el-button>
         </el-form-item>
       </el-form>

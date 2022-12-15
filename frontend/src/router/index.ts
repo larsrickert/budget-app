@@ -10,9 +10,19 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/profile/new",
-      name: "createProfile",
-      component: () => import("@/views/CreateProfileView.vue"),
+      path: "/profile",
+      children: [
+        {
+          path: "",
+          name: "profile",
+          component: () => import("@/views/ProfileView.vue"),
+        },
+        {
+          path: "new",
+          name: "createProfile",
+          component: () => import("@/views/CreateProfileView.vue"),
+        },
+      ],
     },
   ],
 });

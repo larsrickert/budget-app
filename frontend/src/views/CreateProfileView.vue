@@ -31,8 +31,6 @@ const handleSubmit = async (dto: CreateUserDto, reset: () => void) => {
 
 <template>
   <CreateProfileTemplate
-    :headline="t('profile.createPageName')"
-    :submit-label="t('profile.actions.create')"
     :disabled="isLoading"
     :loading="isLoading"
     @submit="handleSubmit"

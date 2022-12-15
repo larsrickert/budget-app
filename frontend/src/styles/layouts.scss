@@ -16,7 +16,6 @@
 .grid {
   display: grid;
   column-gap: var(--app-space-4);
-  row-gap: 24px;
 
   &--2 {
     grid-template-columns: 1fr 1fr;

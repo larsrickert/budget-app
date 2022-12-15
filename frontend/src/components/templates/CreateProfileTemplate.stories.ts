@@ -9,10 +9,7 @@ export default {
 } as Meta<Args>;
 
 export const Primary: StoryObj<Args> = {
-  args: {
-    headline: "Registration",
-    submitLabel: "Submit",
-  },
+  args: {},
 };
 
 export const Disabled: StoryObj<Args> = {
@@ -33,16 +30,5 @@ export const Loading: StoryObj<Args> = {
   args: {
     ...Primary.args,
     loading: true,
-  },
-};
-
-export const WithInitialData: StoryObj<Args> = {
-  args: {
-    headline: "Edit profile",
-    submitLabel: "Update",
-    initialValue: {
-      email: "example@example.de",
-      username: "John Doe",
-    },
   },
 };

@@ -1,5 +1,6 @@
 import { showToast } from "@/utils/io";
 import { defineStore } from "pinia";
+import { ClientResponseError } from "pocketbase";
 import type { App } from "vue";
 
 export class CustomError extends Error {
@@ -30,11 +31,24 @@ export class CustomError extends Error {
 
 export const useErrorStore = defineStore("errors", () => {
   const handle = async (err: Error | CustomError) => {
+    let message = err.toString();
+
+    // check if more specific backend error is available
+    if (err instanceof ClientResponseError) {
+      const firstEntry = Object.values(err.data.data)[0];
+      const hasBackendData = firstEntry && typeof firstEntry === "object";
+
+      if (
+        hasBackendData &&
+        "message" in firstEntry &&
+        typeof firstEntry.message === "string"
+      ) {
+        message = `${Object.keys(err.data.data)[0]}: ${firstEntry.message}`;
+      }
+    }
+
     console.error("Caught application error", { err });
-    showToast({
-      message: err.toString(),
-      type: "error",
-    });
+    showToast({ message, type: "error" });
   };
 
   const register = (app: App) => {
