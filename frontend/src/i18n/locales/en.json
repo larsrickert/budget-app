@@ -32,6 +32,7 @@
     "notLoggedIn": "You are not logged in.",
     "registeredSince": "Registered since",
     "login": "Already registered? Login now",
+    "logout": "Logout",
     "emailStatus": {
       "label": "Email status",
       "verified": "Verified",

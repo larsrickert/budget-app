@@ -1,16 +1,19 @@
 <script lang="ts" setup>
 import { provideIsDrawerOpenSymbol } from "@/types";
 import { Back, Menu } from "@element-plus/icons-vue";
-import { ElButton } from "element-plus";
-import { inject } from "vue";
+import { ElButton, ElTooltip } from "element-plus";
+import { inject, type DefineComponent } from "vue";
 
 defineProps<{
   headline: string;
   showBack?: boolean;
+  rightIcon?: DefineComponent;
+  rightIconText?: string;
 }>();
 
 const emit = defineEmits<{
   (event: "back"): void;
+  (event: "rightIconClick"): void;
 }>();
 
 const isDrawerOpen = inject(provideIsDrawerOpenSymbol);
@@ -23,23 +26,36 @@ const toggleDrawer = () => {
 
 <template>
   <header class="header">
-    <el-button
-      v-if="showBack"
-      :icon="Back"
-      circle
-      color="transparent"
-      class="btn--icon btn--no-gap"
-      @click="emit('back')"
-    />
-    <el-button
-      v-else
-      :icon="Menu"
-      circle
-      color="transparent"
-      class="header__menu btn--icon"
-      @click="toggleDrawer"
-    />
-    <h1 class="header__headline font--truncated">{{ headline }}</h1>
+    <div class="header__content">
+      <el-button
+        v-if="showBack"
+        :icon="Back"
+        circle
+        color="transparent"
+        class="btn--icon btn--no-gap"
+        @click="emit('back')"
+      />
+      <el-button
+        v-else
+        :icon="Menu"
+        circle
+        color="transparent"
+        class="header__menu btn--icon"
+        @click="toggleDrawer"
+      />
+      <h1 class="header__headline font--truncated">{{ headline }}</h1>
+    </div>
+
+    <el-tooltip :content="rightIconText">
+      <el-button
+        v-if="rightIcon"
+        :icon="rightIcon"
+        circle
+        color="transparent"
+        class="btn--icon btn--no-gap"
+        @click="emit('rightIconClick')"
+      />
+    </el-tooltip>
   </header>
 </template>
 
@@ -58,6 +74,7 @@ const toggleDrawer = () => {
   font-size: 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--app-space-2);
 
   padding: var(--app-space-3);
@@ -69,6 +86,15 @@ const toggleDrawer = () => {
     padding: var(--app-space-2);
     padding-bottom: var(--app-space-3);
     font-size: 20px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: var(--app-space-2);
+    max-width: 100%;
+    // 32px button width - header gap size
+    width: calc(100% - 32px - var(--app-space-2));
   }
 
   &__headline {

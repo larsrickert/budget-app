@@ -42,3 +42,6 @@ export const NotVerified: StoryObj<Args> = {
     },
   },
 };
+export const WithoutUser: StoryObj<Args> = {
+  args: {},
+};

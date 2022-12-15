@@ -3,11 +3,12 @@ import MyProfileTemplate from "@/components/templates/MyProfileTemplate.vue";
 import { useFile } from "@/composables/use-file";
 import { useAuthStore, type UpdateUserDto } from "@/stores/auth";
 import { showToast } from "@/utils/io";
-import { ElEmpty } from "element-plus";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
+const router = useRouter();
 const { t } = useI18n();
 
 const isLoading = ref(false);
@@ -46,18 +47,23 @@ const { file: avatarUrl } = useFile({
   filename: computed(() => authStore.user?.avatar),
   format: { height: 100, width: 100 },
 });
+
+const handleLogout = async () => {
+  authStore.logout();
+  await router.push("/login");
+};
 </script>
 
 <template>
   <div>
     <MyProfileTemplate
-      v-if="authStore.user"
-      :user="{ ...authStore.user, avatar: avatarUrl }"
+      :user="
+        authStore.user ? { ...authStore.user, avatar: avatarUrl } : undefined
+      "
       @submit="handleSubmit"
       @request-email-verification="handleRequestEmailVerification"
+      @logout="handleLogout"
     />
-
-    <el-empty v-else :description="t('profile.notLoggedIn')" />
   </div>
 </template>
 
