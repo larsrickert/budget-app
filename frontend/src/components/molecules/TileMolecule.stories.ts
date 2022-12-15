@@ -45,3 +45,10 @@ export const Danger: StoryObj<Args> = {
     color: "danger",
   },
 };
+
+export const WithPercentage: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    percentage: 75,
+  },
+};

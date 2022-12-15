@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { VueProps } from "@/types/vue";
-import { Money, PieChart, PriceTag } from "@element-plus/icons-vue";
+import { Money, PriceTag } from "@element-plus/icons-vue";
 import { ElContainer, ElDivider, ElEmpty } from "element-plus";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
@@ -17,6 +17,7 @@ const props = defineProps<{
   income?: number;
   outcome?: number;
   budget?: number;
+  budgetPercentage?: number;
   isMonthlyLoading?: boolean;
   budgetDevelopment?: {
     items: { date: string; budget: number }[];
@@ -40,6 +41,14 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
     };
   });
 });
+
+const budgetPercentageColors = [
+  { color: "#f56c6c", percentage: 20 },
+  { color: "#e6a23c", percentage: 40 },
+  { color: "#5cb87a", percentage: 60 },
+  { color: "#1989fa", percentage: 80 },
+  { color: "#6f7ad3", percentage: 100 },
+];
 </script>
 
 <template>
@@ -83,8 +92,8 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
           <TileMolecule
             :title="n(budget ?? 0, 'currency')"
             :subtitle="t('home.monthly.budget')"
-            :icon="PieChart"
             :loading="isMonthlyLoading"
+            :percentage="budgetPercentage ?? 0"
           />
         </div>
       </section>
