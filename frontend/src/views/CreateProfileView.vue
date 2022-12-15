@@ -22,7 +22,7 @@ const handleSubmit = async (dto: CreateUserDto, reset: () => void) => {
       type: "success",
       duration: 3000,
     });
-    await router.push("/");
+    await router.replace("/");
   } finally {
     isLoading.value = false;
   }
@@ -34,6 +34,7 @@ const handleSubmit = async (dto: CreateUserDto, reset: () => void) => {
     :disabled="isLoading"
     :loading="isLoading"
     @submit="handleSubmit"
+    @login="router.replace('/login')"
   />
 </template>
 

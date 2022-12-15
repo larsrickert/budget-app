@@ -28,6 +28,11 @@ export interface UpdateUserDto {
   avatar?: File | null;
 }
 
+export interface LoginPayload {
+  usernameOrEmail: string;
+  password: string;
+}
+
 export const useAuthStore = defineStore("auth", () => {
   const isAuthenticated = computed(() => !!user.value);
   const user = ref(client.authStore.model as User | null);
@@ -38,7 +43,7 @@ export const useAuthStore = defineStore("auth", () => {
 
   if (user.value) client.collection("users").authRefresh();
 
-  const login = async (usernameOrEmail: string, password: string) => {
+  const login = async ({ usernameOrEmail, password }: LoginPayload) => {
     await client
       .collection("users")
       .authWithPassword(usernameOrEmail, password);

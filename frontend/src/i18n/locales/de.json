@@ -31,6 +31,7 @@
     "oldPassword": "Altes Passwort",
     "notLoggedIn": "Du bist nicht angemeldet.",
     "registeredSince": "Registriert seit",
+    "login": "Bereits registriert? Jetzt anmelden",
     "emailStatus": {
       "label": "E-Mail Status",
       "verified": "Bestätigt",
@@ -45,6 +46,12 @@
       "updatedWithEmail": "Profil aktualisiert. Wir haben eine Bestätigung an deine neue E-Mail Adresse geschickt.",
       "requestedEmailVerification": "Wir haben dir eine E-Mail zur Bestätigung deiner E-Mail Adresse geschickt."
     }
+  },
+  "login": {
+    "pageName": "Anmelden",
+    "usernameOrEmail": "Benutzername oder E-Mail Adresse",
+    "submit": "Anmelden",
+    "register": "Noch kein Konto? Jetzt registrieren"
   },
   "validations": {
     "required": "Wert wird benötigt.",

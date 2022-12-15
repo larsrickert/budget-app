@@ -46,7 +46,13 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
     ];
   }
 
-  return [];
+  return [
+    {
+      label: t("login.pageName"),
+      icon: UserFilled,
+      href: "/login",
+    },
+  ];
 });
 </script>
 

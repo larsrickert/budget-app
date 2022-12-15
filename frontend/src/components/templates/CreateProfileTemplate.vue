@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import type { CreateUserDto } from "@/stores/auth";
 import type { FormValidation } from "@/types/vue";
-import { Key, Message, User } from "@element-plus/icons-vue";
+import { Key, Message, User, UserFilled } from "@element-plus/icons-vue";
 import {
   ElButton,
   ElForm,
   ElFormItem,
+  ElIcon,
   ElInput,
+  ElLink,
   type FormInstance,
   type FormItemRule,
 } from "element-plus";
@@ -16,12 +18,12 @@ import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
 defineProps<{
   disabled?: boolean;
-  readonly?: boolean;
   loading?: boolean;
 }>();
 
 const emit = defineEmits<{
   (event: "submit", dto: CreateUserDto, reset: () => void): void;
+  (event: "login"): void;
 }>();
 
 const { t } = useI18n();
@@ -100,7 +102,6 @@ const reset = () => formRef.value?.resetFields();
             <el-input
               :prefix-icon="User"
               name="username"
-              :readonly="readonly"
               v-model.trim="state.username"
             />
           </el-form-item>
@@ -110,7 +111,6 @@ const reset = () => formRef.value?.resetFields();
               :prefix-icon="Message"
               type="email"
               name="email"
-              :readonly="readonly"
               v-model.trim="state.email"
             />
           </el-form-item>
@@ -123,7 +123,6 @@ const reset = () => formRef.value?.resetFields();
               type="password"
               show-password
               name="password"
-              :readonly="readonly"
               v-model="state.password"
             />
           </el-form-item>
@@ -137,25 +136,42 @@ const reset = () => formRef.value?.resetFields();
               type="password"
               show-password
               name="passwordConfirm"
-              :readonly="readonly"
               v-model="state.passwordConfirm"
             />
           </el-form-item>
         </div>
 
-        <el-form-item v-if="!readonly">
-          <el-button
-            type="primary"
-            :loading="loading"
-            @click="handleSubmit"
-            :disabled="disabled"
-          >
-            {{ t("profile.actions.create") }}
-          </el-button>
+        <el-form-item>
+          <div class="actions">
+            <el-button
+              type="primary"
+              :loading="loading"
+              :disabled="disabled"
+              @click="handleSubmit"
+            >
+              {{ t("profile.actions.create") }}
+            </el-button>
+
+            <el-link type="primary" :disabled="disabled" @click="emit('login')">
+              {{ t("profile.login") }}
+              <el-icon class="actions__icon"> <UserFilled /> </el-icon>
+            </el-link>
+          </div>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-1) var(--app-space-3);
+  flex-wrap: wrap;
+
+  &__icon {
+    margin-left: var(--app-space-1);
+  }
+}
+</style>

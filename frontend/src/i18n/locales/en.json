@@ -31,6 +31,7 @@
     "oldPassword": "Old password",
     "notLoggedIn": "You are not logged in.",
     "registeredSince": "Registered since",
+    "login": "Already registered? Login now",
     "emailStatus": {
       "label": "Email status",
       "verified": "Verified",
@@ -45,6 +46,12 @@
       "updatedWithEmail": "Profile updated. We have sent a confirmation email to your new email address.",
       "requestedEmailVerification": "We have sent you an email to confirm your email address."
     }
+  },
+  "login": {
+    "pageName": "Login",
+    "usernameOrEmail": "Username or email",
+    "submit": "Login",
+    "register": "No profile yet? Register now"
   },
   "validations": {
     "required": "Value is required.",
