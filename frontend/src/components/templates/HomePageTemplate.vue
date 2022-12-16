@@ -105,7 +105,7 @@ const currentAccountPage = useVModel(props, "currentAccountPage", emit);
         <HeadlineAtom :headline="t('home.chart.headline')" />
 
         <el-container
-          v-if="chartItems.length || isBudgetDevelopmentLoading"
+          v-if="chartItems.length > 1 || isBudgetDevelopmentLoading"
           v-loading="isBudgetDevelopmentLoading"
           direction="vertical"
         >

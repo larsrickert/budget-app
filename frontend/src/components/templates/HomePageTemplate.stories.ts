@@ -56,6 +56,9 @@ export const Loading: StoryObj<Args> = {
 export const Empty: StoryObj<Args> = {
   args: {
     accounts: [],
-    budgetDevelopment: undefined,
+    budgetDevelopment: {
+      items: [{ budget: 0, date: new Date().toISOString() }],
+      min: { budget: 0, date: new Date().toISOString() },
+    },
   },
 };
