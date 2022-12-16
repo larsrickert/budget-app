@@ -1,10 +1,14 @@
 <script lang="ts" setup>
+import type { BudgetDevelopment } from "@/composables/use-budget-development";
+import type { TransactionSummary } from "@/composables/use-transaction-summary";
 import type { VueProps } from "@/types/vue";
 import { Money, PriceTag } from "@element-plus/icons-vue";
+import { useVModel } from "@vueuse/core";
 import { ElContainer, ElDivider, ElEmpty } from "element-plus";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
+import HelpAtom from "../atoms/HelpAtom.vue";
 import LineChartAtom from "../atoms/LineChartAtom.vue";
 import TileMolecule from "../molecules/TileMolecule.vue";
 import FinanceItemListOrganism from "../organisms/FinanceItemListOrganism.vue";
@@ -13,20 +17,18 @@ import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 const props = defineProps<{
   modelValue?: unknown;
   accounts: VueProps<typeof FinanceItemListOrganism>["items"];
+  currentAccountPage?: number;
+  accountPageCount?: number;
   isAccountsLoading?: boolean;
-  income?: number;
-  outcome?: number;
-  budget?: number;
-  budgetPercentage?: number;
-  isMonthlyLoading?: boolean;
-  budgetDevelopment?: {
-    items: { date: string; budget: number }[];
-  };
+  transactionSummary?: TransactionSummary;
+  isTransactionSummaryLoading?: boolean;
+  budgetDevelopment?: Pick<BudgetDevelopment, "items" | "min">;
   isBudgetDevelopmentLoading?: boolean;
 }>();
 
 const emit = defineEmits<{
   (event: "itemClick", id: string): void;
+  (event: "update:currentAccountPage", value: number): void;
 }>();
 
 const { t, n, d } = useI18n();
@@ -42,13 +44,7 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
   });
 });
 
-const budgetPercentageColors = [
-  { color: "#f56c6c", percentage: 20 },
-  { color: "#e6a23c", percentage: 40 },
-  { color: "#5cb87a", percentage: 60 },
-  { color: "#1989fa", percentage: 80 },
-  { color: "#6f7ad3", percentage: 100 },
-];
+const currentAccountPage = useVModel(props, "currentAccountPage", emit);
 </script>
 
 <template>
@@ -63,6 +59,9 @@ const budgetPercentageColors = [
           v-if="accounts.length || isAccountsLoading"
           :items="accounts"
           :skeleton-count="isAccountsLoading ? 3 : 0"
+          v-model:current-page="currentAccountPage"
+          :page-count="accountPageCount"
+          :disabled="isAccountsLoading"
           @item-click="emit('itemClick', $event.id)"
         />
 
@@ -76,24 +75,26 @@ const budgetPercentageColors = [
 
         <div class="tiles">
           <TileMolecule
-            :title="n(income ?? 0, 'currency')"
+            :title="n(transactionSummary?.income.monthlyTotal ?? 0, 'currency')"
             :subtitle="t('global.income', 2)"
             :icon="Money"
             color="success"
-            :loading="isMonthlyLoading"
+            :loading="isTransactionSummaryLoading"
           />
           <TileMolecule
-            :title="n(outcome ?? 0, 'currency')"
+            :title="
+              n(transactionSummary?.outcome.monthlyTotal ?? 0, 'currency')
+            "
             :subtitle="t('global.outcome', 2)"
             :icon="PriceTag"
             color="danger"
-            :loading="isMonthlyLoading"
+            :loading="isTransactionSummaryLoading"
           />
           <TileMolecule
-            :title="n(budget ?? 0, 'currency')"
+            :title="n(transactionSummary?.monthlyBudget ?? 0, 'currency')"
             :subtitle="t('home.monthly.budget')"
-            :loading="isMonthlyLoading"
-            :percentage="budgetPercentage ?? 0"
+            :loading="isTransactionSummaryLoading"
+            :percentage="transactionSummary?.budgetPercentageOfIncome ?? 0"
           />
         </div>
       </section>
@@ -106,7 +107,23 @@ const budgetPercentageColors = [
         <el-container
           v-if="chartItems.length || isBudgetDevelopmentLoading"
           v-loading="isBudgetDevelopmentLoading"
+          direction="vertical"
         >
+          <div class="chart__help">
+            <span>
+              {{ t("home.chart.availableBudget") }}:
+              {{ n(budgetDevelopment?.min.budget ?? 0, "currency") }}
+            </span>
+
+            <HelpAtom
+              :content="
+                t('home.chart.availableBudgetHelpText', {
+                  value: n(budgetDevelopment?.min.budget ?? 0, 'currency'),
+                })
+              "
+            />
+          </div>
+
           <LineChartAtom
             :items="chartItems"
             :y-ticks-formatter="(value) => n(value, 'currencyShort')"
@@ -144,5 +161,11 @@ const budgetPercentageColors = [
   margin-top: var(--app-space-2);
   max-height: 500px;
   width: 100%;
+
+  &__help {
+    display: flex;
+    align-items: center;
+    gap: var(--app-space-2);
+  }
 }
 </style>

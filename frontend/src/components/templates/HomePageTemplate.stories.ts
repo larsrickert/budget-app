@@ -12,10 +12,18 @@ export default {
 export const Primary: StoryObj<Args> = {
   args: {
     accounts: FinanceItemListStory.args?.items ?? [],
-    income: 59.99,
-    outcome: 19.99,
-    budget: 49,
-    budgetPercentage: 40,
+    transactionSummary: {
+      income: {
+        monthlyTotal: 59.99,
+      },
+      outcome: {
+        monthlyTotal: 19.99,
+      },
+      monthlyBudget: 40,
+      budgetPercentageOfIncome: 66.67,
+    },
+    accountPageCount: 10,
+    currentAccountPage: 2,
     budgetDevelopment: {
       items: [
         {
@@ -27,6 +35,10 @@ export const Primary: StoryObj<Args> = {
           budget: -100,
         },
       ],
+      min: {
+        date: new Date().toISOString(),
+        budget: -100,
+      },
     },
   },
 };
@@ -35,7 +47,7 @@ export const Loading: StoryObj<Args> = {
   args: {
     ...Primary.args,
     isAccountsLoading: true,
-    isMonthlyLoading: true,
+    isTransactionSummaryLoading: true,
     isBudgetDevelopmentLoading: true,
     budgetDevelopment: undefined,
   },

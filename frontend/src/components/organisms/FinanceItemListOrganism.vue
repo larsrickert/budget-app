@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { VueProps } from "@/types/vue";
 import { Minus } from "@element-plus/icons-vue";
+import { useVModel } from "@vueuse/core";
+import { ElPagination } from "element-plus";
 import { computed } from "vue";
 import FinanceItemMolecule from "../molecules/FinanceItemMolecule.vue";
 
@@ -12,6 +14,9 @@ const props = withDefaults(
     skeletonCount?: number;
     total?: string;
     totalLabel?: string;
+    currentPage?: number;
+    pageCount?: number;
+    disabled?: boolean;
   }>(),
   {
     skeletonCount: 0,
@@ -20,9 +25,12 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   (event: "itemClick", item: ListItem): void;
+  (event: "update:currentPage", value: number): void;
 }>();
 
 const isSkeleton = computed(() => props.skeletonCount > 0);
+
+const currentPageModel = useVModel(props, "currentPage", emit);
 </script>
 
 <template>
@@ -62,8 +70,22 @@ const isSkeleton = computed(() => props.skeletonCount > 0);
         hide-arrow
         class="total"
       />
+
+      <el-pagination
+        layout="prev, pager, next"
+        :page-count="pageCount"
+        background
+        hide-on-single-page
+        v-model:current-page="currentPageModel"
+        :disabled="disabled"
+        class="pagination"
+      />
     </template>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.pagination {
+  margin-top: var(--app-space-2);
+}
+</style>

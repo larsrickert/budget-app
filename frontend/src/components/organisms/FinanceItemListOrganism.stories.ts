@@ -11,22 +11,15 @@ export default {
 
 export const Primary: StoryObj<Args> = {
   args: {
-    items: [
-      {
-        id: "1",
-        title: "Finance Item 1",
-        subtitle: "Subtitle",
-        icon: WalletFilled,
-        value: "3.99",
-      },
-      {
-        id: "2",
-        title: "Finance Item 2",
-        subtitle: "Subtitle",
-        icon: WalletFilled,
-        value: "29.99",
-      },
-    ],
+    items: new Array(15).fill("").map((_, index) => ({
+      id: index.toString(),
+      title: `Finance Item ${index + 1}`,
+      subtitle: "Subtitle",
+      icon: WalletFilled,
+      value: "3.99",
+    })),
+    pageCount: 10,
+    currentPage: 3,
   },
 };
 
@@ -42,5 +35,12 @@ export const Skeleton: StoryObj<Args> = {
   args: {
     ...Primary.args,
     skeletonCount: 3,
+  },
+};
+
+export const Disabled: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    disabled: true,
   },
 };

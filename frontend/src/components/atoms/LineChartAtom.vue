@@ -149,8 +149,12 @@ const chartOptions = computed<ChartOptions<"line">>(() => {
 
 <template>
   <div>
-    <Line :data="chartData" :options="chartOptions" />
+    <Line :data="chartData" :options="chartOptions" class="chart" />
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.chart {
+  height: 350px;
+}
+</style>

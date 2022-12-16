@@ -24,7 +24,7 @@ const percentageColors = [
     <ElProgress
       v-if="percentage != null"
       type="dashboard"
-      :percentage="percentage"
+      :percentage="Math.round(percentage)"
       :color="percentageColors"
       :width="32"
       :stroke-width="4"
@@ -87,6 +87,7 @@ const percentageColors = [
 
     :deep(.el-progress__text) {
       left: -8px;
+      font-size: 8px !important;
     }
   }
 }
