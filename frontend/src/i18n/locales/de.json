@@ -3,7 +3,9 @@
     "accounts": "Konto | Konten",
     "income": "Einnahme | Einnahmen",
     "outcome": "Ausgabe | Ausgaben",
-    "update": "Aktualisieren"
+    "update": "Aktualisieren",
+    "cancel": "Abbrechen",
+    "select": "Auswählen"
   },
   "app": {
     "title": "Budget App",
@@ -35,6 +37,8 @@
     "registeredSince": "Registriert seit",
     "login": "Bereits registriert? Jetzt anmelden",
     "logout": "Abmelden",
+    "changeAvatar": "Profilbild ändern",
+    "fileSizeExceeded": "Das Profilbild darf maximal {n} MB groß sein. Bitte wähle ein kleineres Bild aus.",
     "emailStatus": {
       "label": "E-Mail Status",
       "verified": "Bestätigt",
@@ -55,6 +59,12 @@
     "usernameOrEmail": "Benutzername oder E-Mail Adresse",
     "submit": "Anmelden",
     "register": "Noch kein Konto? Jetzt registrieren"
+  },
+  "fileUpload": {
+    "text": "Ziehe eine Datei hier her oder",
+    "textClickToSelect": "klicke zum Auswählen",
+    "maxFileSize": "Erlaubte Dateigröße: {n} MB",
+    "allowedFileTypes": "Erlaubte Dateitypen"
   },
   "validations": {
     "required": "Wert wird benötigt.",

@@ -76,9 +76,15 @@ export const useAuthStore = defineStore("auth", () => {
       );
     }
 
+    const formData = new FormData();
+    Object.entries(dto).forEach(([key, value]) => {
+      if (key === "email") return;
+      formData.set(key, value);
+    });
+
     const record = await client
       .collection("users")
-      .update<User>(user.value.id, { ...dto, email: undefined });
+      .update<User>(user.value.id, formData);
     if (dto.email && record.email !== dto.email) {
       await client.collection("users").requestEmailChange(dto.email);
     }
