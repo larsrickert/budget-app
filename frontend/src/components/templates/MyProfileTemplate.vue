@@ -137,7 +137,9 @@ const selectedAvatarPreviewSrc = computedAsync(async () => {
       const data = ev.target?.result;
       resolve(typeof data === "string" ? data : "");
     };
+    reader.onerror = () => resolve("");
   });
+
   reader.readAsDataURL(state.value.avatar);
   return promise;
 });
@@ -187,7 +189,7 @@ const handleFileSizeExceed = () => {
               <span class="meta__label">
                 {{ t("profile.registeredSince") }}:
               </span>
-              <span>{{ d(user.created) }}</span>
+              <span>{{ user.created ? d(user.created) : "-" }}</span>
             </div>
             <div>
               <span class="meta__label">
