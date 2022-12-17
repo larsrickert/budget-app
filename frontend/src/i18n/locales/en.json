@@ -56,6 +56,12 @@
     "submit": "Login",
     "register": "No profile yet? Register now"
   },
+  "fileUpload": {
+    "text": "Drop file here or",
+    "textClickToSelect": "click to select",
+    "maxFileSize": "Allowed file size: {n}mb",
+    "allowedFileTypes": "Allowed file types"
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",

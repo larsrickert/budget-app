@@ -56,6 +56,12 @@
     "submit": "Anmelden",
     "register": "Noch kein Konto? Jetzt registrieren"
   },
+  "fileUpload": {
+    "text": "Ziehe eine Datei hier her oder",
+    "textClickToSelect": "klicke zum Auswählen",
+    "maxFileSize": "Erlaubte Dateigröße: {n} MB",
+    "allowedFileTypes": "Erlaubte Dateitypen"
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
