@@ -97,6 +97,7 @@
     "notes": "Beschreibung",
     "bookingDate": "Buchungsdatum",
     "frequency": "Häufigkeit",
+    "type": "Typ",
     "frequencies": {
       "none": "Einmalig",
       "monthly": "Monatlich",

@@ -17,6 +17,8 @@ import {
   ElInputNumber,
   ElOption,
   ElPopconfirm,
+  ElRadioButton,
+  ElRadioGroup,
   ElSelect,
   type FormInstance,
 } from "element-plus";
@@ -172,6 +174,18 @@ const isDateDisabled = (date: Date) => {
           ref="formRef"
           v-loading="loading"
         >
+          <el-form-item :label="t('transaction.type')" prop="type">
+            <el-radio-group v-model="state.type" name="type">
+              <el-radio-button
+                v-for="type in TRANSACTION_TYPES"
+                :key="type"
+                :label="type"
+              >
+                {{ t(`global.${type}`) }}
+              </el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+
           <div class="grid grid--2">
             <el-form-item :label="t('transaction.name')" prop="name">
               <el-input

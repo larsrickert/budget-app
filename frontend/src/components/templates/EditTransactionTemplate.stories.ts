@@ -45,7 +45,7 @@ export const WithInitialValue: StoryObj<Args> = {
       name: "My transaction",
       value: 123.45,
       notes: "These are some notes.",
-      type: "outcome",
+      type: "income",
       bookingDate: new Date().toISOString(),
       frequency: TransactionFrequency.MONTHLY,
     },

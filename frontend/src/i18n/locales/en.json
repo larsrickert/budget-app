@@ -97,6 +97,7 @@
     "notes": "Notes",
     "bookingDate": "Booking date",
     "frequency": "Frequency",
+    "type": "Type",
     "frequencies": {
       "none": "One time",
       "monthly": "Monthly",
