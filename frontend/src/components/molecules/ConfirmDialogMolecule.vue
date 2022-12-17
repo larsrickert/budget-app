@@ -29,12 +29,13 @@ const handleConfirm = () => {
   <el-dialog
     v-model="isOpen"
     :title="title"
-    width="30%"
+    width="600px"
     align-center
     destroy-on-close
     :show-close="!loading"
     :close-on-click-modal="!loading"
     :close-on-press-escape="!loading"
+    class="confirm-dialog"
   >
     <slot>{{ description }}</slot>
 
@@ -54,4 +55,8 @@ const handleConfirm = () => {
   </el-dialog>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:global(.confirm-dialog) {
+  max-width: 95%;
+}
+</style>
