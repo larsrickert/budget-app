@@ -147,13 +147,19 @@ watch(files, () => (fileSelectionStarted.value = false));
 </template>
 
 <style lang="scss" scoped>
-.el-upload__tip {
-  margin-top: var(--app-space-1);
-  display: grid;
-  gap: 4px;
+.el-upload {
+  &__text {
+    word-break: break-word;
+  }
 
-  &--has-files {
-    margin-bottom: var(--app-space-2);
+  &__tip {
+    margin-top: var(--app-space-1);
+    display: grid;
+    gap: 4px;
+
+    &--has-files {
+      margin-bottom: var(--app-space-2);
+    }
   }
 }
 
