@@ -89,9 +89,9 @@ const handleSubmit = async () => {
             @confirm="emit('delete')"
           >
             <template #reference>
-              <el-button type="danger" plain>{{
-                t("global.delete")
-              }}</el-button>
+              <el-button type="danger" plain :disabled="disabled">
+                {{ t("global.delete") }}
+              </el-button>
             </template>
           </el-popconfirm>
         </HeadlineAtom>
