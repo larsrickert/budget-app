@@ -5,7 +5,8 @@
     "outcome": "Ausgabe | Ausgaben",
     "update": "Aktualisieren",
     "cancel": "Abbrechen",
-    "select": "Auswählen"
+    "select": "Auswählen",
+    "add": "Hinzufügen"
   },
   "app": {
     "title": "Budget App",
@@ -67,11 +68,24 @@
     "maxFileSize": "Erlaubte Dateigröße: {n} MB",
     "allowedFileTypes": "Erlaubte Dateitypen"
   },
+  "account": {
+    "addPageName": "Neues Konto",
+    "editPageName": "Konto bearbeiten",
+    "name": "Kontoname",
+    "value": "Betrag",
+    "notes": "Beschreibung",
+    "notFound": "Konto nicht gefunden",
+    "toasts": {
+      "created": "Konto erstellt",
+      "updated": "Konto aktualisiert"
+    }
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
     "maxLength": "Wert darf maximal {max} Zeichen lang sein.",
     "email": "Wert muss eine gültige E-Mail Adresse sein.",
+    "number": "Wert muss eine Zahl sein.",
     "sameAs": "Wert muss identisch zu \"{otherName}\" sein."
   }
 }

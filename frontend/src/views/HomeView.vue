@@ -43,6 +43,10 @@ const { budgetDevelopment, isLoading: isBudgetDevelopmentLoading } =
     computed(() => authStore.user?.id),
     { initialFetch: true }
   );
+
+const handleItemClick = async (id: string) => {
+  await router.push(`/accounts/${id}`);
+};
 </script>
 
 <template>
@@ -56,6 +60,7 @@ const { budgetDevelopment, isLoading: isBudgetDevelopmentLoading } =
       :is-transaction-summary-loading="isSummaryLoading"
       :budget-development="budgetDevelopment"
       :is-budget-development-loading="isBudgetDevelopmentLoading"
+      @item-click="handleItemClick"
     />
 
     <FloatingButtonAtom

@@ -5,7 +5,8 @@
     "outcome": "Outcome | Outcomes",
     "update": "Update",
     "cancel": "Cancel",
-    "select": "Select"
+    "select": "Select",
+    "add": "Add"
   },
   "app": {
     "title": "Budget App",
@@ -67,11 +68,24 @@
     "maxFileSize": "Allowed file size: {n}mb",
     "allowedFileTypes": "Allowed file types"
   },
+  "account": {
+    "addPageName": "New account",
+    "editPageName": "Edit account",
+    "name": "Account name",
+    "value": "Value",
+    "notes": "Notes",
+    "notFound": "Account not found",
+    "toasts": {
+      "created": "Account created",
+      "updated": "Account updated"
+    }
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",
     "maxLength": "Value must be at most {max} characters long.",
     "email": "Value must be a valid email address.",
+    "number": "Value must be a number.",
     "sameAs": "Value must be identical to \"{otherName}\"."
   }
 }
