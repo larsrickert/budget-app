@@ -43,11 +43,11 @@ defineProps<{
   }
 
   &:hover {
-    background-color: var(--el-fill-color-lighter);
+    background-color: var(--el-fill-color-light);
   }
 
   &:active {
-    background-color: var(--el-fill-color-light);
+    background-color: var(--el-fill-color);
   }
 
   &--active {

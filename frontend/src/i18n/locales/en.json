@@ -114,6 +114,14 @@
       "deleted": "Transaction deleted"
     }
   },
+  "settings": {
+    "pageName": "Settings",
+    "theme": "Appearance",
+    "themes": {
+      "light": "light",
+      "dark": "dark"
+    }
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",

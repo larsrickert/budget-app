@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import logoSrc from "@/assets/logo.svg";
-import { CreditCard, HomeFilled, UserFilled } from "@element-plus/icons-vue";
+import {
+  CreditCard,
+  HomeFilled,
+  Setting,
+  UserFilled,
+} from "@element-plus/icons-vue";
+import { useDark } from "@vueuse/core";
 import { ElConfigProvider } from "element-plus";
 import de from "element-plus/dist/locale/de";
 import { computed, provide, ref } from "vue";
@@ -44,25 +50,34 @@ const { file: avatarUrl } = useFile({
 });
 
 const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
-  if (authStore.isAuthenticated) {
-    return [
-      {
-        label: t("profile.myProfilePageName"),
-        img: avatarUrl.value,
-        icon: UserFilled,
-        href: "/profile",
-      },
-    ];
-  }
-
-  return [
+  const items: VueProps<typeof SideMenuTemplate>["subItems"] = [
     {
+      label: t("settings.pageName"),
+      icon: Setting,
+      href: "/settings",
+    },
+  ];
+
+  if (authStore.isAuthenticated) {
+    items.unshift({
+      label: t("profile.myProfilePageName"),
+      img: avatarUrl.value,
+      icon: UserFilled,
+      href: "/profile",
+    });
+  } else {
+    items.unshift({
       label: t("login.pageName"),
       icon: UserFilled,
       href: "/login",
-    },
-  ];
+    });
+  }
+
+  return items;
 });
+
+// enable auto dark/light mode
+useDark();
 </script>
 
 <template>

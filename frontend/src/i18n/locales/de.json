@@ -114,6 +114,14 @@
       "deleted": "Buchung gelöscht"
     }
   },
+  "settings": {
+    "pageName": "Einstellungen",
+    "theme": "Darstellung",
+    "themes": {
+      "light": "hell",
+      "dark": "dunkel"
+    }
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
