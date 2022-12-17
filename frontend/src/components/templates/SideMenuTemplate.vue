@@ -139,8 +139,7 @@ const handleItemClick = (href: string) => {
   }
 
   &__items {
-    margin-top: var(--app-space-3);
-    margin-left: calc(-1 * var(--app-space-2));
+    margin: var(--app-space-3) calc(-1 * var(--app-space-2)) 0;
   }
 }
 </style>
