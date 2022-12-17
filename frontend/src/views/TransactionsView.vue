@@ -15,7 +15,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const { t, n, d } = useI18n();
 
-const currentType = ref<TransactionType>("income");
+const currentType = ref<TransactionType>("outcome");
 
 const incomePagination = usePagination<TransactionDto>("transactions", {
   query: {

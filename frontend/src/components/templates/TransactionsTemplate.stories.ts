@@ -11,7 +11,7 @@ export default {
 
 export const Primary: StoryObj<Args> = {
   args: {
-    type: "outcome",
+    type: "income",
     transactions: FinanceItemListStory.args?.items ?? [],
     pageCount: 10,
     currentPage: 2,

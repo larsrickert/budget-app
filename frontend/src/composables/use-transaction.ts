@@ -1,7 +1,7 @@
 import type { BaseRecord } from "@/pocketbase";
 import { useRecord } from "./use-record";
 
-export const TRANSACTION_TYPES = ["income", "outcome"] as const;
+export const TRANSACTION_TYPES = ["outcome", "income"] as const;
 export type TransactionType = typeof TRANSACTION_TYPES[number];
 
 export enum TransactionFrequency {

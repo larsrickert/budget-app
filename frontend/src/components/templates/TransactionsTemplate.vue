@@ -12,7 +12,7 @@ import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
 const props = withDefaults(
   defineProps<{
-    /** @default income */
+    /** @default outcome */
     type?: TransactionType;
     transactions: VueProps<typeof FinanceItemListOrganism>["items"];
     loading?: boolean;
@@ -21,7 +21,7 @@ const props = withDefaults(
     totals: Record<TransactionType, number>;
   }>(),
   {
-    type: "income",
+    type: "outcome",
   }
 );
 
