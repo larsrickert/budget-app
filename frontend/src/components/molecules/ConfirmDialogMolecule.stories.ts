@@ -1,6 +1,6 @@
 import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Component from "./ConfirmModalMolecule.vue";
+import Component from "./ConfirmDialogMolecule.vue";
 
 type Args = VueProps<typeof Component>;
 
