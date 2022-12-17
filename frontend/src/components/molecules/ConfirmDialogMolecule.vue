@@ -2,16 +2,23 @@
 import { useVModel } from "@vueuse/core";
 import { ElButton, ElDialog } from "element-plus";
 
-const props = defineProps<{
-  title: string;
-  /** will be overridden when slot is used */
-  description?: string;
-  modelValue?: boolean;
-  cancelText: string;
-  confirmText: string;
-  disabled?: boolean;
-  loading?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    /** will be overridden when slot is used */
+    description?: string;
+    modelValue?: boolean;
+    cancelText: string;
+    confirmText: string;
+    disabled?: boolean;
+    loading?: boolean;
+    /** @default true */
+    showActions?: boolean;
+  }>(),
+  {
+    showActions: true,
+  }
+);
 
 const emit = defineEmits<{
   (event: "update:modelValue", value: boolean): void;
@@ -39,7 +46,7 @@ const handleConfirm = () => {
   >
     <slot>{{ description }}</slot>
 
-    <template #footer>
+    <template #footer v-if="showActions">
       <el-button @click="isOpen = false" :disabled="loading">
         {{ cancelText }}
       </el-button>

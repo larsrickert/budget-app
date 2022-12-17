@@ -127,7 +127,7 @@ const handleVerifyEmail = () => {
 
 const showEditAvatarDialog = ref(false);
 const allowedAvatarTypes = [".jpg", ".jpeg", ".png", ".svg", ".webp"];
-const selectedAvatar = ref<File>();
+
 const selectedAvatarPreviewSrc = computedAsync(async () => {
   if (!state.value.avatar) return "";
   const reader = new FileReader();
@@ -141,10 +141,9 @@ const selectedAvatarPreviewSrc = computedAsync(async () => {
   return promise;
 });
 
-const confirmAvatar = () => {
-  state.value.avatar = selectedAvatar.value;
-  selectedAvatar.value = undefined;
-  showEditAvatarDialog.value = false;
+const selectAvatar = (file?: File) => {
+  state.value.avatar = file;
+  if (file) showEditAvatarDialog.value = false;
 };
 </script>
 
@@ -292,7 +291,7 @@ const confirmAvatar = () => {
       :title="t('profile.changeAvatar')"
       :disabled="disabled"
       :loading="loading"
-      @confirm="confirmAvatar"
+      :show-actions="false"
     >
       <FileSelectOrganism
         :allowed-file-types="allowedAvatarTypes"
@@ -300,7 +299,7 @@ const confirmAvatar = () => {
         :limit="1"
         :disabled="disabled"
         replace
-        @change="selectedAvatar = $event[0]"
+        @change="selectAvatar($event[0])"
       />
     </ConfirmDialogMolecule>
   </div>

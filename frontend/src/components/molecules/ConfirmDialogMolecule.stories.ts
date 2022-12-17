@@ -42,3 +42,10 @@ export const Loading: StoryObj<Args> = {
     loading: true,
   },
 };
+
+export const WithoutActions: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    showActions: false,
+  },
+};
