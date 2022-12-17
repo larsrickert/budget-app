@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { UpdateUserDto, User } from "@/stores/auth";
 import type { FormValidation } from "@/types/vue";
+import { showToast } from "@/utils/io";
 import {
   Key,
   Message,
@@ -144,6 +145,14 @@ const selectedAvatarPreviewSrc = computedAsync(async () => {
 const selectAvatar = (file?: File) => {
   state.value.avatar = file;
   if (file) showEditAvatarDialog.value = false;
+};
+
+const handleFileSizeExceed = () => {
+  showToast({
+    message: t("profile.fileSizeExceeded", 5),
+    duration: 3000,
+    type: "error",
+  });
 };
 </script>
 
@@ -300,6 +309,7 @@ const selectAvatar = (file?: File) => {
         :disabled="disabled"
         replace
         @change="selectAvatar($event[0])"
+        @exceed-file-size="handleFileSizeExceed"
       />
     </ConfirmDialogMolecule>
   </div>
