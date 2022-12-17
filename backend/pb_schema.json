@@ -20,7 +20,6 @@
             "image/jpeg",
             "image/png",
             "image/svg+xml",
-            "image/gif",
             "image/webp"
           ],
           "thumbs": ["24x24f"]
