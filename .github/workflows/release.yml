@@ -1,10 +1,10 @@
 name: Release and deploy
 on:
   push:
-    branches: [alpha]
+    branches: [main]
     paths:
-      - "backend/**"
       - "frontend/**"
+      - "backend/**"
   workflow_dispatch:
 
 jobs:
@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "18"
       - name: Release

@@ -1,3 +1,5 @@
-# Budget App (WIP)
+# 💰 Budget App
 
-The lastest development state can be found on the [alpha branch](https://github.com/larsrickert/budget-app/tree/alpha).
+App for managing personal finances and checking per-day available budget.
+
+The app is available on: [budget-app.de](https://budget-app.de)

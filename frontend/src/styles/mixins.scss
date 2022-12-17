@@ -1,0 +1,20 @@
+$breakpoints: (
+  s: 576px,
+  m: 768px,
+  l: 992px,
+  xl: 1200px,
+);
+
+/**
+ * Breakpoints might be consistently applied via the defined $breakpoints (s / m / l / ...)
+ * @param {string} $breakpoint - the (globally defined) breakpoint
+ * @param {string} $min-max - Whether to use min-width or max-width, values: min,max default: max
+ * @example breakpoint(m, min)
+ */
+@mixin breakpoint($breakpoint, $min-max: max) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (#{$min-max}-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+}

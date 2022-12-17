@@ -1,0 +1,137 @@
+{
+  "global": {
+    "accounts": "Account | Accounts",
+    "income": "Income | Incomes",
+    "outcome": "Outcome | Outcomes",
+    "update": "Update",
+    "cancel": "Cancel",
+    "select": "Select",
+    "add": "Add",
+    "no": "No",
+    "delete": "Delete"
+  },
+  "app": {
+    "title": "Budget App",
+    "subtitle": "Personal finances"
+  },
+  "home": {
+    "pageName": "Overview",
+    "noAccounts": "No accounts found.",
+    "monthly": {
+      "headline": "Monthly overview",
+      "Budget": "Budget"
+    },
+    "chart": {
+      "headline": "Budget development",
+      "noItems": "Add bookings to see your daily available budget for the next {n} months.",
+      "availableBudget": "Actually available",
+      "availableBudgetHelpText": "You could now spend up to {value} and still have enough money left over to pay all your upcoming expenses without overdrawing your accounts."
+    },
+    "fabTooltip": "Add new account"
+  },
+  "profile": {
+    "createPageName": "Registration",
+    "myProfilePageName": "My profile",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirm": "Confirm password",
+    "oldPassword": "Old password",
+    "notLoggedIn": "You are not logged in.",
+    "registeredSince": "Registered since",
+    "login": "Already registered? Login now",
+    "logout": "Logout",
+    "changeAvatar": "Change profile picture",
+    "fileSizeExceeded": "The profile picture must be smaller than {n}mb in size. Please choose a smaller image.",
+    "emailStatus": {
+      "label": "Email status",
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    },
+    "actions": {
+      "create": "Register"
+    },
+    "toasts": {
+      "created": "Profile created",
+      "updated": "Profile updated",
+      "updatedWithEmail": "Profile updated. We have sent a confirmation email to your new email address.",
+      "requestedEmailVerification": "We have sent you an email to confirm your email address."
+    }
+  },
+  "login": {
+    "pageName": "Login",
+    "usernameOrEmail": "Username or email",
+    "submit": "Login",
+    "register": "No profile yet? Register now"
+  },
+  "fileUpload": {
+    "text": "Drop file here or",
+    "textClickToSelect": "click to select",
+    "maxFileSize": "Allowed file size: {n}mb",
+    "allowedFileTypes": "Allowed file types"
+  },
+  "account": {
+    "addPageName": "New account",
+    "editPageName": "Edit account",
+    "name": "Account name",
+    "value": "Value",
+    "notes": "Notes",
+    "notFound": "Account not found",
+    "deleteConfirmation": "Are you sure you want to irrevocably delete \"{name}\"?",
+    "toasts": {
+      "created": "Account created",
+      "updated": "Account updated",
+      "deleted": "Account deleted"
+    }
+  },
+  "transactions": {
+    "pageName": "Transactions",
+    "noItems": "No transactions found.",
+    "fabTooltip": "Add new transaction"
+  },
+  "transaction": {
+    "addPageName": "New transaction",
+    "editPageName": "Edit transaction",
+    "name": "Transaction name",
+    "value": "Value",
+    "notes": "Notes",
+    "bookingDate": "Booking date",
+    "frequency": "Frequency",
+    "type": "Type",
+    "frequencies": {
+      "none": "One time",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "semiannual": "Semiannual",
+      "annual": "Annual",
+      "biennial": "Biennial"
+    },
+    "notFound": "Transaction not found",
+    "deleteConfirmation": "Are you sure you want to irrevocably delete \"{name}\"?",
+    "toasts": {
+      "created": "Transaction created",
+      "updated": "Transaction updated",
+      "deleted": "Transaction deleted"
+    }
+  },
+  "settings": {
+    "pageName": "Settings",
+    "theme": "Appearance",
+    "themes": {
+      "light": "light",
+      "dark": "dark"
+    }
+  },
+  "validations": {
+    "required": "Value is required.",
+    "minLength": "Value must be at least {min} characters long.",
+    "maxLength": "Value must be at most {max} characters long.",
+    "email": "Value must be a valid email address.",
+    "number": "Value must be a number.",
+    "sameAs": "Value must be identical to \"{otherName}\".",
+    "date": "Value must be a valid date.",
+    "enum": "Value must be one of the allowed values.",
+    "largerThan": "Value must be larger than {n}.",
+    "smallerThan": "Value must be smaller than {n}."
+  }
+}
