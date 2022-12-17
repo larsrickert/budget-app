@@ -122,6 +122,12 @@
       "dark": "dark"
     }
   },
+  "notFound": {
+    "pageName": "Page not found",
+    "description": "The page {path} does not exist.",
+    "backToLogin": "Back to login page",
+    "backToHomePage": "Back to home page"
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",

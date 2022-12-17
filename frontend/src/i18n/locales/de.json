@@ -122,6 +122,12 @@
       "dark": "dunkel"
     }
   },
+  "notFound": {
+    "pageName": "Seite nicht gefunden",
+    "description": "Die Seite {path} existiert nicht.",
+    "backToLogin": "Zurück zur Anmeldeseite",
+    "backToHomePage": "Zurück zur Startseite"
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",
