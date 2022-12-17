@@ -3,7 +3,9 @@
     "accounts": "Konto | Konten",
     "income": "Einnahme | Einnahmen",
     "outcome": "Ausgabe | Ausgaben",
-    "update": "Aktualisieren"
+    "update": "Aktualisieren",
+    "cancel": "Abbrechen",
+    "select": "Auswählen"
   },
   "app": {
     "title": "Budget App",
@@ -35,6 +37,7 @@
     "registeredSince": "Registriert seit",
     "login": "Bereits registriert? Jetzt anmelden",
     "logout": "Abmelden",
+    "changeAvatar": "Profilbild ändern",
     "emailStatus": {
       "label": "E-Mail Status",
       "verified": "Bestätigt",

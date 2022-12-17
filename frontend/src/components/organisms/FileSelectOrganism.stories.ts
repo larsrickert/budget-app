@@ -1,6 +1,6 @@
 import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Component from "./FileUploadOrganism.vue";
+import Component from "./FileSelectOrganism.vue";
 
 type Args = VueProps<typeof Component>;
 

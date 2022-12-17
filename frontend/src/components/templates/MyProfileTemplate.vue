@@ -8,6 +8,7 @@ import {
   User as UserIcon,
   UserFilled,
 } from "@element-plus/icons-vue";
+import { computedAsync } from "@vueuse/core";
 import {
   ElAvatar,
   ElButton,
@@ -17,16 +18,18 @@ import {
   ElIcon,
   ElInput,
   ElTag,
+  ElTooltip,
   type FormInstance,
   type FormItemRule,
 } from "element-plus";
 import { computed, ref, watchEffect, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
+import ConfirmDialogMolecule from "../molecules/ConfirmDialogMolecule.vue";
+import FileSelectOrganism from "../organisms/FileSelectOrganism.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
 const props = defineProps<{
   disabled?: boolean;
-  readonly?: boolean;
   loading?: boolean;
   user?: User;
 }>();
@@ -121,6 +124,28 @@ const handleVerifyEmail = () => {
   emit("requestEmailVerification");
   isVerifyEmailDisabled.value = true;
 };
+
+const showEditAvatarDialog = ref(false);
+const allowedAvatarTypes = [".jpg", ".jpeg", ".png", ".svg", ".webp"];
+const selectedAvatar = ref<File>();
+const selectedAvatarPreviewSrc = computedAsync(async () => {
+  if (!state.value.avatar) return "";
+  const reader = new FileReader();
+  const promise = new Promise<string>((resolve) => {
+    reader.onload = (ev) => {
+      const data = ev.target?.result;
+      resolve(typeof data === "string" ? data : "");
+    };
+  });
+  reader.readAsDataURL(state.value.avatar);
+  return promise;
+});
+
+const confirmAvatar = () => {
+  state.value.avatar = selectedAvatar.value;
+  selectedAvatar.value = undefined;
+  showEditAvatarDialog.value = false;
+};
 </script>
 
 <template>
@@ -137,11 +162,17 @@ const handleVerifyEmail = () => {
 
       <template v-else>
         <div class="meta">
-          <el-avatar :size="100" :src="user.avatar">
-            <el-icon :size="48">
-              <UserFilled />
-            </el-icon>
-          </el-avatar>
+          <el-tooltip :content="t('profile.changeAvatar')">
+            <el-avatar
+              :size="100"
+              :src="selectedAvatarPreviewSrc || user.avatar"
+              @click="showEditAvatarDialog = true"
+            >
+              <el-icon :size="48">
+                <UserFilled />
+              </el-icon>
+            </el-avatar>
+          </el-tooltip>
 
           <div class="meta__items">
             <div>
@@ -186,7 +217,6 @@ const handleVerifyEmail = () => {
               <el-input
                 :prefix-icon="UserIcon"
                 name="username"
-                :readonly="readonly"
                 v-model.trim="state.username"
               />
             </el-form-item>
@@ -196,7 +226,6 @@ const handleVerifyEmail = () => {
                 :prefix-icon="Message"
                 type="email"
                 name="email"
-                :readonly="readonly"
                 v-model.trim="state.email"
               />
             </el-form-item>
@@ -209,7 +238,6 @@ const handleVerifyEmail = () => {
                 type="password"
                 show-password
                 name="password"
-                :readonly="readonly"
                 v-model="state.password"
               />
             </el-form-item>
@@ -224,7 +252,6 @@ const handleVerifyEmail = () => {
                   type="password"
                   show-password
                   name="passwordConfirm"
-                  :readonly="readonly"
                   v-model="state.passwordConfirm"
                 />
               </el-form-item>
@@ -238,14 +265,13 @@ const handleVerifyEmail = () => {
                   type="password"
                   show-password
                   name="oldPassword"
-                  :readonly="readonly"
                   v-model="state.oldPassword"
                 />
               </el-form-item>
             </template>
           </div>
 
-          <el-form-item v-if="!readonly">
+          <el-form-item>
             <el-button
               type="primary"
               :loading="loading"
@@ -258,6 +284,25 @@ const handleVerifyEmail = () => {
         </el-form>
       </template>
     </div>
+
+    <ConfirmDialogMolecule
+      v-model="showEditAvatarDialog"
+      :cancel-text="t('global.cancel')"
+      :confirm-text="t('global.select')"
+      :title="t('profile.changeAvatar')"
+      :disabled="disabled"
+      :loading="loading"
+      @confirm="confirmAvatar"
+    >
+      <FileSelectOrganism
+        :allowed-file-types="allowedAvatarTypes"
+        :max-size="5"
+        :limit="1"
+        :disabled="disabled"
+        replace
+        @change="selectedAvatar = $event[0]"
+      />
+    </ConfirmDialogMolecule>
   </div>
 </template>
 
@@ -285,6 +330,10 @@ const handleVerifyEmail = () => {
     width: 128px;
     margin-right: var(--app-space-2);
     font-weight: 500;
+  }
+
+  .el-avatar {
+    cursor: pointer;
   }
 }
 
