@@ -33,6 +33,7 @@ const handleSubmit = async (dto: CreateAccountDto) => {
       duration: 3000,
       type: "success",
     });
+    await router.replace("/");
   } finally {
     isUpdateLoading.value = false;
   }
