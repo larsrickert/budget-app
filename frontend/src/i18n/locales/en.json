@@ -89,6 +89,30 @@
     "noItems": "No transactions found.",
     "fabTooltip": "Add new transaction"
   },
+  "transaction": {
+    "addPageName": "New transaction",
+    "editPageName": "Edit transaction",
+    "name": "Transaction name",
+    "value": "Value",
+    "notes": "Notes",
+    "bookingDate": "Booking date",
+    "frequency": "Frequency",
+    "frequencies": {
+      "none": "One time",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "semiannual": "Semiannual",
+      "annual": "Annual",
+      "biennial": "Biennial"
+    },
+    "notFound": "Transaction not found",
+    "deleteConfirmation": "Are you sure you want to irrevocably delete \"{name}\"?",
+    "toasts": {
+      "created": "Transaction created",
+      "updated": "Transaction updated",
+      "deleted": "Transaction deleted"
+    }
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",

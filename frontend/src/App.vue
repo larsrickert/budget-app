@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import logoSrc from "@/assets/logo.svg";
 import { CreditCard, HomeFilled, UserFilled } from "@element-plus/icons-vue";
+import { ElConfigProvider } from "element-plus";
+import de from "element-plus/dist/locale/de";
 import { computed, provide, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterView, useRouter } from "vue-router";
@@ -10,7 +12,7 @@ import { useAuthStore } from "./stores/auth";
 import { provideIsDrawerOpenSymbol } from "./types";
 import type { VueProps } from "./types/vue";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const router = useRouter();
 const authStore = useAuthStore();
 
@@ -65,18 +67,20 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
 
 <template>
   <div>
-    <SideMenuTemplate
-      :title="t('app.title')"
-      :subtitle="t('app.subtitle')"
-      :logo-src="logoSrc"
-      :nav-items="navItems"
-      :sub-items="subItems"
-      :active-href="router.currentRoute.value.path"
-      v-model:is-drawer-open="isDrawerOpen"
-      @item-click="router.push($event)"
-    >
-      <router-view />
-    </SideMenuTemplate>
+    <el-config-provider :locale="locale === 'de' ? de : undefined">
+      <SideMenuTemplate
+        :title="t('app.title')"
+        :subtitle="t('app.subtitle')"
+        :logo-src="logoSrc"
+        :nav-items="navItems"
+        :sub-items="subItems"
+        :active-href="router.currentRoute.value.path"
+        v-model:is-drawer-open="isDrawerOpen"
+        @item-click="router.push($event)"
+      >
+        <router-view />
+      </SideMenuTemplate>
+    </el-config-provider>
   </div>
 </template>
 

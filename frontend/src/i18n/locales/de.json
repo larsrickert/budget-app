@@ -89,6 +89,30 @@
     "noItems": "Keine Buchungen gefunden.",
     "fabTooltip": "Neue Buchung anlegen"
   },
+  "transaction": {
+    "addPageName": "Neue Buchung",
+    "editPageName": "Buchung bearbeiten",
+    "name": "Buchungsname",
+    "value": "Betrag",
+    "notes": "Beschreibung",
+    "bookingDate": "Buchungsdatum",
+    "frequency": "Häufigkeit",
+    "frequencies": {
+      "none": "Einmalig",
+      "monthly": "Monatlich",
+      "quarterly": "Quartalsweise",
+      "semiannual": "Halbjährlich",
+      "annual": "Jährlich",
+      "biennial": "Zweijährlich"
+    },
+    "notFound": "Buchung nicht gefunden",
+    "deleteConfirmation": "Bist du sicher dass du \"{name}\" unwiderruflich löschen möchtest?",
+    "toasts": {
+      "created": "Buchung erstellt",
+      "updated": "Buchung aktualisiert",
+      "deleted": "Buchung gelöscht"
+    }
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",

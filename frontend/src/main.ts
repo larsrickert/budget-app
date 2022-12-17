@@ -7,6 +7,7 @@ import router from "./router";
 
 import { useErrorStore } from "@/stores/errors";
 import "@/styles/index.scss";
+import "dayjs/locale/de";
 import { ElLoading } from "element-plus";
 
 const app = createApp(App);

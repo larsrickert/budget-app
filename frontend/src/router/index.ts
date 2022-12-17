@@ -66,6 +66,11 @@ const router = createRouter({
           name: "createTransaction",
           component: () => import("@/views/CreateTransactionView.vue"),
         },
+        {
+          path: ":id",
+          name: "editTransaction",
+          component: () => import("@/views/EditTransactionView.vue"),
+        },
       ],
     },
   ],

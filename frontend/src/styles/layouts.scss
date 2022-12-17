@@ -43,3 +43,18 @@
 .el-popper {
   max-width: 100%;
 }
+
+.el-select {
+  width: 100%;
+}
+
+.el-date-editor {
+  &.el-input {
+    width: 100% !important;
+  }
+
+  .el-input__wrapper {
+    // prefix icon has width of 22px
+    width: calc(100% - 22px);
+  }
+}
