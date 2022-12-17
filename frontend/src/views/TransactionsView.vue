@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import FloatingButtonAtom from "@/components/atoms/FloatingButtonAtom.vue";
 import TransactionsTemplate from "@/components/templates/TransactionsTemplate.vue";
 import { usePagination } from "@/composables/use-pagination";
 import type {
@@ -9,8 +10,10 @@ import type { VueProps } from "@/types/vue";
 import { CreditCard } from "@element-plus/icons-vue";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 
-const { n, d } = useI18n();
+const router = useRouter();
+const { t, n, d } = useI18n();
 
 const currentType = ref<TransactionType>("income");
 
@@ -49,15 +52,22 @@ const transactions = computed<
 </script>
 
 <template>
-  <TransactionsTemplate
-    v-model:type="currentType"
-    v-model:current-page="pagination.currentPage.value"
-    :page-count="pagination.pageCount.value"
-    :loading="pagination.isLoading.value"
-    :transactions="transactions"
-    :totals="{
-      income: incomePagination.total.value,
-      outcome: outcomePagination.total.value,
-    }"
-  />
+  <div>
+    <TransactionsTemplate
+      v-model:type="currentType"
+      v-model:current-page="pagination.currentPage.value"
+      :page-count="pagination.pageCount.value"
+      :loading="pagination.isLoading.value"
+      :transactions="transactions"
+      :totals="{
+        income: incomePagination.total.value,
+        outcome: outcomePagination.total.value,
+      }"
+    />
+
+    <FloatingButtonAtom
+      :tooltip-text="t('transactions.fabTooltip')"
+      @click="router.push('/transactions/new')"
+    />
+  </div>
 </template>

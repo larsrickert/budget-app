@@ -61,6 +61,11 @@ const router = createRouter({
           name: "transactions",
           component: () => import("@/views/TransactionsView.vue"),
         },
+        {
+          path: "new",
+          name: "createTransaction",
+          component: () => import("@/views/CreateTransactionView.vue"),
+        },
       ],
     },
   ],

@@ -86,7 +86,8 @@
   },
   "transactions": {
     "pageName": "Transactions",
-    "noItems": "No transactions found."
+    "noItems": "No transactions found.",
+    "fabTooltip": "Add new transaction"
   },
   "validations": {
     "required": "Value is required.",
