@@ -84,6 +84,11 @@
       "deleted": "Konto gelöscht"
     }
   },
+  "transactions": {
+    "pageName": "Buchungen",
+    "noItems": "Keine Buchungen gefunden.",
+    "fabTooltip": "Neue Buchung anlegen"
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",

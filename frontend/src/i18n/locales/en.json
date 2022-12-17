@@ -84,6 +84,11 @@
       "deleted": "Account deleted"
     }
   },
+  "transactions": {
+    "pageName": "Transactions",
+    "noItems": "No transactions found.",
+    "fabTooltip": "Add new transaction"
+  },
   "validations": {
     "required": "Value is required.",
     "minLength": "Value must be at least {min} characters long.",

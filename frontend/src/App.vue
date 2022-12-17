@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import logoSrc from "@/assets/logo.svg";
-import { HomeFilled, UserFilled } from "@element-plus/icons-vue";
+import { CreditCard, HomeFilled, UserFilled } from "@element-plus/icons-vue";
 import { computed, provide, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterView, useRouter } from "vue-router";
@@ -25,6 +25,11 @@ const navItems = computed<VueProps<typeof SideMenuTemplate>["navItems"]>(() => {
       label: t("home.pageName"),
       icon: HomeFilled,
       href: "/",
+    },
+    {
+      label: t("transactions.pageName"),
+      icon: CreditCard,
+      href: "/transactions",
     },
   ];
 });
