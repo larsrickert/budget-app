@@ -4,18 +4,19 @@ import { useAccount, type CreateAccountDto } from "@/composables/use-account";
 import { showToast } from "@/utils/io";
 import { computed, ref, watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
 const { t } = useI18n();
-const route = useRoute();
+const router = useRouter();
 
 const accountId = computed(() => {
-  const id = route.params.id ?? "";
+  const id = router.currentRoute.value.params.id ?? "";
   return typeof id === "string" ? id : id.at(0);
 });
 
-const { record, update, isFetching, fetch } = useAccount();
-const isLoading = ref(false);
+const { record, update, isFetching, fetch, remove } = useAccount();
+const isUpdateLoading = ref(false);
+const isDeleteLoading = ref(false);
 
 watchEffect(async () => {
   if (!accountId.value) return;
@@ -23,7 +24,7 @@ watchEffect(async () => {
 });
 
 const handleSubmit = async (dto: CreateAccountDto) => {
-  isLoading.value = true;
+  isUpdateLoading.value = true;
 
   try {
     await update(dto);
@@ -33,7 +34,23 @@ const handleSubmit = async (dto: CreateAccountDto) => {
       type: "success",
     });
   } finally {
-    isLoading.value = false;
+    isUpdateLoading.value = false;
+  }
+};
+
+const handleDelete = async () => {
+  isDeleteLoading.value = true;
+
+  try {
+    await remove();
+    showToast({
+      message: t("account.toasts.deleted"),
+      duration: 3000,
+      type: "success",
+    });
+    await router.replace("/");
+  } finally {
+    isDeleteLoading.value = false;
   }
 };
 </script>
@@ -42,10 +59,12 @@ const handleSubmit = async (dto: CreateAccountDto) => {
   <EditAccountTemplate
     :headline="t('account.editPageName')"
     :submit-label="t('global.update')"
-    :disabled="isFetching"
+    :disabled="isFetching || isUpdateLoading || isDeleteLoading"
     :not-found="!isFetching && !record"
-    :loading="isFetching"
+    :loading="isFetching || isDeleteLoading"
+    :submit-loading="isUpdateLoading"
     :initial-value="record"
     @submit="handleSubmit"
+    @delete="handleDelete"
   />
 </template>

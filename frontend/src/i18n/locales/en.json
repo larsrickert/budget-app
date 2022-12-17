@@ -6,7 +6,9 @@
     "update": "Update",
     "cancel": "Cancel",
     "select": "Select",
-    "add": "Add"
+    "add": "Add",
+    "no": "No",
+    "delete": "Delete"
   },
   "app": {
     "title": "Budget App",
@@ -75,9 +77,11 @@
     "value": "Value",
     "notes": "Notes",
     "notFound": "Account not found",
+    "deleteConfirmation": "Are you sure you want to irrevocably delete \"{name}\"?",
     "toasts": {
       "created": "Account created",
-      "updated": "Account updated"
+      "updated": "Account updated",
+      "deleted": "Account deleted"
     }
   },
   "validations": {

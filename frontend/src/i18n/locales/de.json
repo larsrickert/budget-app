@@ -6,7 +6,9 @@
     "update": "Aktualisieren",
     "cancel": "Abbrechen",
     "select": "Auswählen",
-    "add": "Hinzufügen"
+    "add": "Hinzufügen",
+    "no": "Nein",
+    "delete": "Löschen"
   },
   "app": {
     "title": "Budget App",
@@ -75,9 +77,11 @@
     "value": "Betrag",
     "notes": "Beschreibung",
     "notFound": "Konto nicht gefunden",
+    "deleteConfirmation": "Bist du sicher dass du \"{name}\" unwiderruflich löschen möchtest?",
     "toasts": {
       "created": "Konto erstellt",
-      "updated": "Konto aktualisiert"
+      "updated": "Konto aktualisiert",
+      "deleted": "Konto gelöscht"
     }
   },
   "validations": {

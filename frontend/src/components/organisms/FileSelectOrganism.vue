@@ -148,10 +148,6 @@ watch(files, () => (fileSelectionStarted.value = false));
 
 <style lang="scss" scoped>
 .el-upload {
-  &__text {
-    word-break: break-word;
-  }
-
   &__tip {
     margin-top: var(--app-space-1);
     display: grid;
