@@ -1,6 +1,6 @@
 import client, { type CollectionQuery } from "@/pocketbase";
 import { useOffsetPagination, type MaybeRef } from "@vueuse/core";
-import { ref, type Ref } from "vue";
+import { computed, ref, type Ref } from "vue";
 
 export interface UsePaginationOptions {
   /** @default 15 */
@@ -48,5 +48,12 @@ export const usePagination = <T extends object>(
 
   refetch();
 
-  return { ...pagination, isLoading, items, refetch };
+  return {
+    ...pagination,
+    isLoading,
+    items,
+    refetch,
+    // make total readonly
+    total: computed(() => total.value),
+  };
 };

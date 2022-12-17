@@ -84,6 +84,10 @@
       "deleted": "Konto gelöscht"
     }
   },
+  "transactions": {
+    "pageName": "Buchungen",
+    "noItems": "Keine Buchungen gefunden."
+  },
   "validations": {
     "required": "Wert wird benötigt.",
     "minLength": "Wert muss mindestens {min} Zeichen lang sein.",

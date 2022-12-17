@@ -53,6 +53,16 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/transactions",
+      children: [
+        {
+          path: "",
+          name: "transactions",
+          component: () => import("@/views/TransactionsView.vue"),
+        },
+      ],
+    },
   ],
 });
 
