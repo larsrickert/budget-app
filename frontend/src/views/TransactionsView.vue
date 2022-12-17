@@ -53,6 +53,13 @@ const transactions = computed<
 const handleItemClick = async (id: string) => {
   await router.push(`/transactions/${id}`);
 };
+
+const handleFabClick = async () => {
+  await router.push({
+    path: "transactions/new",
+    query: { type: currentType.value },
+  });
+};
 </script>
 
 <template>
@@ -72,7 +79,7 @@ const handleItemClick = async (id: string) => {
 
     <FloatingButtonAtom
       :tooltip-text="t('transactions.fabTooltip')"
-      @click="router.push('/transactions/new')"
+      @click="handleFabClick"
     />
   </div>
 </template>

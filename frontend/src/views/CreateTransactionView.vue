@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import EditTransactionTemplate from "@/components/templates/EditTransactionTemplate.vue";
 import {
+  TRANSACTION_TYPES,
   useTransaction,
   type CreateTransactionDto,
+  type TransactionType,
 } from "@/composables/use-transaction";
 import { showToast } from "@/utils/io";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -30,6 +32,16 @@ const handleSubmit = async (dto: CreateTransactionDto) => {
     isLoading.value = false;
   }
 };
+
+const initialTypeQuery = computed<TransactionType | undefined>(() => {
+  const { type } = router.currentRoute.value.query;
+  if (!type) return;
+
+  const typeValue = typeof type === "string" ? type : type[0];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!TRANSACTION_TYPES.includes(typeValue as any)) return;
+  return typeValue as TransactionType;
+});
 </script>
 
 <template>
@@ -38,6 +50,7 @@ const handleSubmit = async (dto: CreateTransactionDto) => {
     :submit-label="t('global.add')"
     :disabled="isLoading"
     :submit-loading="isLoading"
+    :initial-type="initialTypeQuery"
     @submit="handleSubmit"
   />
 </template>

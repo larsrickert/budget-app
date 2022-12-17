@@ -3,6 +3,7 @@ import {
   TransactionFrequency,
   TRANSACTION_TYPES,
   type CreateTransactionDto,
+  type TransactionType,
 } from "@/composables/use-transaction";
 import type { FormValidation } from "@/types/vue";
 import { Refresh, Wallet, Warning } from "@element-plus/icons-vue";
@@ -22,20 +23,27 @@ import {
   ElSelect,
   type FormInstance,
 } from "element-plus";
-import { computed, ref, watchEffect, type UnwrapRef } from "vue";
+import { computed, ref, toRaw, watchEffect, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
-const props = defineProps<{
-  headline: string;
-  submitLabel: string;
-  loading?: boolean;
-  submitLoading?: boolean;
-  disabled?: boolean;
-  initialValue?: CreateTransactionDto;
-  notFound?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    headline: string;
+    submitLabel: string;
+    loading?: boolean;
+    submitLoading?: boolean;
+    disabled?: boolean;
+    initialValue?: CreateTransactionDto;
+    notFound?: boolean;
+    /** Initial type to set when no initial value is given. @default outcome */
+    initialType?: TransactionType;
+  }>(),
+  {
+    initialType: "outcome",
+  }
+);
 
 const emit = defineEmits<{
   (event: "submit", value: CreateTransactionDto): void;
@@ -48,7 +56,7 @@ const state = ref<CreateTransactionDto>({
   name: "",
   value: 0,
   notes: "",
-  type: "income",
+  type: toRaw(props.initialType),
   bookingDate: "",
   frequency: TransactionFrequency.NONE,
 });
