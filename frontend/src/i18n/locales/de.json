@@ -23,7 +23,8 @@
       "noItems": "Füge Buchungen hinzu, um hier dein tägliches zur Verfügung stehende Budget für die nächsten {n} Monate zu sehen.",
       "availableBudget": "Tatsächlich verfügbar",
       "availableBudgetHelpText": "Du könntest jetzt bis zu {value} ausgeben und hättest immer noch genug Geld übrig, um alle deine anstehenden Ausgaben zu bezahlen ohne deine Konten zu überziehen."
-    }
+    },
+    "fabTooltip": "Neues Konto anlegen"
   },
   "profile": {
     "createPageName": "Registrieren",

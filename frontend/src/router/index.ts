@@ -38,6 +38,16 @@ const router = createRouter({
       name: "login",
       component: () => import("@/views/LoginView.vue"),
     },
+    {
+      path: "/accounts",
+      children: [
+        {
+          path: "new",
+          name: "createAccount",
+          component: () => import("@/views/CreateAccountView.vue"),
+        },
+      ],
+    },
   ],
 });
 
