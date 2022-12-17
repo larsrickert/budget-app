@@ -12,3 +12,13 @@
 *.sw?
 
 docker-data
+
+# For Go:
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work

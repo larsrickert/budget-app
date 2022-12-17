@@ -1,7 +1,7 @@
 name: Release and deploy
 on:
   push:
-    branches: [alpha]
+    branches: [main]
     paths:
       - "frontend/**"
       - "backend/**"
