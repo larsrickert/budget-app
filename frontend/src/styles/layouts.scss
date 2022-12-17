@@ -25,3 +25,21 @@
     }
   }
 }
+
+.el-popconfirm {
+  &__main {
+    word-break: break-word;
+    text-align: left;
+    gap: var(--app-space-1);
+  }
+}
+
+.el-upload {
+  &__text {
+    word-break: break-word;
+  }
+}
+
+.el-popper {
+  max-width: 100%;
+}
