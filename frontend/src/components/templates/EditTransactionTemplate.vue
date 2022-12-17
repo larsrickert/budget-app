@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {
   TransactionFrequency,
+  TRANSACTION_TYPES,
   type CreateTransactionDto,
 } from "@/composables/use-transaction";
 import type { FormValidation } from "@/types/vue";
@@ -82,8 +83,35 @@ const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
   value: [
     { required: true, message: t("validations.required") },
     { type: "number", message: t("validations.number") },
+    {
+      validator: (rule, value: number, callback) => {
+        if (state.value.type === "income" && value <= 0) {
+          callback(new Error(t("validations.largerThan", 0)));
+        } else if (state.value.type === "outcome" && value >= 0) {
+          callback(new Error(t("validations.smallerThan", 0)));
+        } else {
+          callback();
+        }
+      },
+    },
   ],
   notes: [{ max: 512, message: t("validations.maxLength", { max: 512 }) }],
+  type: [
+    { required: true, message: t("validations.required") },
+    {
+      type: "enum",
+      enum: [...TRANSACTION_TYPES],
+      message: t("validations.enum"),
+    },
+  ],
+  bookingDate: [{ type: "date", message: t("validations.date") }],
+  frequency: [
+    {
+      type: "enum",
+      enum: Object.values(TransactionFrequency),
+      message: t("validations.enum"),
+    },
+  ],
 }));
 
 const formRef = ref<FormInstance | null>(null);

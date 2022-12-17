@@ -49,6 +49,10 @@ const transactions = computed<
     status: i.value < 0 ? "danger" : undefined,
   }));
 });
+
+const handleItemClick = async (id: string) => {
+  await router.push(`/transactions/${id}`);
+};
 </script>
 
 <template>
@@ -63,6 +67,7 @@ const transactions = computed<
         income: incomePagination.total.value,
         outcome: outcomePagination.total.value,
       }"
+      @item-click="handleItemClick"
     />
 
     <FloatingButtonAtom

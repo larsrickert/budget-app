@@ -119,6 +119,10 @@
     "maxLength": "Wert darf maximal {max} Zeichen lang sein.",
     "email": "Wert muss eine gültige E-Mail Adresse sein.",
     "number": "Wert muss eine Zahl sein.",
-    "sameAs": "Wert muss identisch zu \"{otherName}\" sein."
+    "sameAs": "Wert muss identisch zu \"{otherName}\" sein.",
+    "date": "Wert muss ein gültiges Datum sein.",
+    "enum": "Wert muss einer der erlaubten Wert sein.",
+    "largerThan": "Wert muss größer als {n} sein.",
+    "smallerThan": "Wert muss kleiner als {n} sein."
   }
 }
