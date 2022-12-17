@@ -45,6 +45,14 @@ watchEffect(() => {
   state.value = { ...props.initialValue };
 });
 
+const hasDataChanged = computed(() => {
+  return (
+    state.value.name.trim() !== props.initialValue?.name ||
+    state.value.value !== props.initialValue?.value ||
+    state.value.notes !== props.initialValue.notes
+  );
+});
+
 const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
   name: [
     { required: true, message: t("validations.required") },
@@ -144,7 +152,7 @@ const handleSubmit = async () => {
             <el-button
               type="primary"
               :loading="submitLoading"
-              :disabled="disabled"
+              :disabled="disabled || !hasDataChanged"
               @click="handleSubmit"
             >
               {{ submitLabel }}
