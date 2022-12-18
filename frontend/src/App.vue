@@ -14,6 +14,7 @@ import { useI18n } from "vue-i18n";
 import { RouterView, useRouter } from "vue-router";
 import SideMenuTemplate from "./components/templates/SideMenuTemplate.vue";
 import { useFile } from "./composables/use-file";
+import { getUserPreferredLocale } from "./i18n";
 import { useAuthStore } from "./stores/auth";
 import { provideIsDrawerOpenSymbol } from "./types";
 import type { VueProps } from "./types/vue";
@@ -78,6 +79,10 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
 
 // enable auto dark/light mode
 useDark();
+
+// detect user locale
+const userPreferredLocale = getUserPreferredLocale();
+if (userPreferredLocale) locale.value = userPreferredLocale;
 </script>
 
 <template>
