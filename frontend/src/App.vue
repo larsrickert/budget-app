@@ -6,10 +6,10 @@ import {
   Setting,
   UserFilled,
 } from "@element-plus/icons-vue";
-import { useDark } from "@vueuse/core";
+import { useColorMode } from "@vueuse/core";
 import { ElConfigProvider } from "element-plus";
 import de from "element-plus/dist/locale/de";
-import { computed, provide, ref } from "vue";
+import { computed, provide, ref, watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterView, useRouter } from "vue-router";
 import SideMenuTemplate from "./components/templates/SideMenuTemplate.vue";
@@ -19,7 +19,7 @@ import { useAuthStore } from "./stores/auth";
 import { provideIsDrawerOpenSymbol } from "./types";
 import type { VueProps } from "./types/vue";
 
-const { t, locale } = useI18n();
+const { t, locale, availableLocales } = useI18n();
 const router = useRouter();
 const authStore = useAuthStore();
 
@@ -78,11 +78,28 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
 });
 
 // enable auto dark/light mode
-useDark();
+const colorMode = useColorMode({ emitAuto: true });
+watchEffect(() => {
+  if (!authStore.user?.theme || colorMode.value === authStore.user.theme) {
+    return;
+  }
+  colorMode.value = authStore.user.theme;
+});
 
 // detect user locale
 const userPreferredLocale = getUserPreferredLocale();
 if (userPreferredLocale) locale.value = userPreferredLocale;
+
+watchEffect(() => {
+  if (!authStore.user || locale.value === authStore.user.locale) {
+    return;
+  }
+  if (availableLocales.includes(authStore.user.locale)) {
+    locale.value = authStore.user.locale;
+  } else if (userPreferredLocale) {
+    locale.value = userPreferredLocale;
+  }
+});
 </script>
 
 <template>

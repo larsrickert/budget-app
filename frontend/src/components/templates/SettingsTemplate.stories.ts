@@ -18,6 +18,15 @@ export const Primary: StoryObj<Args> = {
 
 export const Disabled: StoryObj<Args> = {
   args: {
+    ...Primary.args,
     disabled: true,
+  },
+};
+
+export const Loading: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    isLocaleLoading: true,
+    isDarkLoading: true,
   },
 };

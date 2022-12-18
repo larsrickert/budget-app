@@ -17,6 +17,8 @@ const props = defineProps<{
   isDark?: boolean;
   locale: string;
   availableLocales: string[];
+  isLocaleLoading?: boolean;
+  isDarkLoading?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -51,7 +53,12 @@ const getFlagSrc = (locale: string) => {
         :validate-on-rule-change="false"
       >
         <el-form-item :label="t('settings.language')">
-          <el-select v-model="localeModel" name="language">
+          <el-select
+            v-model="localeModel"
+            name="language"
+            v-loading="isLocaleLoading"
+            :disabled="isLocaleLoading"
+          >
             <el-option
               v-for="locale in availableLocales"
               :key="locale"
@@ -87,6 +94,7 @@ const getFlagSrc = (locale: string) => {
               inline-prompt
               :active-icon="Moon"
               :inactive-icon="Sunny"
+              :loading="isDarkLoading"
             />
           </el-tooltip>
         </el-form-item>

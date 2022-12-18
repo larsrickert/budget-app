@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { CustomError } from "./errors";
 
-export interface User extends BaseRecord {
+export interface User extends BaseRecord, UserSettingsDto {
   email: string;
   username: string;
   avatar: string;
@@ -31,6 +31,11 @@ export interface UpdateUserDto {
 export interface LoginPayload {
   usernameOrEmail: string;
   password: string;
+}
+
+export interface UserSettingsDto {
+  theme: "light" | "dark" | "";
+  locale: string;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -90,6 +95,15 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const updateSettings = async (dto: Partial<UserSettingsDto>) => {
+    if (!user.value?.id) {
+      throw new CustomError(
+        "Unable to update user because you are not logged in"
+      );
+    }
+    await client.collection("users").update<User>(user.value.id, dto);
+  };
+
   return {
     isAuthenticated,
     login,
@@ -98,5 +112,6 @@ export const useAuthStore = defineStore("auth", () => {
     requestEmailVerification,
     createUser,
     updateUser,
+    updateSettings,
   };
 });
