@@ -16,6 +16,11 @@ const isLocaleLoading = ref(false);
 const localeModel = computed({
   get: () => locale.value,
   set: async (value) => {
+    if (!authStore.isAuthenticated) {
+      locale.value = value;
+      return;
+    }
+
     if (isLocaleLoading.value) return;
     isLocaleLoading.value = true;
 
@@ -33,10 +38,12 @@ const isDarkLoading = ref(false);
 const isDarkModel = computed({
   get: () => isDark.value,
   set: async (value) => {
+    isDark.value = value;
+    if (!authStore.isAuthenticated) return;
+
     if (isDarkLoading.value) return;
     isDarkLoading.value = true;
 
-    isDark.value = value;
     await nextTick();
     const theme = useColorMode({ emitAuto: true }).value;
 
@@ -56,5 +63,6 @@ const isDarkModel = computed({
     :available-locales="availableLocales"
     :is-locale-loading="isLocaleLoading"
     :is-dark-loading="isDarkLoading"
+    :disallow-locale-change="!authStore.isAuthenticated"
   />
 </template>

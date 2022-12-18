@@ -121,7 +121,8 @@
       "light": "hell",
       "dark": "dunkel"
     },
-    "language": "Sprache"
+    "language": "Sprache",
+    "localeChangeNotAllowed": "Du musst angemeldet sein, um die Sprache ändern zu können."
   },
   "notFound": {
     "pageName": "Seite nicht gefunden",

@@ -10,6 +10,7 @@ import {
   ElTooltip,
 } from "element-plus";
 import { useI18n } from "vue-i18n";
+import HelpAtom from "../atoms/HelpAtom.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
 const props = defineProps<{
@@ -19,6 +20,7 @@ const props = defineProps<{
   availableLocales: string[];
   isLocaleLoading?: boolean;
   isDarkLoading?: boolean;
+  disallowLocaleChange?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -57,7 +59,7 @@ const getFlagSrc = (locale: string) => {
             v-model="localeModel"
             name="language"
             v-loading="isLocaleLoading"
-            :disabled="isLocaleLoading"
+            :disabled="isLocaleLoading || disallowLocaleChange"
           >
             <el-option
               v-for="locale in availableLocales"
@@ -83,6 +85,12 @@ const getFlagSrc = (locale: string) => {
               />
             </template>
           </el-select>
+
+          <HelpAtom
+            v-if="disallowLocaleChange"
+            :content="t('settings.localeChangeNotAllowed')"
+            class="locale__help"
+          />
         </el-form-item>
 
         <el-form-item :label="t('settings.theme')">
@@ -113,6 +121,10 @@ const getFlagSrc = (locale: string) => {
     height: 16px;
     width: 16px;
     border-radius: 50%;
+  }
+
+  &__help {
+    margin-left: var(--app-space-2);
   }
 }
 </style>
