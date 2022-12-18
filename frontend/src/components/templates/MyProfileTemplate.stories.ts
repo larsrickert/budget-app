@@ -17,6 +17,8 @@ const user: User = {
   avatar: "https://picsum.photos/100",
   created: new Date().toISOString(),
   updated: new Date().toISOString(),
+  locale: "en",
+  theme: "light",
 };
 
 export const Primary: StoryObj<Args> = {
