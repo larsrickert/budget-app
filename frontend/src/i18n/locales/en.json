@@ -19,7 +19,7 @@
     "noAccounts": "No accounts found.",
     "monthly": {
       "headline": "Monthly overview",
-      "Budget": "Budget"
+      "budget": "Budget"
     },
     "chart": {
       "headline": "Budget development",
