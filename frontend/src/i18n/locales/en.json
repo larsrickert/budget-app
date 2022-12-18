@@ -125,7 +125,8 @@
       "light": "light",
       "dark": "dark"
     },
-    "language": "Language"
+    "language": "Language",
+    "localeChangeNotAllowed": "You must be logged in to change the language."
   },
   "notFound": {
     "pageName": "Page not found",

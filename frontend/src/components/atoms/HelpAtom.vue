@@ -27,5 +27,6 @@ withDefaults(
 <style lang="scss" scoped>
 .help {
   cursor: help;
+  display: inherit;
 }
 </style>

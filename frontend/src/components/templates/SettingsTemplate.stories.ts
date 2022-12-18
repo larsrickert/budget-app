@@ -30,3 +30,10 @@ export const Loading: StoryObj<Args> = {
     isDarkLoading: true,
   },
 };
+
+export const DisallowLocaleChange: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    disallowLocaleChange: true,
+  },
+};
