@@ -234,6 +234,7 @@ const isDateDisabled = (date: Date) => {
                 clearable
                 filterable
                 name="frequency"
+                class="el-select--full-width"
               >
                 <el-option
                   v-for="[key, value] in Object.entries(TransactionFrequency)"

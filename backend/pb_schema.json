@@ -24,6 +24,30 @@
           ],
           "thumbs": ["24x24f"]
         }
+      },
+      {
+        "id": "xs4gphtx",
+        "name": "theme",
+        "type": "select",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": ["light", "dark"]
+        }
+      },
+      {
+        "id": "16xzokps",
+        "name": "locale",
+        "type": "select",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": ["en", "de"]
+        }
       }
     ],
     "listRule": "id = @request.auth.id",

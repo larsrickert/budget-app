@@ -11,11 +11,22 @@ export default {
 export const Primary: StoryObj<Args> = {
   args: {
     isDark: true,
+    locale: "en",
+    availableLocales: ["en", "de"],
   },
 };
 
 export const Disabled: StoryObj<Args> = {
   args: {
+    ...Primary.args,
     disabled: true,
+  },
+};
+
+export const Loading: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    isLocaleLoading: true,
+    isDarkLoading: true,
   },
 };

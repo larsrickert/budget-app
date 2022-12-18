@@ -338,7 +338,7 @@ const handleFileSizeExceed = () => {
 
   &__label {
     display: inline-block;
-    width: 128px;
+    width: 140px;
     margin-right: var(--app-space-2);
     font-weight: 500;
   }

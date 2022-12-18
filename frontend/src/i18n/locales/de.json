@@ -120,7 +120,8 @@
     "themes": {
       "light": "hell",
       "dark": "dunkel"
-    }
+    },
+    "language": "Sprache"
   },
   "notFound": {
     "pageName": "Seite nicht gefunden",
