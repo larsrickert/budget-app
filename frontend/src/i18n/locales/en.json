@@ -8,7 +8,11 @@
     "select": "Select",
     "add": "Add",
     "no": "No",
-    "delete": "Delete"
+    "delete": "Delete",
+    "locales": {
+      "de": "Deutsch",
+      "en": "English"
+    }
   },
   "app": {
     "title": "Budget App",
@@ -120,7 +124,8 @@
     "themes": {
       "light": "light",
       "dark": "dark"
-    }
+    },
+    "language": "Language"
   },
   "notFound": {
     "pageName": "Page not found",

@@ -11,6 +11,8 @@ export default {
 export const Primary: StoryObj<Args> = {
   args: {
     isDark: true,
+    locale: "en",
+    availableLocales: ["en", "de"],
   },
 };
 
