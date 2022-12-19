@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import logoSrc from "@/assets/logo.svg";
 import {
+  ChatDotSquare,
   CreditCard,
   HomeFilled,
   Setting,
@@ -57,6 +58,11 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
       icon: Setting,
       href: "/settings",
     },
+    {
+      label: t("global.contact"),
+      icon: ChatDotSquare,
+      href: "https://github.com/larsrickert/budget-app",
+    },
   ];
 
   if (authStore.isAuthenticated) {
@@ -76,6 +82,11 @@ const subItems = computed<VueProps<typeof SideMenuTemplate>["subItems"]>(() => {
 
   return items;
 });
+
+const handleNavItemClick = async (href: string) => {
+  if (href.startsWith("http")) window.open(href, "_blank");
+  else await router.push(href);
+};
 
 // enable auto dark/light mode
 const colorMode = useColorMode({ emitAuto: true });
@@ -113,7 +124,7 @@ watchEffect(() => {
         :sub-items="subItems"
         :active-href="router.currentRoute.value.path"
         v-model:is-drawer-open="isDrawerOpen"
-        @item-click="router.push($event)"
+        @item-click="handleNavItemClick"
       >
         <router-view />
       </SideMenuTemplate>

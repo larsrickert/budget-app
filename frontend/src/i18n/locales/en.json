@@ -12,7 +12,8 @@
     "locales": {
       "de": "Deutsch",
       "en": "English"
-    }
+    },
+    "contact": "Contact"
   },
   "app": {
     "title": "Budget App",

@@ -8,7 +8,8 @@
     "select": "Auswählen",
     "add": "Hinzufügen",
     "no": "Nein",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "contact": "Kontakt"
   },
   "app": {
     "title": "Budget App",
