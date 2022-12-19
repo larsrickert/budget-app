@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/mail"
 
-	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/models"
+	"github.com/pocketbase/pocketbase/models/settings"
 	"github.com/pocketbase/pocketbase/tools/mailer"
 )
 
@@ -20,7 +20,7 @@ func NewMailService(mailClient mailer.Mailer) *MailService {
 	}
 }
 
-func (s *MailService) SendNewUserAdminMail(settings *core.Settings, record *models.Record) error {
+func (s *MailService) SendNewUserAdminMail(settings *settings.Settings, record *models.Record) error {
 	adminEmail := settings.Meta.SenderAddress
 	if adminEmail == "" {
 		return errors.New("sender address is not set in app settings")
@@ -38,5 +38,10 @@ func (s *MailService) SendNewUserAdminMail(settings *core.Settings, record *mode
 			`, settings.Meta.SenderName, record.Username(), record.Email(),
 	)
 
-	return s.mailClient.Send(adminAddress, adminAddress, "New user registration", body, nil)
+	return s.mailClient.Send(&mailer.Message{
+		From:    adminAddress,
+		To:      adminAddress,
+		Subject: "New user registration",
+		HTML:    body,
+	})
 }

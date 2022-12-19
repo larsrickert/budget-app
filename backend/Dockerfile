@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 RUN go build -v cmd/app/main.go
 
-FROM alpine:3.16
+FROM alpine
 
 WORKDIR /app
 RUN apk add --no-cache ca-certificates

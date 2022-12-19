@@ -7,3 +7,5 @@
 *.test
 *.out
 go.work
+
+pb_data
