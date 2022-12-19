@@ -1,6 +1,6 @@
 import type { NumberFormats } from "@intlify/core-base";
 
-const numberFormats: NumberFormats = {
+const numberFormats = {
   en: {
     currency: {
       style: "currency",
@@ -23,6 +23,6 @@ const numberFormats: NumberFormats = {
       notation: "compact",
     },
   },
-};
+} satisfies NumberFormats;
 
 export default numberFormats;
