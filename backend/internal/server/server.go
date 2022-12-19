@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 )
 
 type Server struct {
@@ -24,6 +25,10 @@ func (s *Server) Start() error {
 	if err := s.registerHooks(); err != nil {
 		return err
 	}
+
+	migratecmd.MustRegister(s.pb, s.pb.RootCmd, &migratecmd.Options{
+		Automigrate: true, // auto creates migration files when making collection changes
+	})
 
 	return s.pb.Start()
 }

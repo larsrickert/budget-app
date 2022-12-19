@@ -12,6 +12,7 @@ services:
       LETSENCRYPT_HOST: ${BACKEND_DOMAIN:?}
     volumes:
       - ./docker-data/pocketbase:/app/pb_data
+      - ./docker-data/migrations:/app/migrations
 
   frontend:
     build:
@@ -21,7 +22,7 @@ services:
     image: larsrickert/budget-app-frontend
     restart: unless-stopped
     # ports:
-    #   - "80:3000"
+    #   - "80:80"
     environment:
       VIRTUAL_HOST: ${FRONTEND_DOMAIN:?}
       LETSENCRYPT_HOST: ${FRONTEND_DOMAIN:?}
