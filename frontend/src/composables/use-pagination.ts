@@ -1,11 +1,12 @@
-import client, { type CollectionQuery } from "@/pocketbase";
+import client from "@/pocketbase";
 import { useOffsetPagination, type MaybeRef } from "@vueuse/core";
+import type { RecordListQueryParams } from "pocketbase";
 import { computed, ref, type Ref } from "vue";
 
 export interface UsePaginationOptions {
   /** @default 15 */
   pageSize?: MaybeRef<number>;
-  query?: CollectionQuery;
+  query?: RecordListQueryParams;
 }
 
 export const usePagination = <T extends object>(

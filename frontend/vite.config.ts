@@ -19,7 +19,7 @@ export default defineConfig({
         "./src/i18n/locales/**"
       ),
     }),
-    ElementPlus({}),
+    ElementPlus(),
   ],
   resolve: {
     alias: {
