@@ -11,10 +11,10 @@ const authStore = useAuthStore();
 const router = useRouter();
 const { t } = useI18n();
 
-const isLoading = ref(false);
+const isSubmitLoading = ref(false);
 
 const handleSubmit = async (dto: UpdateUserDto) => {
-  isLoading.value = true;
+  isSubmitLoading.value = true;
   try {
     await authStore.updateUser(dto);
     showToast({
@@ -27,7 +27,7 @@ const handleSubmit = async (dto: UpdateUserDto) => {
       duration: 3000,
     });
   } finally {
-    isLoading.value = false;
+    isSubmitLoading.value = false;
   }
 };
 
@@ -52,6 +52,17 @@ const handleLogout = async () => {
   authStore.logout();
   await router.push("/login");
 };
+
+const isDeleteLoading = ref(false);
+const handleDeleteUser = async () => {
+  isDeleteLoading.value = true;
+  try {
+    await authStore.deleteUser();
+    router.push("/login");
+  } finally {
+    isDeleteLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -60,9 +71,12 @@ const handleLogout = async () => {
       :user="
         authStore.user ? { ...authStore.user, avatar: avatarUrl } : undefined
       "
+      :is-submit-loading="isSubmitLoading"
+      :is-delete-loading="isDeleteLoading"
       @submit="handleSubmit"
       @request-email-verification="handleRequestEmailVerification"
       @logout="handleLogout"
+      @delete-user="handleDeleteUser"
     />
   </div>
 </template>

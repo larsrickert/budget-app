@@ -44,6 +44,7 @@
     "logout": "Abmelden",
     "changeAvatar": "Profilbild ändern",
     "fileSizeExceeded": "Das Profilbild darf maximal {n} MB groß sein. Bitte wähle ein kleineres Bild aus.",
+    "deleteUserConfirmation": "Bist du sicher dass du dein Profil und ALLE zugehörigen Daten unwiderruflich löschen möchtest?",
     "emailStatus": {
       "label": "E-Mail Status",
       "verified": "Bestätigt",
