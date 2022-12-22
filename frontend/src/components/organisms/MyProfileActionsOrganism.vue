@@ -1,20 +1,28 @@
 <script lang="ts" setup>
 import { showToast } from "@/utils/io";
-import { UserFilled } from "@element-plus/icons-vue";
+import { UserFilled, Warning } from "@element-plus/icons-vue";
 import { computedAsync } from "@vueuse/core";
-import { ElAvatar, ElIcon, ElTag, ElTooltip } from "element-plus";
+import {
+  ElAvatar,
+  ElButton,
+  ElIcon,
+  ElPopconfirm,
+  ElTag,
+  ElTooltip,
+} from "element-plus";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import ConfirmDialogMolecule from "../molecules/ConfirmDialogMolecule.vue";
 import FileSelectOrganism from "./FileSelectOrganism.vue";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     avatar?: string;
     createdDate?: string;
     isVerified?: boolean;
     disabled?: boolean;
     allowedAvatarTypes?: string[];
+    loading?: boolean;
   }>(),
   {
     allowedAvatarTypes: () => [".jpg", ".jpeg", ".png", ".svg", ".webp"],
@@ -24,6 +32,7 @@ withDefaults(
 const emit = defineEmits<{
   (event: "requestEmailVerification"): void;
   (event: "avatarSelect", value?: File): void;
+  (event: "deleteUser"): void;
 }>();
 
 const { t, d } = useI18n();
@@ -66,48 +75,79 @@ const handleFileSizeExceed = () => {
     type: "error",
   });
 };
+
+const handleAvatarClick = () => {
+  if (props.disabled) return;
+  showEditAvatarDialog.value = true;
+};
 </script>
 
 <template>
   <div>
     <div class="actions">
-      <el-tooltip :content="t('profile.changeAvatar')">
-        <el-avatar
-          :size="100"
-          :src="selectedAvatarPreviewSrc || avatar"
-          @click="showEditAvatarDialog = true"
-        >
-          <el-icon :size="48">
-            <UserFilled />
-          </el-icon>
-        </el-avatar>
-      </el-tooltip>
-
-      <div class="actions__items">
-        <div>
-          <span class="actions__label">
-            {{ t("profile.registeredSince") }}:
-          </span>
-          <span>{{ createdDate ? d(createdDate) : "-" }}</span>
-        </div>
-        <div>
-          <span class="actions__label">
-            {{ t("profile.emailStatus.label") }}:
-          </span>
-
-          <el-tag v-if="isVerified" type="success">
-            {{ t("profile.emailStatus.verified") }}
-          </el-tag>
-          <el-tag
-            v-else
-            type="danger"
-            :class="!isVerifyEmailDisabled && 'verify-email-btn'"
-            @click="handleVerifyEmail"
+      <div class="actions__wrapper">
+        <el-tooltip :content="t('profile.changeAvatar')" :disabled="disabled">
+          <el-avatar
+            :size="100"
+            :src="selectedAvatarPreviewSrc || avatar"
+            :class="{ disabled }"
+            @click="handleAvatarClick"
           >
-            {{ t("profile.emailStatus.notVerified") }}
-          </el-tag>
+            <el-icon :size="48">
+              <UserFilled />
+            </el-icon>
+          </el-avatar>
+        </el-tooltip>
+
+        <div class="items">
+          <div>
+            <span class="items__label">
+              {{ t("profile.registeredSince") }}:
+            </span>
+            <span>{{ createdDate ? d(createdDate) : "-" }}</span>
+          </div>
+
+          <div>
+            <span class="items__label">
+              {{ t("profile.emailStatus.label") }}:
+            </span>
+
+            <el-tag v-if="isVerified" type="success">
+              {{ t("profile.emailStatus.verified") }}
+            </el-tag>
+            <el-tag
+              v-else
+              type="danger"
+              :class="!isVerifyEmailDisabled && 'verify-email-btn'"
+              @click="handleVerifyEmail"
+            >
+              {{ t("profile.emailStatus.notVerified") }}
+            </el-tag>
+          </div>
         </div>
       </div>
+
+      <el-popconfirm
+        :title="t('profile.deleteUserConfirmation')"
+        :cancel-button-text="t('global.no')"
+        :confirm-button-text="t('global.delete')"
+        confirm-button-type="danger"
+        :width="300"
+        :icon="Warning"
+        :disabled="disabled"
+        @confirm="emit('deleteUser')"
+      >
+        <template #reference>
+          <el-button
+            type="danger"
+            plain
+            :disabled="disabled"
+            :loading="loading"
+          >
+            {{ t("global.delete") }}
+          </el-button>
+        </template>
+      </el-popconfirm>
     </div>
 
     <ConfirmDialogMolecule
@@ -136,29 +176,37 @@ const handleFileSizeExceed = () => {
 
 .actions {
   display: flex;
-  gap: var(--app-space-2) var(--app-space-3);
+  gap: var(--app-space-3) var(--app-space-3);
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: var(--app-space-3);
 
-  @include breakpoint(s) {
-    gap: var(--app-space-2);
+  &__wrapper {
+    display: flex;
+    gap: var(--app-space-2) var(--app-space-3);
+    align-items: center;
+    flex-wrap: wrap;
   }
 
-  &__items {
+  .items {
     display: grid;
     gap: calc(1.5 * var(--app-space-1));
-  }
 
-  &__label {
-    display: inline-block;
-    width: 140px;
-    margin-right: var(--app-space-2);
-    font-weight: 500;
+    &__label {
+      display: inline-block;
+      width: 140px;
+      margin-right: var(--app-space-2);
+      font-weight: 500;
+    }
   }
 
   .el-avatar {
     cursor: pointer;
+
+    &.disabled {
+      cursor: default;
+    }
   }
 }
 

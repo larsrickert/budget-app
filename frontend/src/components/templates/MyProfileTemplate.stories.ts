@@ -44,6 +44,15 @@ export const NotVerified: StoryObj<Args> = {
     },
   },
 };
+
+export const Loading: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    isSubmitLoading: true,
+    isDeleteLoading: true,
+  },
+};
+
 export const WithoutUser: StoryObj<Args> = {
   args: {},
 };

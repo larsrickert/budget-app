@@ -23,7 +23,8 @@ import MyProfileActionsOrganism from "../organisms/MyProfileActionsOrganism.vue"
 
 const props = defineProps<{
   disabled?: boolean;
-  loading?: boolean;
+  isSubmitLoading?: boolean;
+  isDeleteLoading?: boolean;
   user?: User;
 }>();
 
@@ -31,6 +32,7 @@ const emit = defineEmits<{
   (event: "submit", dto: UpdateUserDto): void;
   (event: "requestEmailVerification"): void;
   (event: "logout"): void;
+  (event: "deleteUser"): void;
 }>();
 
 const { t } = useI18n();
@@ -129,8 +131,10 @@ const handleSubmit = async () => {
           :created-date="user.created"
           :is-verified="user.verified"
           :disabled="disabled"
+          :loading="isDeleteLoading"
           @request-email-verification="emit('requestEmailVerification')"
           @avatar-select="state.avatar = $event"
+          @delete-user="emit('deleteUser')"
         />
 
         <el-form
@@ -206,7 +210,7 @@ const handleSubmit = async () => {
           <el-form-item>
             <el-button
               type="primary"
-              :loading="loading"
+              :loading="isSubmitLoading"
               @click="handleSubmit"
               :disabled="disabled || !hasDataChanged"
             >

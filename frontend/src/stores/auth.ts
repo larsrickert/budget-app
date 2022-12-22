@@ -104,6 +104,11 @@ export const useAuthStore = defineStore("auth", () => {
     await client.collection("users").update<User>(user.value.id, dto);
   };
 
+  const deleteUser = async () => {
+    if (!user.value) return;
+    client.collection("users").delete(user.value.id);
+  };
+
   return {
     isAuthenticated,
     login,
@@ -113,5 +118,6 @@ export const useAuthStore = defineStore("auth", () => {
     createUser,
     updateUser,
     updateSettings,
+    deleteUser,
   };
 });

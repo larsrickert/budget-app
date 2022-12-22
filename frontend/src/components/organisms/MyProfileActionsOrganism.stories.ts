@@ -21,3 +21,17 @@ export const Verified: StoryObj<Args> = {
     isVerified: true,
   },
 };
+
+export const Disabled: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    disabled: true,
+  },
+};
+
+export const Loading: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    loading: true,
+  },
+};

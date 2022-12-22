@@ -52,6 +52,17 @@ const handleLogout = async () => {
   authStore.logout();
   await router.push("/login");
 };
+
+const isDeleteLoading = ref(false);
+const handleDeleteUser = async () => {
+  isDeleteLoading.value = true;
+  try {
+    await authStore.deleteUser();
+    router.push("/login");
+  } finally {
+    isDeleteLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -60,9 +71,12 @@ const handleLogout = async () => {
       :user="
         authStore.user ? { ...authStore.user, avatar: avatarUrl } : undefined
       "
+      :is-submit-loading="isLoading"
+      :is-delete-loading="isDeleteLoading"
       @submit="handleSubmit"
       @request-email-verification="handleRequestEmailVerification"
       @logout="handleLogout"
+      @delete-user="handleDeleteUser"
     />
   </div>
 </template>
