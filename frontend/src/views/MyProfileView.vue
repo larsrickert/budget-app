@@ -11,10 +11,10 @@ const authStore = useAuthStore();
 const router = useRouter();
 const { t } = useI18n();
 
-const isLoading = ref(false);
+const isSubmitLoading = ref(false);
 
 const handleSubmit = async (dto: UpdateUserDto) => {
-  isLoading.value = true;
+  isSubmitLoading.value = true;
   try {
     await authStore.updateUser(dto);
     showToast({
@@ -27,7 +27,7 @@ const handleSubmit = async (dto: UpdateUserDto) => {
       duration: 3000,
     });
   } finally {
-    isLoading.value = false;
+    isSubmitLoading.value = false;
   }
 };
 
@@ -71,7 +71,7 @@ const handleDeleteUser = async () => {
       :user="
         authStore.user ? { ...authStore.user, avatar: avatarUrl } : undefined
       "
-      :is-submit-loading="isLoading"
+      :is-submit-loading="isSubmitLoading"
       :is-delete-loading="isDeleteLoading"
       @submit="handleSubmit"
       @request-email-verification="handleRequestEmailVerification"
