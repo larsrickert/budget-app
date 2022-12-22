@@ -1,33 +1,25 @@
 <script lang="ts" setup>
 import type { UpdateUserDto, User } from "@/stores/auth";
 import type { FormValidation } from "@/types/vue";
-import { showToast } from "@/utils/io";
 import {
   Key,
   Message,
   TurnOff,
   User as UserIcon,
-  UserFilled,
 } from "@element-plus/icons-vue";
-import { computedAsync } from "@vueuse/core";
 import {
-  ElAvatar,
   ElButton,
   ElEmpty,
   ElForm,
   ElFormItem,
-  ElIcon,
   ElInput,
-  ElTag,
-  ElTooltip,
   type FormInstance,
   type FormItemRule,
 } from "element-plus";
 import { computed, ref, watchEffect, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
-import ConfirmDialogMolecule from "../molecules/ConfirmDialogMolecule.vue";
-import FileSelectOrganism from "../organisms/FileSelectOrganism.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
+import MyProfileActionsOrganism from "../organisms/MyProfileActionsOrganism.vue";
 
 const props = defineProps<{
   disabled?: boolean;
@@ -41,7 +33,7 @@ const emit = defineEmits<{
   (event: "logout"): void;
 }>();
 
-const { t, d } = useI18n();
+const { t } = useI18n();
 
 const state = ref<UpdateUserDto>({
   username: "",
@@ -117,45 +109,6 @@ const handleSubmit = async () => {
     emit("submit", { ...state.value });
   });
 };
-
-const isVerifyEmailDisabled = ref(false);
-
-const handleVerifyEmail = () => {
-  if (isVerifyEmailDisabled.value) return;
-  emit("requestEmailVerification");
-  isVerifyEmailDisabled.value = true;
-};
-
-const showEditAvatarDialog = ref(false);
-const allowedAvatarTypes = [".jpg", ".jpeg", ".png", ".svg", ".webp"];
-
-const selectedAvatarPreviewSrc = computedAsync(async () => {
-  if (!state.value.avatar) return "";
-  const reader = new FileReader();
-  const promise = new Promise<string>((resolve) => {
-    reader.onload = (ev) => {
-      const data = ev.target?.result;
-      resolve(typeof data === "string" ? data : "");
-    };
-    reader.onerror = () => resolve("");
-  });
-
-  reader.readAsDataURL(state.value.avatar);
-  return promise;
-});
-
-const selectAvatar = (file?: File) => {
-  state.value.avatar = file;
-  if (file) showEditAvatarDialog.value = false;
-};
-
-const handleFileSizeExceed = () => {
-  showToast({
-    message: t("profile.fileSizeExceeded", 5),
-    duration: 3000,
-    type: "error",
-  });
-};
 </script>
 
 <template>
@@ -171,45 +124,14 @@ const handleFileSizeExceed = () => {
       <el-empty v-if="!user" :description="t('profile.notLoggedIn')" />
 
       <template v-else>
-        <div class="meta">
-          <el-tooltip :content="t('profile.changeAvatar')">
-            <el-avatar
-              :size="100"
-              :src="selectedAvatarPreviewSrc || user.avatar"
-              @click="showEditAvatarDialog = true"
-            >
-              <el-icon :size="48">
-                <UserFilled />
-              </el-icon>
-            </el-avatar>
-          </el-tooltip>
-
-          <div class="meta__items">
-            <div>
-              <span class="meta__label">
-                {{ t("profile.registeredSince") }}:
-              </span>
-              <span>{{ user.created ? d(user.created) : "-" }}</span>
-            </div>
-            <div>
-              <span class="meta__label">
-                {{ t("profile.emailStatus.label") }}:
-              </span>
-
-              <el-tag v-if="user.verified" type="success">
-                {{ t("profile.emailStatus.verified") }}
-              </el-tag>
-              <el-tag
-                v-else
-                type="danger"
-                :class="!isVerifyEmailDisabled && 'verify-email-btn'"
-                @click="handleVerifyEmail"
-              >
-                {{ t("profile.emailStatus.notVerified") }}
-              </el-tag>
-            </div>
-          </div>
-        </div>
+        <MyProfileActionsOrganism
+          :avatar="user.avatar"
+          :created-date="user.created"
+          :is-verified="user.verified"
+          :disabled="disabled"
+          @request-email-verification="emit('requestEmailVerification')"
+          @avatar-select="state.avatar = $event"
+        />
 
         <el-form
           label-position="top"
@@ -294,61 +216,7 @@ const handleFileSizeExceed = () => {
         </el-form>
       </template>
     </div>
-
-    <ConfirmDialogMolecule
-      v-model="showEditAvatarDialog"
-      :cancel-text="t('global.cancel')"
-      :confirm-text="t('global.select')"
-      :title="t('profile.changeAvatar')"
-      :disabled="disabled"
-      :loading="loading"
-      :show-actions="false"
-    >
-      <FileSelectOrganism
-        :allowed-file-types="allowedAvatarTypes"
-        :max-size="5"
-        :limit="1"
-        :disabled="disabled"
-        replace
-        @change="selectAvatar($event[0])"
-        @exceed-file-size="handleFileSizeExceed"
-      />
-    </ConfirmDialogMolecule>
   </div>
 </template>
 
-<style lang="scss" scoped>
-@use "@/styles/mixins.scss" as *;
-
-.meta {
-  display: flex;
-  gap: var(--app-space-2) var(--app-space-3);
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: var(--app-space-3);
-
-  @include breakpoint(s) {
-    gap: var(--app-space-2);
-  }
-
-  &__items {
-    display: grid;
-    gap: calc(1.5 * var(--app-space-1));
-  }
-
-  &__label {
-    display: inline-block;
-    width: 140px;
-    margin-right: var(--app-space-2);
-    font-weight: 500;
-  }
-
-  .el-avatar {
-    cursor: pointer;
-  }
-}
-
-.verify-email-btn {
-  cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>
