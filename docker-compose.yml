@@ -12,7 +12,7 @@ services:
       LETSENCRYPT_HOST: ${BACKEND_DOMAIN:?}
     volumes:
       - ./docker-data/pocketbase:/app/pb_data
-      - ./docker-data/migrations:/app/migrations
+      - ./backend/migrations:/app/migrations
 
   frontend:
     build:

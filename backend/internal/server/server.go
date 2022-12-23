@@ -4,6 +4,9 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
+
+	// automatically load migrations
+	_ "app/migrations"
 )
 
 type Server struct {
