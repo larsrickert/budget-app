@@ -1,7 +1,7 @@
 package service
 
 import (
-	"app/pkg/utils"
+	"budget-app/pkg/utils"
 	"strconv"
 	"time"
 

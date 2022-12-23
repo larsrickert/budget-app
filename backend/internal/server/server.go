@@ -6,7 +6,7 @@ import (
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 
 	// automatically load migrations
-	_ "app/migrations"
+	_ "budget-app/migrations"
 )
 
 type Server struct {

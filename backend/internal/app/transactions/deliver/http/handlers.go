@@ -1,7 +1,7 @@
 package http
 
 import (
-	"app/internal/app/transactions/service"
+	"budget-app/internal/app/transactions/service"
 	"net/http"
 
 	"github.com/labstack/echo/v5"

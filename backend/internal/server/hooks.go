@@ -1,7 +1,7 @@
 package server
 
 import (
-	mailService "app/internal/app/mail/service"
+	mailService "budget-app/internal/app/mail/service"
 	"log"
 
 	"github.com/pocketbase/pocketbase/core"

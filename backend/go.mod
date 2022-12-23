@@ -1,4 +1,4 @@
-module app
+module budget-app
 
 go 1.19
 

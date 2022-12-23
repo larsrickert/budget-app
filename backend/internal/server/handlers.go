@@ -1,10 +1,10 @@
 package server
 
 import (
-	transactionHttp "app/internal/app/transactions/deliver/http"
-	transactionService "app/internal/app/transactions/service"
-	userHttp "app/internal/app/users/deliver/http"
-	userService "app/internal/app/users/service"
+	transactionHttp "budget-app/internal/app/transactions/deliver/http"
+	transactionService "budget-app/internal/app/transactions/service"
+	userHttp "budget-app/internal/app/users/deliver/http"
+	userService "budget-app/internal/app/users/service"
 	"net/http"
 
 	"github.com/labstack/echo/v5"

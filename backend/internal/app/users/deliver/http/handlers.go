@@ -1,7 +1,7 @@
 package http
 
 import (
-	"app/internal/app/users/service"
+	"budget-app/internal/app/users/service"
 	"net/http"
 	"strconv"
 

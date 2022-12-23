@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app/internal/server"
+	"budget-app/internal/server"
 	"log"
 )
 
