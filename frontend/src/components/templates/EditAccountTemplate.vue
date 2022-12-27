@@ -36,7 +36,7 @@ const { t } = useI18n();
 
 const state = ref<CreateAccountDto>({
   name: "",
-  value: 0,
+  value: NaN,
   notes: "",
 });
 
@@ -132,7 +132,7 @@ const handleSubmit = async () => {
                 v-model="state.value"
                 :step="1"
                 :precision="2"
-                :value-on-clear="0"
+                :value-on-clear="NaN"
               />
             </el-form-item>
           </div>

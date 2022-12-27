@@ -54,7 +54,7 @@ const { t, locale } = useI18n();
 
 const state = ref<CreateTransactionDto>({
   name: "",
-  value: 0,
+  value: NaN,
   notes: "",
   type: toRaw(props.initialType),
   bookingDate: "",
@@ -204,7 +204,7 @@ const isDateDisabled = (date: Date) => {
                 v-model="state.value"
                 :step="1"
                 :precision="2"
-                :value-on-clear="0"
+                :value-on-clear="NaN"
               />
             </el-form-item>
           </div>
