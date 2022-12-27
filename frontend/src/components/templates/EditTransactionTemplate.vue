@@ -93,17 +93,6 @@ const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
   value: [
     { required: true, message: t("validations.required") },
     { type: "number", message: t("validations.number") },
-    {
-      validator: (rule, value: number, callback) => {
-        if (state.value.type === "income" && value <= 0) {
-          callback(new Error(t("validations.largerThan", 0)));
-        } else if (state.value.type === "outcome" && value >= 0) {
-          callback(new Error(t("validations.smallerThan", 0)));
-        } else {
-          callback();
-        }
-      },
-    },
   ],
   notes: [{ max: 512, message: t("validations.maxLength", { max: 512 }) }],
   type: [
@@ -130,7 +119,12 @@ const handleSubmit = async () => {
   if (!formRef.value) return;
   await formRef.value.validate((valid) => {
     if (!valid) return;
-    emit("submit", { ...state.value, name: state.value.name.trim() });
+    const absValue = Math.abs(state.value.value);
+    emit("submit", {
+      ...state.value,
+      name: state.value.name.trim(),
+      value: state.value.type === "income" ? absValue : -absValue,
+    });
   });
 };
 
