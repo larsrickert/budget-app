@@ -23,7 +23,15 @@ import {
   ElSelect,
   type FormInstance,
 } from "element-plus";
-import { computed, ref, toRaw, watchEffect, type UnwrapRef } from "vue";
+import {
+  computed,
+  nextTick,
+  ref,
+  toRaw,
+  watch,
+  watchEffect,
+  type UnwrapRef,
+} from "vue";
 import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
@@ -134,6 +142,36 @@ now.setHours(0, 0, 0, 0);
 const isDateDisabled = (date: Date) => {
   return date.getTime() < now.getTime();
 };
+
+const shortcuts = computed(() => {
+  if (!state.value.frequency || !state.value.bookingDate) return [];
+
+  const key =
+    Object.keys(TransactionFrequency)[
+      Object.values(TransactionFrequency).indexOf(state.value.frequency)
+    ];
+
+  const date = new Date(state.value.bookingDate);
+  const monthOffset = Number.parseInt(state.value.frequency);
+  if (isNaN(monthOffset)) return [];
+  date.setMonth(date.getMonth() + monthOffset);
+
+  return [
+    {
+      text: t(`transaction.dateShortcuts.${key.toLowerCase()}`),
+      value: date,
+    },
+  ];
+});
+
+// workaround to make datepicker shortcuts reactive
+// check element-plus issue and remove workaround if fixed: https://github.com/element-plus/element-plus/issues/3879
+const forceDatePickerRerender = ref(false);
+watch(shortcuts, async () => {
+  forceDatePickerRerender.value = true;
+  await nextTick();
+  forceDatePickerRerender.value = false;
+});
 </script>
 
 <template>
@@ -215,10 +253,12 @@ const isDateDisabled = (date: Date) => {
               prop="bookingDate"
             >
               <el-date-picker
+                v-if="!forceDatePickerRerender"
                 v-model="bookingDateModel"
                 name="bookingDate"
                 :disabled-date="isDateDisabled"
                 :format="locale === 'de' ? 'DD.MM.YYYY' : undefined"
+                :shortcuts="shortcuts"
               />
             </el-form-item>
 

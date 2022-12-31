@@ -60,3 +60,28 @@
     width: calc(100% - 22px);
   }
 }
+
+// fix datepicker width on small screens
+.el-picker__popper.el-popper {
+  max-width: calc(100% - 24px);
+
+  @include breakpoint(s) {
+    max-width: calc(390px - 24px);
+  }
+}
+.el-date-picker {
+  &.has-sidebar {
+    max-width: 100%;
+
+    @include breakpoint(s) {
+      max-width: calc(390px - 24px);
+    }
+  }
+
+  .el-picker-panel {
+    &__content {
+      // 15px margin left and right
+      max-width: calc(100% - 30px);
+    }
+  }
+}

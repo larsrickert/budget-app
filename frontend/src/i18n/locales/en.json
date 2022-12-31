@@ -118,6 +118,13 @@
       "created": "Transaction created",
       "updated": "Transaction updated",
       "deleted": "Transaction deleted"
+    },
+    "dateShortcuts": {
+      "monthly": "Next month",
+      "quarterly": "Next quarter",
+      "semiannual": "Next half year",
+      "annual": "Next year",
+      "biennial": "In two years"
     }
   },
   "settings": {

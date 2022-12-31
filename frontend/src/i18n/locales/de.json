@@ -114,6 +114,13 @@
       "created": "Buchung erstellt",
       "updated": "Buchung aktualisiert",
       "deleted": "Buchung gelöscht"
+    },
+    "dateShortcuts": {
+      "monthly": "Nächsten Monat",
+      "quarterly": "Nächstes Quartal",
+      "semiannual": "Nächstes Halbjahr",
+      "annual": "Nächstes Jahr",
+      "biennial": "In 2 Jahren"
     }
   },
   "settings": {
