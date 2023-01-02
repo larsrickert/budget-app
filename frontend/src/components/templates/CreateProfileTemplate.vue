@@ -148,6 +148,7 @@ const reset = () => formRef.value?.resetFields();
               :loading="loading"
               :disabled="disabled"
               @click="handleSubmit"
+              data-cy="submit"
             >
               {{ t("profile.actions.create") }}
             </el-button>

@@ -143,6 +143,7 @@ const handleAvatarClick = () => {
             plain
             :disabled="disabled"
             :loading="loading"
+            data-cy="deleteUser"
           >
             {{ t("global.delete") }}
           </el-button>

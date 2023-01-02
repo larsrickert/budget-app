@@ -54,6 +54,7 @@ const toggleDrawer = () => {
         color="transparent"
         class="btn--icon btn--no-gap"
         @click="emit('rightIconClick')"
+        data-cy="headerButton"
       />
     </el-tooltip>
   </header>

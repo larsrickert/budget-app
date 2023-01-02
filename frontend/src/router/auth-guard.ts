@@ -5,7 +5,10 @@ const authGuard: NavigationGuardWithThis<undefined> = (to) => {
   const authStore = useAuthStore();
 
   if (!authStore.isAuthenticated && to.meta.requiresAuth) {
-    return "/login";
+    return {
+      path: "/login",
+      query: to.path !== "/" ? { redirectTo: to.path } : undefined,
+    };
   }
 };
 

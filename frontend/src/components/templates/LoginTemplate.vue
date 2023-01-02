@@ -102,6 +102,7 @@ const handleSubmit = async () => {
               :loading="loading"
               :disabled="disabled"
               @click="handleSubmit"
+              data-cy="submit"
             >
               {{ t("login.submit") }}
             </el-button>
