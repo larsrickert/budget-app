@@ -78,10 +78,32 @@
     }
   }
 
+  &__header-label {
+    @include breakpoint(s) {
+      font-size: 13px !important;
+    }
+  }
+
   .el-picker-panel {
     &__content {
-      // 15px margin left and right
-      max-width: calc(100% - 30px);
+      // 8px margin left and right
+      max-width: calc(100% - 16px);
+
+      @include breakpoint(s) {
+        margin: 15px 8px;
+      }
+    }
+
+    &__icon-btn {
+      @include breakpoint(s) {
+        padding: 0 5px;
+      }
+
+      &:first-child {
+        @include breakpoint(s) {
+          padding-left: 0;
+        }
+      }
     }
   }
 }
