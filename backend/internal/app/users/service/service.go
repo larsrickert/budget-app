@@ -6,11 +6,13 @@ import (
 	"time"
 
 	"github.com/pocketbase/dbx"
+	"github.com/pocketbase/pocketbase/daos"
+	"github.com/pocketbase/pocketbase/models"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 type UserService struct {
-	builder dbx.Builder
+	dao daos.Dao
 }
 
 type BudgetDevelopment struct {
@@ -25,20 +27,23 @@ type BudgetDevelopmentItem struct {
 	Budget float32 `json:"budget"`
 }
 
-func NewUserService(builder dbx.Builder) *UserService {
+func NewUserService(dao daos.Dao) *UserService {
 	return &UserService{
-		builder: builder,
+		dao: dao,
 	}
 }
 
 func (s *UserService) GetBudgetDevelopment(userId string, checkLength uint8, includePast bool) (*BudgetDevelopment, error) {
 	items := make([]BudgetDevelopmentItem, 0)
 
+	// TODO: remove builder in favor of dao
+	builder := s.dao.DB()
+
 	checkDate := time.Now()
 	checkEnd := time.Now()
 	if includePast {
 		var firstTransaction dbx.NullStringMap
-		s.builder.NewQuery("SELECT bookingDate FROM transactions WHERE userId={:userId} AND bookingDate!='' ORDER BY bookingDate LIMIT 1").Bind(dbx.Params{"userId": userId}).One(&firstTransaction)
+		builder.NewQuery("SELECT bookingDate FROM transactions WHERE userId={:userId} AND bookingDate!='' ORDER BY bookingDate LIMIT 1").Bind(dbx.Params{"userId": userId}).One(&firstTransaction)
 		firstTransactionDate, err := time.Parse(types.DefaultDateLayout, firstTransaction["bookingDate"].String)
 		if err == nil {
 			checkDate = firstTransactionDate
@@ -47,11 +52,11 @@ func (s *UserService) GetBudgetDevelopment(userId string, checkLength uint8, inc
 	checkEnd = checkEnd.AddDate(0, int(checkLength), 0)
 
 	var accountSum dbx.NullStringMap
-	s.builder.NewQuery("SELECT SUM(value) FROM accounts WHERE userId={:userId}").Bind(dbx.Params{"userId": userId}).One(&accountSum)
+	builder.NewQuery("SELECT SUM(value) FROM accounts WHERE userId={:userId}").Bind(dbx.Params{"userId": userId}).One(&accountSum)
 	currentBudget, _ := strconv.ParseFloat(accountSum["SUM(value)"].String, 32)
 
 	transactions := make([]dbx.NullStringMap, 0)
-	s.builder.NewQuery("SELECT bookingDate, value, frequency FROM transactions WHERE userId={:userId}").Bind(dbx.Params{"userId": userId}).All(&transactions)
+	builder.NewQuery("SELECT bookingDate, value, frequency FROM transactions WHERE userId={:userId}").Bind(dbx.Params{"userId": userId}).All(&transactions)
 
 	for i := 0; checkDate.Unix() <= checkEnd.Unix(); i++ {
 		var budgetDiff float64
@@ -117,7 +122,7 @@ func (s *UserService) GetBudgetDevelopment(userId string, checkLength uint8, inc
 	}
 
 	var onetimeSum dbx.NullStringMap
-	s.builder.NewQuery("SELECT SUM(value) FROM transactions WHERE userId={:userId} AND frequency=''").Bind(dbx.Params{"userId": userId}).One(&onetimeSum)
+	builder.NewQuery("SELECT SUM(value) FROM transactions WHERE userId={:userId} AND frequency=''").Bind(dbx.Params{"userId": userId}).One(&onetimeSum)
 	onetimeTotal, _ := strconv.ParseFloat(onetimeSum["SUM(value)"].String, 32)
 
 	return &BudgetDevelopment{
@@ -126,4 +131,34 @@ func (s *UserService) GetBudgetDevelopment(userId string, checkLength uint8, inc
 		OnetimeTotal: float32(onetimeTotal),
 		Items:        items,
 	}, nil
+}
+
+func (s *UserService) CreateOrResetTestUser(username string, email string, password string) (*models.Record, error) {
+	collection, err := s.dao.FindCollectionByNameOrId("users")
+	if err != nil {
+		return nil, err
+	}
+
+	// check if user already exists, if so reset existing instead of creating a new one
+	record, err := s.dao.FindAuthRecordByEmail(collection.Name, email)
+	if err != nil {
+		record = models.NewRecord(collection)
+	}
+
+	// set test data
+	record.Load(map[string]any{
+		"username":        username,
+		"email":           email,
+		"emailVisibility": true,
+		"verified":        true,
+	})
+
+	record.RefreshUpdated()
+	record.SetPassword(password)
+
+	if err := s.dao.SaveRecord(record); err != nil {
+		return nil, err
+	}
+
+	return record, nil
 }

@@ -2,9 +2,7 @@ package server
 
 import (
 	transactionHttp "budget-app/internal/app/transactions/deliver/http"
-	transactionService "budget-app/internal/app/transactions/service"
 	userHttp "budget-app/internal/app/users/deliver/http"
-	userService "budget-app/internal/app/users/service"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -20,11 +18,8 @@ func (s *Server) registerHandlers(router *echo.Echo) error {
 		},
 	})
 
-	builder := s.pb.Dao().DB()
-
 	// add transaction routes
-	transactionService := transactionService.NewTransactionService(builder)
-	transactionHandlers := transactionHttp.NewTransactionHandlers(transactionService)
+	transactionHandlers := transactionHttp.NewTransactionHandlers(s.transactionService)
 
 	router.AddRoute(echo.Route{
 		Method:  http.MethodGet,
@@ -37,8 +32,7 @@ func (s *Server) registerHandlers(router *echo.Echo) error {
 	})
 
 	// add user routes
-	userService := userService.NewUserService(builder)
-	userHandlers := userHttp.NewUserHandlers(userService)
+	userHandlers := userHttp.NewUserHandlers(s.userService)
 
 	router.AddRoute(echo.Route{
 		Method:  http.MethodGet,

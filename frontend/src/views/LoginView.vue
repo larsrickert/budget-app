@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import LoginTemplate from "@/components/templates/LoginTemplate.vue";
+import { config } from "@/config";
 import { useAuthStore, type LoginPayload } from "@/stores/auth";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -30,6 +31,7 @@ const handleSubmit = async (dto: LoginPayload) => {
   <LoginTemplate
     :disabled="isLoading"
     :loading="isLoading"
+    :test-user="config.api.testUser"
     @submit="handleSubmit"
     @register="router.replace('/profile/new')"
   />

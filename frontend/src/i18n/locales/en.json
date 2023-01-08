@@ -68,7 +68,11 @@
     "pageName": "Login",
     "usernameOrEmail": "Username or email",
     "submit": "Login",
-    "register": "No profile yet? Register now"
+    "register": "No profile yet? Register now",
+    "testUser": {
+      "headline": "Test user",
+      "description": "You want to test Budget App without your own profile? Then click here to log in with the public test profile. Note: The profile is reset every hour."
+    }
   },
   "fileUpload": {
     "text": "Drop file here or",

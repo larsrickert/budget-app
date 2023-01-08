@@ -3,6 +3,7 @@ import type { LoginPayload } from "@/stores/auth";
 import type { FormValidation } from "@/types/vue";
 import { Finished, Key, User } from "@element-plus/icons-vue";
 import {
+  ElAlert,
   ElButton,
   ElForm,
   ElFormItem,
@@ -11,13 +12,14 @@ import {
   ElLink,
   type FormInstance,
 } from "element-plus";
-import { computed, ref, type UnwrapRef } from "vue";
+import { computed, nextTick, ref, type UnwrapRef } from "vue";
 import { useI18n } from "vue-i18n";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
-defineProps<{
+const props = defineProps<{
   disabled?: boolean;
   loading?: boolean;
+  testUser?: LoginPayload;
 }>();
 
 const emit = defineEmits<{
@@ -54,6 +56,13 @@ const handleSubmit = async () => {
     emit("submit", { ...state.value });
   });
 };
+
+const loginWithTestUser = async () => {
+  if (!props.testUser || props.disabled) return;
+  state.value = props.testUser;
+  await nextTick();
+  await handleSubmit();
+};
 </script>
 
 <template>
@@ -61,6 +70,20 @@ const handleSubmit = async () => {
     <HeaderOrganism :headline="t('login.pageName')" />
 
     <div class="page__content">
+      <el-alert
+        v-if="testUser"
+        :title="t('login.testUser.headline')"
+        type="info"
+        show-icon
+        class="test-user"
+      >
+        <div class="test-user__description">
+          <el-link type="info" :disabled="disabled" @click="loginWithTestUser">
+            {{ t("login.testUser.description") }}
+          </el-link>
+        </div>
+      </el-alert>
+
       <el-form
         label-position="top"
         :disabled="disabled"
@@ -132,5 +155,17 @@ const handleSubmit = async () => {
   &__icon {
     margin-left: var(--app-space-1);
   }
+}
+
+.test-user {
+  margin-bottom: var(--app-space-3);
+
+  &__description {
+    font-size: var(--el-font-size-base);
+  }
+}
+
+:deep(.el-alert__title) {
+  font-size: var(--el-font-size-base);
 }
 </style>
