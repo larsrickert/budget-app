@@ -140,44 +140,52 @@ func (s *UserService) CreateOrResetTestUser(username string, email string, passw
 	}
 
 	record, _ := s.dao.FindAuthRecordByEmail(collection.Name, email)
-	if record != nil {
-		// delete current test user an all related data
-		if err := s.dao.DeleteRecord(record); err != nil {
-			return nil, err
+
+	err = s.dao.RunInTransaction(func(txDao *daos.Dao) error {
+		if record != nil {
+			// delete current test user an all related data
+			if err := txDao.DeleteRecord(record); err != nil {
+				return err
+			}
 		}
-	}
 
-	record = models.NewRecord(collection)
+		record = models.NewRecord(collection)
 
-	// set test data
-	record.Load(map[string]any{
-		"username":        username,
-		"email":           email,
-		"emailVisibility": true,
-		"verified":        true,
+		// set test data
+		record.Load(map[string]any{
+			"username":        username,
+			"email":           email,
+			"emailVisibility": true,
+			"verified":        true,
+		})
+
+		record.RefreshUpdated()
+		record.SetPassword(password)
+
+		if err := txDao.SaveRecord(record); err != nil {
+			return err
+		}
+
+		if err := s.createTestUserData(txDao, record.Id); err != nil {
+			return err
+		}
+
+		return nil
 	})
 
-	record.RefreshUpdated()
-	record.SetPassword(password)
-
-	if err := s.dao.SaveRecord(record); err != nil {
+	if err != nil {
 		return nil, err
 	}
-
-	if err := s.createTestUserData(record.Id); err != nil {
-		return nil, s.dao.DeleteRecord(record)
-	}
-
 	return record, nil
 }
 
-func (s *UserService) createTestUserData(userId string) error {
-	accountsCollection, err := s.dao.FindCollectionByNameOrId("accounts")
+func (s *UserService) createTestUserData(txDao *daos.Dao, userId string) error {
+	accountsCollection, err := txDao.FindCollectionByNameOrId("accounts")
 	if err != nil {
 		return err
 	}
 
-	transactionsCollection, err := s.dao.FindCollectionByNameOrId("transactions")
+	transactionsCollection, err := txDao.FindCollectionByNameOrId("transactions")
 	if err != nil {
 		return err
 	}
@@ -214,36 +222,34 @@ func (s *UserService) createTestUserData(userId string) error {
 		{Name: "Donations", Value: -123, Type: "outcome", Frequency: "3", BookingDate: now.AddDate(0, 3, 0)},
 	}
 
-	return s.dao.RunInTransaction(func(txDao *daos.Dao) error {
-		// add accounts
-		for _, v := range testAccounts {
-			record := models.NewRecord(accountsCollection)
-			record.Load(map[string]any{
-				"name":   v.Name,
-				"value":  v.Value,
-				"userId": userId,
-			})
-			if err := txDao.SaveRecord(record); err != nil {
-				return err
-			}
+	// add accounts
+	for _, v := range testAccounts {
+		record := models.NewRecord(accountsCollection)
+		record.Load(map[string]any{
+			"name":   v.Name,
+			"value":  v.Value,
+			"userId": userId,
+		})
+		if err := txDao.SaveRecord(record); err != nil {
+			return err
 		}
+	}
 
-		// add transactions
-		for _, v := range testTransactions {
-			record := models.NewRecord(transactionsCollection)
-			record.Load(map[string]any{
-				"name":        v.Name,
-				"value":       v.Value,
-				"type":        v.Type,
-				"frequency":   v.Frequency,
-				"bookingDate": v.BookingDate.Format(types.DefaultDateLayout),
-				"userId":      userId,
-			})
-			if err := txDao.SaveRecord(record); err != nil {
-				return err
-			}
+	// add transactions
+	for _, v := range testTransactions {
+		record := models.NewRecord(transactionsCollection)
+		record.Load(map[string]any{
+			"name":        v.Name,
+			"value":       v.Value,
+			"type":        v.Type,
+			"frequency":   v.Frequency,
+			"bookingDate": v.BookingDate.Format(types.DefaultDateLayout),
+			"userId":      userId,
+		})
+		if err := txDao.SaveRecord(record); err != nil {
+			return err
 		}
+	}
 
-		return nil
-	})
+	return nil
 }
