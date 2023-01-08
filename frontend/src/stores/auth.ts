@@ -62,11 +62,7 @@ export const useAuthStore = defineStore("auth", () => {
 
   const refreshAuth = async () => {
     if (!user.value) return;
-    try {
-      await client.collection("users").authRefresh();
-    } catch {
-      logout();
-    }
+    await client.collection("users").authRefresh();
   };
 
   const requestEmailVerification = async () => {
@@ -120,8 +116,6 @@ export const useAuthStore = defineStore("auth", () => {
     client.collection("users").delete(user.value.id);
   };
 
-  refreshAuth();
-
   return {
     isAuthenticated,
     login,
@@ -133,5 +127,6 @@ export const useAuthStore = defineStore("auth", () => {
     updateSettings,
     deleteUser,
     isTestUser,
+    refreshAuth,
   };
 });

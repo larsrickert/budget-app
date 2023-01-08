@@ -23,6 +23,10 @@ import type { VueProps } from "./types/vue";
 const { t, locale, availableLocales } = useI18n();
 const router = useRouter();
 const authStore = useAuthStore();
+authStore.refreshAuth().catch(async () => {
+  authStore.logout();
+  await router.replace("/login");
+});
 
 const isDrawerOpen = ref(false);
 provide(provideIsDrawerOpenSymbol, isDrawerOpen);
