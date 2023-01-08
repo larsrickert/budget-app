@@ -47,11 +47,14 @@ func (s *Server) Start() error {
 		return err
 	}
 
-	s.startPeriodicTestUserCreation()
-
 	migratecmd.MustRegister(s.pb, s.pb.RootCmd, &migratecmd.Options{
 		Automigrate: true, // auto creates migration files when making collection changes
 	})
 
-	return s.pb.Start()
+	if err := s.pb.Start(); err != nil {
+		return err
+	}
+
+	s.startPeriodicTestUserCreation()
+	return nil
 }

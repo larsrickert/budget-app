@@ -20,15 +20,33 @@ func NewMailService(mailClient mailer.Mailer) *MailService {
 	}
 }
 
-func (s *MailService) SendNewUserAdminMail(settings *settings.Settings, record *models.Record) error {
+func (s *MailService) sendAdminMail(settings *settings.Settings, subject string, body string) error {
+	if settings == nil {
+		return errors.New("mail settings must not be nil")
+	}
+
 	adminEmail := settings.Meta.SenderAddress
-	if adminEmail == "" {
-		return errors.New("sender address is not set in app settings")
+	adminName := settings.Meta.SenderName
+	if adminEmail == "" || adminName == "" {
+		return errors.New("sender address or name is not set in app settings")
 	}
 
 	adminAddress := mail.Address{
-		Name:    settings.Meta.SenderName,
-		Address: settings.Meta.SenderAddress,
+		Name:    adminName,
+		Address: adminEmail,
+	}
+
+	return s.mailClient.Send(&mailer.Message{
+		From:    adminAddress,
+		To:      adminAddress,
+		Subject: subject,
+		HTML:    body,
+	})
+}
+
+func (s *MailService) SendNewUserAdminMail(settings *settings.Settings, record *models.Record) error {
+	if settings == nil {
+		return errors.New("mail settings must not be nil")
 	}
 
 	body := fmt.Sprintf(
@@ -38,10 +56,5 @@ func (s *MailService) SendNewUserAdminMail(settings *settings.Settings, record *
 			`, settings.Meta.SenderName, record.Username(), record.Email(),
 	)
 
-	return s.mailClient.Send(&mailer.Message{
-		From:    adminAddress,
-		To:      adminAddress,
-		Subject: "New user registration",
-		HTML:    body,
-	})
+	return s.sendAdminMail(settings, "New user registration", body)
 }

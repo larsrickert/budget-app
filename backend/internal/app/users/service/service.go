@@ -206,7 +206,7 @@ func (s *UserService) createTestUserData(userId string) error {
 		{Name: "Job bonus", Value: 500, Type: "income", Frequency: "", BookingDate: now.AddDate(0, 2, 15)},
 		{Name: "Rent", Value: -500, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 6)},
 		{Name: "Groceries", Value: -300, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 7)},
-		{Name: "Netflix", Value: -17.99, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 8)},
+		{Name: "Netflix", Value: -18, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 8)},
 		{Name: "Gym", Value: -30, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 10)},
 		{Name: "Savings", Value: -100, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 12)},
 		{Name: "New TV", Value: -800, Type: "outcome", Frequency: "", BookingDate: now.AddDate(0, 0, 20)},
