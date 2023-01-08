@@ -139,11 +139,15 @@ func (s *UserService) CreateOrResetTestUser(username string, email string, passw
 		return nil, err
 	}
 
-	// check if user already exists, if so reset existing instead of creating a new one
-	record, err := s.dao.FindAuthRecordByEmail(collection.Name, email)
-	if err != nil {
-		record = models.NewRecord(collection)
+	record, _ := s.dao.FindAuthRecordByEmail(collection.Name, email)
+	if record != nil {
+		// delete current test user an all related data
+		if err := s.dao.DeleteRecord(record); err != nil {
+			return nil, err
+		}
 	}
+
+	record = models.NewRecord(collection)
 
 	// set test data
 	record.Load(map[string]any{
@@ -160,5 +164,86 @@ func (s *UserService) CreateOrResetTestUser(username string, email string, passw
 		return nil, err
 	}
 
+	if err := s.createTestUserData(record.Id); err != nil {
+		return nil, s.dao.DeleteRecord(record)
+	}
+
 	return record, nil
+}
+
+func (s *UserService) createTestUserData(userId string) error {
+	accountsCollection, err := s.dao.FindCollectionByNameOrId("accounts")
+	if err != nil {
+		return err
+	}
+
+	transactionsCollection, err := s.dao.FindCollectionByNameOrId("transactions")
+	if err != nil {
+		return err
+	}
+
+	type TestAccount struct {
+		Name  string
+		Value float32
+	}
+
+	testAccounts := []TestAccount{
+		{Name: "Main account", Value: 423.56},
+	}
+
+	type TestTransaction struct {
+		Name        string
+		Value       float32
+		Type        string
+		BookingDate time.Time
+		Frequency   string
+	}
+
+	now := time.Now()
+
+	testTransactions := []TestTransaction{
+		{Name: "Salary", Value: 1500, Type: "income", Frequency: "1", BookingDate: now.AddDate(0, 0, 4)},
+		{Name: "Job bonus", Value: 500, Type: "income", Frequency: "", BookingDate: now.AddDate(0, 2, 15)},
+		{Name: "Rent", Value: -500, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 6)},
+		{Name: "Groceries", Value: -300, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 7)},
+		{Name: "Netflix", Value: -17.99, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 8)},
+		{Name: "Gym", Value: -30, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 10)},
+		{Name: "Savings", Value: -100, Type: "outcome", Frequency: "1", BookingDate: now.AddDate(0, 0, 12)},
+		{Name: "New TV", Value: -800, Type: "outcome", Frequency: "", BookingDate: now.AddDate(0, 0, 20)},
+		{Name: "Insurance", Value: -600, Type: "outcome", Frequency: "12", BookingDate: now.AddDate(0, 2, 0)},
+		{Name: "Donations", Value: -123, Type: "outcome", Frequency: "3", BookingDate: now.AddDate(0, 3, 0)},
+	}
+
+	return s.dao.RunInTransaction(func(txDao *daos.Dao) error {
+		// add accounts
+		for _, v := range testAccounts {
+			record := models.NewRecord(accountsCollection)
+			record.Load(map[string]any{
+				"name":   v.Name,
+				"value":  v.Value,
+				"userId": userId,
+			})
+			if err := txDao.SaveRecord(record); err != nil {
+				return err
+			}
+		}
+
+		// add transactions
+		for _, v := range testTransactions {
+			record := models.NewRecord(transactionsCollection)
+			record.Load(map[string]any{
+				"name":        v.Name,
+				"value":       v.Value,
+				"type":        v.Type,
+				"frequency":   v.Frequency,
+				"bookingDate": v.BookingDate.Format(types.DefaultDateLayout),
+				"userId":      userId,
+			})
+			if err := txDao.SaveRecord(record); err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
 }
