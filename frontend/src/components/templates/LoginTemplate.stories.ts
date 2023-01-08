@@ -23,3 +23,13 @@ export const Loading: StoryObj<Args> = {
     loading: true,
   },
 };
+
+export const WithTestUser: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    testUser: {
+      usernameOrEmail: "testuser",
+      password: "123456789",
+    },
+  },
+};

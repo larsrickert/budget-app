@@ -73,6 +73,7 @@ const handleDeleteUser = async () => {
       "
       :is-submit-loading="isSubmitLoading"
       :is-delete-loading="isDeleteLoading"
+      :allow-email-change="!authStore.isTestUser"
       @submit="handleSubmit"
       @request-email-verification="handleRequestEmailVerification"
       @logout="handleLogout"

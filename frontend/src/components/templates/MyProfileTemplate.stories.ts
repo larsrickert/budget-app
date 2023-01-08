@@ -56,3 +56,10 @@ export const Loading: StoryObj<Args> = {
 export const WithoutUser: StoryObj<Args> = {
   args: {},
 };
+
+export const EmailChangeDisabled: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    allowEmailChange: false,
+  },
+};

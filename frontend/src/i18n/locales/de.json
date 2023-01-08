@@ -64,7 +64,11 @@
     "pageName": "Anmelden",
     "usernameOrEmail": "Benutzername oder E-Mail Adresse",
     "submit": "Anmelden",
-    "register": "Noch kein Konto? Jetzt registrieren"
+    "register": "Noch kein Konto? Jetzt registrieren",
+    "testUser": {
+      "headline": "Testprofil",
+      "description": "Du möchtest Budget App ohne eigenes Profil testen? Dann klicke hier, um dich mit dem öffentlichen Testprofil anzumelden. Hinweis: Das Profil wird stündlich zurückgesetzt."
+    }
   },
   "fileUpload": {
     "text": "Ziehe eine Datei hier her oder",
