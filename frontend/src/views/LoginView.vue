@@ -25,13 +25,18 @@ const handleSubmit = async (dto: LoginPayload) => {
     isLoading.value = false;
   }
 };
+
+const testUser: LoginPayload = {
+  usernameOrEmail: config.api.testUser.username,
+  password: config.api.testUser.password,
+};
 </script>
 
 <template>
   <LoginTemplate
     :disabled="isLoading"
     :loading="isLoading"
-    :test-user="config.api.testUser"
+    :test-user="testUser"
     @submit="handleSubmit"
     @register="router.replace('/profile/new')"
   />

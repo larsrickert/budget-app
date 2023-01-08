@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import type { BaseRecord } from "@/pocketbase";
 import client from "@/pocketbase";
 import { defineStore } from "pinia";
@@ -41,6 +42,9 @@ export interface UserSettingsDto {
 export const useAuthStore = defineStore("auth", () => {
   const isAuthenticated = computed(() => !!user.value);
   const user = ref(client.authStore.model as User | null);
+  const isTestUser = computed(
+    () => user.value?.email === config.api.testUser.email
+  );
 
   client.authStore.onChange((_, model) => {
     user.value = model as typeof user.value;
@@ -119,5 +123,6 @@ export const useAuthStore = defineStore("auth", () => {
     updateUser,
     updateSettings,
     deleteUser,
+    isTestUser,
   };
 });

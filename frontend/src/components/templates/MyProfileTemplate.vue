@@ -21,12 +21,18 @@ import { useI18n } from "vue-i18n";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 import MyProfileActionsOrganism from "../organisms/MyProfileActionsOrganism.vue";
 
-const props = defineProps<{
-  disabled?: boolean;
-  isSubmitLoading?: boolean;
-  isDeleteLoading?: boolean;
-  user?: User;
-}>();
+const props = withDefaults(
+  defineProps<{
+    disabled?: boolean;
+    isSubmitLoading?: boolean;
+    isDeleteLoading?: boolean;
+    user?: User;
+    allowEmailChange?: boolean;
+  }>(),
+  {
+    allowEmailChange: true,
+  }
+);
 
 const emit = defineEmits<{
   (event: "submit", dto: UpdateUserDto): void;
@@ -159,6 +165,7 @@ const handleSubmit = async () => {
 
             <el-form-item :label="t('profile.email')" prop="email">
               <el-input
+                :disabled="!allowEmailChange"
                 :prefix-icon="Message"
                 type="email"
                 name="email"

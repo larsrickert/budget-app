@@ -2,6 +2,7 @@ package server
 
 import (
 	mailService "budget-app/internal/app/mail/service"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -23,6 +24,14 @@ func (s *Server) registerHooks() error {
 			log.Printf("error while sending new user admin email: %s", err)
 		}
 
+		return nil
+	})
+
+	// prevent changing test user email
+	s.pb.OnRecordBeforeRequestEmailChangeRequest().Add(func(e *core.RecordRequestEmailChangeEvent) error {
+		if e.Record.Email() == s.config.TestUser.Email {
+			return errors.New("you are not allowed to change the test user email")
+		}
 		return nil
 	})
 

@@ -1,11 +1,10 @@
-import type { LoginPayload } from "./stores/auth";
-
 export const config = {
   api: {
     host: import.meta.env.VITE_API_HOST || "",
     testUser: {
-      usernameOrEmail: "testuser",
+      username: "testuser",
+      email: "test@budget-app.de",
       password: "12345678",
-    } as LoginPayload,
+    },
   },
 };
