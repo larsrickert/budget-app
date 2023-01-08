@@ -50,8 +50,6 @@ export const useAuthStore = defineStore("auth", () => {
     user.value = model as typeof user.value;
   });
 
-  if (user.value) client.collection("users").authRefresh();
-
   const login = async ({ usernameOrEmail, password }: LoginPayload) => {
     await client
       .collection("users")
@@ -60,6 +58,15 @@ export const useAuthStore = defineStore("auth", () => {
 
   const logout = () => {
     client.authStore.clear();
+  };
+
+  const refreshAuth = async () => {
+    if (!user.value) return;
+    try {
+      await client.collection("users").authRefresh();
+    } catch {
+      logout();
+    }
   };
 
   const requestEmailVerification = async () => {
@@ -112,6 +119,8 @@ export const useAuthStore = defineStore("auth", () => {
     if (!user.value) return;
     client.collection("users").delete(user.value.id);
   };
+
+  refreshAuth();
 
   return {
     isAuthenticated,
