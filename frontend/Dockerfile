@@ -1,14 +1,20 @@
 # build stage
 FROM node:18-alpine as build
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+# install pnpm
+RUN npm i -g pnpm@7.27.0
+
+COPY pnpm-lock.yaml ./
+RUN pnpm fetch --ignore-scripts
+
+COPY . ./
+RUN pnpm install --offline
 
 ARG API_HOST=http://localhost:8090
 ENV VITE_API_HOST $API_HOST
 
-COPY . ./
-RUN npm run build
+RUN pnpm build
 
 # production stage
 FROM nginx:stable-alpine
