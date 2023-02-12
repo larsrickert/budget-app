@@ -1,9 +1,9 @@
-name: Check frontend
+name: Check
 on:
   pull_request:
 
 jobs:
-  check:
+  check_frontend:
     name: Check frontend
     runs-on: ubuntu-latest
     defaults:
