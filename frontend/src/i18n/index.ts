@@ -7,8 +7,8 @@ import numberFormats from "./number-formats";
 
 // add type inference/autocompletion for translation keys
 type MessageSchema = typeof en;
-type DatetimeSchema = typeof dateTimeFormats["en"];
-type NumberSchema = typeof numberFormats["en"];
+type DatetimeSchema = (typeof dateTimeFormats)["en"];
+type NumberSchema = (typeof numberFormats)["en"];
 declare module "vue-i18n" {
   export interface DefineLocaleMessage extends MessageSchema {
     [key: string]: unknown;

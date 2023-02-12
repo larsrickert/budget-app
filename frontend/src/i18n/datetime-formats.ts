@@ -1,4 +1,4 @@
-import type { DateTimeFormat, DateTimeFormats } from "@intlify/core-base";
+import type { IntlDateTimeFormat, IntlDateTimeFormats } from "vue-i18n";
 
 const formats = {
   date: {
@@ -13,11 +13,11 @@ const formats = {
     hour: "2-digit",
     minute: "2-digit",
   },
-} satisfies DateTimeFormat;
+} satisfies IntlDateTimeFormat;
 
 const dateTimeFormats = {
   en: formats,
   de: formats,
-} satisfies DateTimeFormats;
+} satisfies IntlDateTimeFormats;
 
 export default dateTimeFormats;

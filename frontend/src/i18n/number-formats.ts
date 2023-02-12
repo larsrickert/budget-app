@@ -1,4 +1,4 @@
-import type { NumberFormats } from "@intlify/core-base";
+import type { IntlNumberFormats } from "vue-i18n";
 
 const numberFormats = {
   en: {
@@ -23,6 +23,6 @@ const numberFormats = {
       notation: "compact",
     },
   },
-} satisfies NumberFormats;
+} satisfies IntlNumberFormats;
 
 export default numberFormats;
