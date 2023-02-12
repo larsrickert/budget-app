@@ -1,9 +1,9 @@
-name: Check frontend
+name: Check
 on:
   pull_request:
 
 jobs:
-  check:
+  check_frontend:
     name: Check frontend
     runs-on: ubuntu-latest
     defaults:
@@ -12,17 +12,21 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: "npm"
-          cache-dependency-path: "frontend/package-lock.json"
-      - name: Install node modules
-        run: npm ci
+          cache: "pnpm"
+          cache-dependency-path: "frontend/pnpm-lock.yaml"
+      - name: 📦 Install dependencies
+        run: pnpm install
       - name: Lint
-        run: npm run lint
+        run: pnpm lint
       - name: Run unit tests
-        run: npm run test:unit
-      - name: Build
-        run: npm run build
+        run: pnpm test:unit
+      - name: ⚒️ Build
+        run: pnpm build
