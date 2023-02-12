@@ -1,4 +1,4 @@
-import type { Arrayable } from "@vueuse/shared";
+import type { Arrayable } from "@vueuse/core";
 import type { FormItemRule } from "element-plus";
 import type { AllowedComponentProps, VNodeProps } from "vue";
 
