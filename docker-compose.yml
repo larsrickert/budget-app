@@ -5,30 +5,11 @@ services:
     build: ./backend
     image: larsrickert/budget-app-backend
     restart: unless-stopped
-    # ports:
-    #   - "8090:8090"
+    ports:
+      - "8090:8090"
     environment:
       VIRTUAL_HOST: ${BACKEND_DOMAIN:?}
       LETSENCRYPT_HOST: ${BACKEND_DOMAIN:?}
     volumes:
       - ./docker-data/pocketbase:/app/pb_data
       - ./backend/migrations:/app/migrations
-
-  frontend:
-    build:
-      context: ./frontend
-      args:
-        API_HOST: https://${BACKEND_DOMAIN:?}
-    image: larsrickert/budget-app-frontend
-    restart: unless-stopped
-    # ports:
-    #   - "80:80"
-    environment:
-      VIRTUAL_HOST: ${FRONTEND_DOMAIN:?}
-      LETSENCRYPT_HOST: ${FRONTEND_DOMAIN:?}
-      NUXT_PUBLIC_API_HOST: ${BACKEND_DOMAIN:?}
-
-networks:
-  default:
-    name: nginx-proxy
-    external: true

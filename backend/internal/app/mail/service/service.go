@@ -38,7 +38,7 @@ func (s *MailService) sendAdminMail(settings *settings.Settings, subject string,
 
 	return s.mailClient.Send(&mailer.Message{
 		From:    adminAddress,
-		To:      adminAddress,
+		To:      []mail.Address{adminAddress},
 		Subject: subject,
 		HTML:    body,
 	})
