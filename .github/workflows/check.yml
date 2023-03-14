@@ -8,4 +8,4 @@ jobs:
     with:
       lint_script: lint
       test_script: test:unit
-      working_directory: frontend
+      working_directory: ./frontend
