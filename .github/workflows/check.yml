@@ -4,29 +4,8 @@ on:
 
 jobs:
   check_frontend:
-    name: Check frontend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
-    steps:
-      - name: Checkout Git repository
-        uses: actions/checkout@v3
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: "frontend/pnpm-lock.yaml"
-      - name: 📦 Install dependencies
-        run: pnpm install
-      - name: Lint
-        run: pnpm lint
-      - name: Run unit tests
-        run: pnpm test:unit
-      - name: ⚒️ Build
-        run: pnpm build
+    uses: larsrickert/larsrickert/.github/workflows/check-pnpm.yml@feat/check-workflow
+    with:
+      lint_script: lint
+      test_script: test:unit
+      working_directory: frontend
