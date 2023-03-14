@@ -6,6 +6,6 @@ jobs:
   check_frontend:
     uses: larsrickert/larsrickert/.github/workflows/check-pnpm.yml@feat/check-workflow
     with:
-      lint_script: lint
-      test_script: test:unit
-      working_directory: ./frontend
+      lint-script: lint
+      test-script: test:unit
+      working-directory: frontend
