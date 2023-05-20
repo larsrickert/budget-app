@@ -131,6 +131,10 @@
       "biennial": "In two years"
     }
   },
+  "wishlists": {
+    "pageName": "Wishlists",
+    "empty": "No wishlists found."
+  },
   "settings": {
     "pageName": "Settings",
     "theme": "Appearance",

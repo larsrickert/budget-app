@@ -79,6 +79,17 @@ const router = createRouter({
       ],
     },
     {
+      path: "/wishlists",
+      children: [
+        {
+          path: "",
+          name: "wishlists",
+          component: () => import("@/views/WishlistView.vue"),
+          meta: { requiresAuth: true },
+        },
+      ],
+    },
+    {
       path: "/settings",
       name: "settings",
       component: () => import("@/views/SettingsView.vue"),

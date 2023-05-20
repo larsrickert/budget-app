@@ -4,6 +4,7 @@ import {
   ChatDotSquare,
   CreditCard,
   HomeFilled,
+  List,
   Setting,
   UserFilled,
 } from "@element-plus/icons-vue";
@@ -44,6 +45,11 @@ const navItems = computed<VueProps<typeof SideMenuTemplate>["navItems"]>(() => {
       label: t("transactions.pageName"),
       icon: CreditCard,
       href: "/transactions",
+    },
+    {
+      label: t("wishlists.pageName"),
+      icon: List,
+      href: "/wishlists",
     },
   ];
 });
