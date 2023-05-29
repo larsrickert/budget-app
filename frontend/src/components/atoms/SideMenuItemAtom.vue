@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ElIcon } from "element-plus";
-import type { DefineComponent } from "vue";
+import type { defineComponent } from "vue";
 
 defineProps<{
   label: string;
   active?: boolean;
-  icon?: DefineComponent;
+  icon?: ReturnType<typeof defineComponent>;
   /** If img and icon are defined, img will be used. */
   img?: string;
 }>();
