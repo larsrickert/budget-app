@@ -3,7 +3,7 @@ FROM node:18-alpine as build
 WORKDIR /app
 
 # install pnpm
-RUN npm i -g pnpm@7.27.0
+RUN npm i -g pnpm@8.6.0
 
 COPY pnpm-lock.yaml ./
 RUN pnpm fetch --ignore-scripts
