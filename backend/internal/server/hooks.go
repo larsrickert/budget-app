@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/tools/cron"
 )
 
 func (s *Server) registerHooks() error {
@@ -53,15 +53,10 @@ func (s *Server) startPeriodicTestUserCreation() {
 		}
 	}
 
-	// create/reset test user periodically
-	ticker := time.NewTicker(s.config.TestUser.ResetInterval)
+	c := cron.New()
+	c.MustAdd("testUserJob", fmt.Sprintf("0 */%d * * *", s.config.TestUser.ResetInterval), createUserFunc)
+	c.Start()
 
-	go func() {
-		for range ticker.C {
-			createUserFunc()
-		}
-	}()
-
-	// ticker is not called immediately, so we create the user manually once
+	// cron is not called immediately, so we manually create the user manually once on app start
 	createUserFunc()
 }

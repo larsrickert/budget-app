@@ -51,10 +51,12 @@ func (s *Server) Start() error {
 		Automigrate: true, // auto creates migration files when making collection changes
 	})
 
+	s.startPeriodicTestUserCreation()
+
+	// start will block code execution so make sure to execute custom code before this
 	if err := s.pb.Start(); err != nil {
 		return err
 	}
 
-	s.startPeriodicTestUserCreation()
 	return nil
 }
