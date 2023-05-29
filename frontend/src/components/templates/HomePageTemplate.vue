@@ -184,7 +184,7 @@ const budgetDevelopmentModel = useVModel(
 
   &__header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 32px;
   }
