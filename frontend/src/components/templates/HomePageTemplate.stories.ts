@@ -7,6 +7,13 @@ type Args = VueProps<typeof Component>;
 
 export default {
   component: Component,
+  argTypes: {
+    onItemClick: { action: "itemClick" },
+    "onUpdate:budgetDevelopmentSettings": {
+      action: "update:budgetDevelopmentSettings",
+    },
+    "onUpdate:currentAccountPage": { action: "update:currentAccountPage" },
+  },
 } as Meta<Args>;
 
 export const Primary: StoryObj<Args> = {
@@ -39,6 +46,10 @@ export const Primary: StoryObj<Args> = {
         date: new Date().toISOString(),
         budget: -100,
       },
+    },
+    budgetDevelopmentSettings: {
+      checkLength: 6,
+      includePast: true,
     },
   },
 };

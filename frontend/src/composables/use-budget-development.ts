@@ -13,15 +13,14 @@ export interface BudgetDevelopment {
   items: BudgetDevelopmentItem[];
 }
 
-export interface UseBudgetDevelopmentOptions {
+export interface BudgetDevelopmentSettings {
   includePast?: boolean;
   checkLength?: number;
-  initialFetch?: boolean;
 }
 
 export const useBudgetDevelopment = (
   userId: Ref<string | undefined>,
-  options?: UseBudgetDevelopmentOptions
+  settings: Ref<BudgetDevelopmentSettings>
 ) => {
   const budgetDevelopment = ref<BudgetDevelopment>();
   const isLoading = ref(false);
@@ -31,10 +30,10 @@ export const useBudgetDevelopment = (
     isLoading.value = true;
 
     const queryParams: Record<string, unknown> = {};
-    if (options?.includePast != null)
-      queryParams.includePast = options.includePast;
-    if (options?.checkLength != null)
-      queryParams.checkLength = options.checkLength;
+    if (settings.value.includePast != null)
+      queryParams.includePast = settings.value.includePast;
+    if (settings.value.checkLength != null)
+      queryParams.checkLength = settings.value.checkLength;
 
     try {
       budgetDevelopment.value = await client.send(
@@ -46,7 +45,7 @@ export const useBudgetDevelopment = (
     }
   };
 
-  watch(userId, fetch, { immediate: options?.initialFetch });
+  watch([userId, settings], fetch, { immediate: true });
 
   return { budgetDevelopment, fetch, isLoading };
 };

@@ -24,8 +24,8 @@ func (h *UserHandlers) GetBudgetDevelopment(c echo.Context) error {
 
 	checkLengthQuery := c.QueryParamDefault("checkLength", "6")
 	checkLength, err := strconv.ParseInt(checkLengthQuery, 10, 8)
-	if err != nil || checkLength < 1 || checkLength > 255 {
-		return apis.NewBadRequestError("invalid value for query parameter checkLength, value must be an integer between 1 and 255", nil)
+	if err != nil || checkLength < 1 || checkLength > 24 {
+		return apis.NewBadRequestError("invalid value for query parameter checkLength, value must be an integer between 1 and 24", nil)
 	}
 
 	includePast := c.QueryParamDefault("includePast", "true") == "true"

@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import type { BudgetDevelopment } from "@/composables/use-budget-development";
+import type {
+  BudgetDevelopment,
+  BudgetDevelopmentSettings,
+} from "@/composables/use-budget-development";
 import type { TransactionSummary } from "@/composables/use-transaction-summary";
 import type { VueProps } from "@/types/vue";
 import { Money, PriceTag } from "@element-plus/icons-vue";
@@ -10,13 +13,15 @@ import { useI18n } from "vue-i18n";
 import HeadlineAtom from "../atoms/HeadlineAtom.vue";
 import HelpAtom from "../atoms/HelpAtom.vue";
 import LineChartAtom from "../atoms/LineChartAtom.vue";
+import BudgetDevelopmentSettingsMolecule from "../molecules/BudgetDevelopmentSettingsMolecule.vue";
 import TileMolecule from "../molecules/TileMolecule.vue";
 import FinanceItemListOrganism from "../organisms/FinanceItemListOrganism.vue";
 import HeaderOrganism from "../organisms/HeaderOrganism.vue";
 
 const props = defineProps<{
-  modelValue?: unknown;
   accounts: VueProps<typeof FinanceItemListOrganism>["items"];
+  budgetDevelopmentSettings: BudgetDevelopmentSettings;
+  modelValue?: unknown;
   currentAccountPage?: number;
   accountPageCount?: number;
   isAccountsLoading?: boolean;
@@ -29,6 +34,10 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: "itemClick", id: string): void;
   (event: "update:currentAccountPage", value: number): void;
+  (
+    event: "update:budgetDevelopmentSettings",
+    value: BudgetDevelopmentSettings
+  ): void;
 }>();
 
 const { t, n, d } = useI18n();
@@ -45,6 +54,11 @@ const chartItems = computed<VueProps<typeof LineChartAtom>["items"]>(() => {
 });
 
 const currentAccountPage = useVModel(props, "currentAccountPage", emit);
+const budgetDevelopmentModel = useVModel(
+  props,
+  "budgetDevelopmentSettings",
+  emit
+);
 </script>
 
 <template>
@@ -109,18 +123,24 @@ const currentAccountPage = useVModel(props, "currentAccountPage", emit);
           v-loading="isBudgetDevelopmentLoading"
           direction="vertical"
         >
-          <div class="chart__help">
-            <span>
-              {{ t("home.chart.availableBudget") }}:
-              {{ n(budgetDevelopment?.min.budget ?? 0, "currency") }}
-            </span>
+          <div class="chart__header">
+            <div class="chart__help">
+              <span>
+                {{ t("home.chart.availableBudget") }}:
+                {{ n(budgetDevelopment?.min.budget ?? 0, "currency") }}
+              </span>
 
-            <HelpAtom
-              :content="
-                t('home.chart.availableBudgetHelpText', {
-                  value: n(budgetDevelopment?.min.budget ?? 0, 'currency'),
-                })
-              "
+              <HelpAtom
+                :content="
+                  t('home.chart.availableBudgetHelpText', {
+                    value: n(budgetDevelopment?.min.budget ?? 0, 'currency'),
+                  })
+                "
+              />
+            </div>
+
+            <BudgetDevelopmentSettingsMolecule
+              v-model="budgetDevelopmentModel"
             />
           </div>
 
@@ -161,6 +181,13 @@ const currentAccountPage = useVModel(props, "currentAccountPage", emit);
   margin-top: var(--app-space-2);
   max-height: 500px;
   width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
 
   &__help {
     display: flex;

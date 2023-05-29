@@ -30,7 +30,17 @@
       "headline": "Budget development",
       "noItems": "Add bookings to see your daily available budget for the next {n} months.",
       "availableBudget": "Actually available",
-      "availableBudgetHelpText": "You could now spend up to {value} and still have enough money left over to pay all your upcoming expenses without overdrawing your accounts."
+      "availableBudgetHelpText": "You could now spend up to {value} and still have enough money left over to pay all your upcoming expenses without overdrawing your accounts.",
+      "settings": {
+        "checkLength": {
+          "label": "Months",
+          "help": "The budget development will be checked for the next X months."
+        },
+        "includePast": {
+          "label": "Include past transactions?",
+          "help": "Should transactions that are in the past be included in the calculation?"
+        }
+      }
     },
     "fabTooltip": "Add new account"
   },
