@@ -26,7 +26,17 @@
       "headline": "Budgetentwicklung",
       "noItems": "Füge Buchungen hinzu, um hier dein tägliches zur Verfügung stehende Budget für die nächsten {n} Monate zu sehen.",
       "availableBudget": "Tatsächlich verfügbar",
-      "availableBudgetHelpText": "Du könntest jetzt bis zu {value} ausgeben und hättest immer noch genug Geld übrig, um alle deine anstehenden Ausgaben zu bezahlen ohne deine Konten zu überziehen."
+      "availableBudgetHelpText": "Du könntest jetzt bis zu {value} ausgeben und hättest immer noch genug Geld übrig, um alle deine anstehenden Ausgaben zu bezahlen ohne deine Konten zu überziehen.",
+      "settings": {
+        "checkLength": {
+          "label": "Monate",
+          "help": "Die Budgetentwicklung wird für die nächsten X Monate überprüft."
+        },
+        "includePast": {
+          "label": "Vergangene Buchungen einschließen?",
+          "help": "Sollen Buchungen, die in der Vergangenheit liegen bei der Berechnung mit  berücksichtigt werden?"
+        }
+      }
     },
     "fabTooltip": "Neues Konto anlegen"
   },

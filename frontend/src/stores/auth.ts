@@ -1,3 +1,4 @@
+import type { BudgetDevelopmentSettings } from "@/composables/use-budget-development";
 import { config } from "@/config";
 import type { BaseRecord } from "@/pocketbase";
 import client from "@/pocketbase";
@@ -37,6 +38,7 @@ export interface LoginPayload {
 export interface UserSettingsDto {
   theme: "light" | "dark" | "";
   locale: string;
+  budgetDevelopmentSettings?: Partial<BudgetDevelopmentSettings>;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -116,6 +118,26 @@ export const useAuthStore = defineStore("auth", () => {
     client.collection("users").delete(user.value.id);
   };
 
+  /**
+   * Budget development settings.
+   * Will be updated in the backend if the value changes.
+   */
+  const budgetDevelopmentSettings = computed({
+    get: () => ({
+      checkLength: 6,
+      includePast: true,
+      ...user.value?.budgetDevelopmentSettings,
+    }),
+    set: async (value) => {
+      await updateSettings({
+        budgetDevelopmentSettings: {
+          ...user.value?.budgetDevelopmentSettings,
+          ...value,
+        },
+      });
+    },
+  });
+
   return {
     isAuthenticated,
     login,
@@ -128,5 +150,6 @@ export const useAuthStore = defineStore("auth", () => {
     deleteUser,
     isTestUser,
     refreshAuth,
+    budgetDevelopmentSettings,
   };
 });

@@ -41,7 +41,13 @@ const { summary, isLoading: isSummaryLoading } = useTransactionSummary(
 const { budgetDevelopment, isLoading: isBudgetDevelopmentLoading } =
   useBudgetDevelopment(
     computed(() => authStore.user?.id),
-    { initialFetch: true }
+    computed(
+      () =>
+        authStore.user?.budgetDevelopmentSettings ?? {
+          checkLength: 6,
+          includePast: true,
+        }
+    )
   );
 
 const handleItemClick = async (id: string) => {
@@ -52,6 +58,7 @@ const handleItemClick = async (id: string) => {
 <template>
   <div>
     <HomePageTemplate
+      v-model:budget-development-settings="authStore.budgetDevelopmentSettings"
       :accounts="accounts"
       :account-page-count="pageCount"
       :is-accounts-loading="isLoading"
