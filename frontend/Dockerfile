@@ -2,10 +2,11 @@
 FROM node:18-alpine as build
 WORKDIR /app
 
-# install pnpm
-RUN npm i -g pnpm@8.6.6
+COPY pnpm-lock.yaml package.json ./
 
-COPY pnpm-lock.yaml ./
+# install pnpm as defined in package.json
+RUN npm i -g $(node -p "require('./package.json').packageManager")
+
 RUN pnpm fetch --ignore-scripts
 
 COPY . ./
