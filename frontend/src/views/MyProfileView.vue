@@ -21,7 +21,7 @@ const handleSubmit = async (dto: UpdateUserDto) => {
       message: t(
         `profile.toasts.${
           dto.email !== authStore.user?.email ? "updatedWithEmail" : "updated"
-        }`
+        }`,
       ),
       type: "success",
       duration: 3000,

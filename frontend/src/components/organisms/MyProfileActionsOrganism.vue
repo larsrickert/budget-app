@@ -26,7 +26,7 @@ const props = withDefaults(
   }>(),
   {
     allowedAvatarTypes: () => [".jpg", ".jpeg", ".png", ".svg", ".webp"],
-  }
+  },
 );
 
 const emit = defineEmits<{

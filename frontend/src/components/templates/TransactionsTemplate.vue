@@ -22,7 +22,7 @@ const props = withDefaults(
   }>(),
   {
     type: "outcome",
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -45,19 +45,19 @@ TRANSACTION_TYPES;
     <div class="page__content">
       <el-tabs v-model="typeModel">
         <el-tab-pane
-          v-for="type of TRANSACTION_TYPES"
-          :key="type"
-          :label="`${t(`global.${type}`, 2)} (${totals[type]})`"
-          :name="type"
+          v-for="_type of TRANSACTION_TYPES"
+          :key="_type"
+          :label="`${t(`global.${_type}`, 2)} (${totals[_type]})`"
+          :name="_type"
         />
       </el-tabs>
 
       <section>
         <FinanceItemListOrganism
           v-if="transactions.length || loading"
+          v-model:current-page="currentPageModel"
           :items="transactions"
           :skeleton-count="loading ? 3 : 0"
-          v-model:current-page="currentPageModel"
           :page-count="pageCount"
           :disabled="loading"
           @item-click="emit('itemClick', $event.id)"

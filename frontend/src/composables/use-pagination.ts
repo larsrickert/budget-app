@@ -1,17 +1,18 @@
 import client from "@/pocketbase";
 import { useOffsetPagination, type MaybeRef } from "@vueuse/core";
-import type { RecordListQueryParams } from "pocketbase";
+import type { RecordListOptions } from "pocketbase";
+
 import { computed, ref, type Ref } from "vue";
 
 export interface UsePaginationOptions {
   /** @default 15 */
   pageSize?: MaybeRef<number>;
-  query?: RecordListQueryParams;
+  query?: RecordListOptions;
 }
 
 export const usePagination = <T extends object>(
   collection: string,
-  options?: UsePaginationOptions
+  options?: UsePaginationOptions,
 ) => {
   const total = ref(0);
   const isLoading = ref(false);
@@ -43,7 +44,7 @@ export const usePagination = <T extends object>(
   const refetch = () => {
     return fetchPage(
       pagination.currentPage.value,
-      pagination.currentPageSize.value
+      pagination.currentPageSize.value,
     );
   };
 

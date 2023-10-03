@@ -35,9 +35,10 @@ export default i18n;
 
 export const getUserPreferredLocale = (): string | undefined => {
   const browserLocales = navigator.languages.map(
-    (locale) => locale.split("-")[0]
+    (locale) => locale.split("-")[0],
   );
   return browserLocales.find((locale) =>
-    i18n.global.availableLocales.includes(locale)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    i18n.global.availableLocales.includes(locale as any),
   );
 };

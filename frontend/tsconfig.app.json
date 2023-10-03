@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "index.d.ts",
     "src/**/*",
@@ -9,7 +9,6 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
-    "allowJs": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

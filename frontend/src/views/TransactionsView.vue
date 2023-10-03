@@ -34,7 +34,7 @@ const outcomePagination = usePagination<TransactionDto>("transactions", {
 });
 
 const pagination = computed(() =>
-  currentType.value === "income" ? incomePagination : outcomePagination
+  currentType.value === "income" ? incomePagination : outcomePagination,
 );
 
 const transactions = computed<

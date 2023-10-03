@@ -45,7 +45,7 @@ export const useAuthStore = defineStore("auth", () => {
   const isAuthenticated = computed(() => !!user.value);
   const user = ref(client.authStore.model as User | null);
   const isTestUser = computed(
-    () => user.value?.email === config.api.testUser.email
+    () => user.value?.email === config.api.testUser.email,
   );
 
   client.authStore.onChange((_, model) => {
@@ -86,7 +86,7 @@ export const useAuthStore = defineStore("auth", () => {
   const updateUser = async (dto: UpdateUserDto) => {
     if (!user.value?.id) {
       throw new CustomError(
-        "Unable to update user because you are not logged in"
+        "Unable to update user because you are not logged in",
       );
     }
 
@@ -107,7 +107,7 @@ export const useAuthStore = defineStore("auth", () => {
   const updateSettings = async (dto: Partial<UserSettingsDto>) => {
     if (!user.value?.id) {
       throw new CustomError(
-        "Unable to update user because you are not logged in"
+        "Unable to update user because you are not logged in",
       );
     }
     await client.collection("users").update<User>(user.value.id, dto);

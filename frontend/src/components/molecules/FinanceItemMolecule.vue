@@ -17,7 +17,7 @@ defineProps<{
 <template>
   <div class="item">
     <div class="item__group overflow--hidden">
-      <SkeletonAtom :loaded="!skeleton" v-if="icon" :width="36" :height="36">
+      <SkeletonAtom v-if="icon" :loaded="!skeleton" :width="36" :height="36">
         <el-icon class="item__icon" :size="24">
           <component :is="icon" />
         </el-icon>
@@ -36,7 +36,7 @@ defineProps<{
     <div class="item__value">
       <SkeletonAtom :loaded="!skeleton" :width="48">
         {{ value }}
-        <el-icon :size="18" v-if="!hideArrow">
+        <el-icon v-if="!hideArrow" :size="18">
           <ArrowRight />
         </el-icon>
       </SkeletonAtom>

@@ -20,7 +20,7 @@ const props = withDefaults(
   }>(),
   {
     skeletonCount: 0,
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -72,11 +72,11 @@ const currentPageModel = useVModel(props, "currentPage", emit);
       />
 
       <el-pagination
+        v-model:current-page="currentPageModel"
         layout="prev, pager, next"
         :page-count="pageCount"
         background
         hide-on-single-page
-        v-model:current-page="currentPageModel"
         :disabled="disabled"
         class="pagination"
       />

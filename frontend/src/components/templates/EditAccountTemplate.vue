@@ -105,6 +105,8 @@ const handleSubmit = async () => {
         </HeadlineAtom>
 
         <el-form
+          ref="formRef"
+          v-loading="loading"
           label-position="top"
           :disabled="disabled"
           require-asterisk-position="right"
@@ -113,15 +115,13 @@ const handleSubmit = async () => {
           status-icon
           scroll-to-error
           :validate-on-rule-change="false"
-          ref="formRef"
-          v-loading="loading"
         >
           <div class="grid grid--2">
             <el-form-item :label="t('account.name')" prop="name">
               <el-input
+                v-model="state.name"
                 :prefix-icon="Wallet"
                 name="name"
-                v-model="state.name"
                 :maxlength="64"
                 show-word-limit
               />
@@ -139,8 +139,8 @@ const handleSubmit = async () => {
 
           <el-form-item :label="t('account.notes')" prop="notes">
             <el-input
-              name="notes"
               v-model="state.notes"
+              name="notes"
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 16 }"
               :maxlength="512"

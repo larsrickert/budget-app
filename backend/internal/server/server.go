@@ -47,7 +47,7 @@ func (s *Server) Start() error {
 		return err
 	}
 
-	migratecmd.MustRegister(s.pb, s.pb.RootCmd, &migratecmd.Options{
+	migratecmd.MustRegister(s.pb, s.pb.RootCmd, migratecmd.Config{
 		Automigrate: true, // auto creates migration files when making collection changes
 	})
 

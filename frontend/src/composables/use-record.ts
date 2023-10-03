@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 export const useRecord = <T extends BaseRecord, CreateDto extends object>(
-  collection: string
+  collection: string,
 ) => {
   const record = ref<T>();
   const isFetching = ref(false);

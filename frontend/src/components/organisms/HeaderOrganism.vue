@@ -53,8 +53,8 @@ const toggleDrawer = () => {
         circle
         color="transparent"
         class="btn--icon btn--no-gap"
-        @click="emit('rightIconClick')"
         data-cy="headerButton"
+        @click="emit('rightIconClick')"
       />
     </el-tooltip>
   </header>
