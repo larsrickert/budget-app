@@ -31,7 +31,7 @@ const props = withDefaults(
   {
     modelValue: () => [],
     allowedFileTypes: () => [],
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -50,7 +50,7 @@ watch(files, (newFiles) => {
     "change",
     newFiles
       .filter((i): i is UploadUserFile & { raw: UploadRawFile } => !!i.raw)
-      .map((i) => i.raw)
+      .map((i) => i.raw),
   );
 });
 
@@ -104,9 +104,9 @@ watch(files, () => (fileSelectionStarted.value = false));
 <template>
   <el-upload
     ref="upload"
+    v-model:file-list="files"
     drag
     :accept="allowedFileTypes.join(',')"
-    v-model:file-list="files"
     :auto-upload="false"
     :disabled="disabled"
     :limit="limit"

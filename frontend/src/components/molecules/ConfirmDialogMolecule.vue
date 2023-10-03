@@ -17,7 +17,7 @@ const props = withDefaults(
   }>(),
   {
     showActions: true,
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -46,15 +46,15 @@ const handleConfirm = () => {
   >
     <slot>{{ description }}</slot>
 
-    <template #footer v-if="showActions">
-      <el-button @click="isOpen = false" :disabled="loading">
+    <template v-if="showActions" #footer>
+      <el-button :disabled="loading" @click="isOpen = false">
         {{ cancelText }}
       </el-button>
       <el-button
         type="primary"
-        @click="handleConfirm"
         :disabled="disabled"
         :loading="loading"
+        @click="handleConfirm"
       >
         {{ confirmText }}
       </el-button>

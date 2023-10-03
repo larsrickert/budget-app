@@ -85,6 +85,7 @@ const loginWithTestUser = async () => {
       </el-alert>
 
       <el-form
+        ref="formRef"
         label-position="top"
         :disabled="disabled"
         require-asterisk-position="right"
@@ -93,7 +94,6 @@ const loginWithTestUser = async () => {
         status-icon
         scroll-to-error
         :validate-on-rule-change="false"
-        ref="formRef"
       >
         <div class="grid grid--2">
           <el-form-item
@@ -101,19 +101,19 @@ const loginWithTestUser = async () => {
             prop="usernameOrEmail"
           >
             <el-input
+              v-model.trim="state.usernameOrEmail"
               :prefix-icon="User"
               name="usernameOrEmail"
-              v-model.trim="state.usernameOrEmail"
             />
           </el-form-item>
 
           <el-form-item :label="t('profile.password')" prop="password">
             <el-input
+              v-model="state.password"
               :prefix-icon="Key"
               type="password"
               show-password
               name="password"
-              v-model="state.password"
             />
           </el-form-item>
         </div>
@@ -124,8 +124,8 @@ const loginWithTestUser = async () => {
               type="primary"
               :loading="loading"
               :disabled="disabled"
-              @click="handleSubmit"
               data-cy="submit"
+              @click="handleSubmit"
             >
               {{ t("login.submit") }}
             </el-button>

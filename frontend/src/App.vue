@@ -121,13 +121,13 @@ watchEffect(() => {
   <div>
     <el-config-provider :locale="locale === 'de' ? de : undefined">
       <SideMenuTemplate
+        v-model:is-drawer-open="isDrawerOpen"
         :title="t('app.title')"
         :subtitle="t('app.subtitle')"
         :logo-src="logoSrc"
         :nav-items="navItems"
         :sub-items="subItems"
         :active-href="router.currentRoute.value.path"
-        v-model:is-drawer-open="isDrawerOpen"
         @item-click="handleNavItemClick"
       >
         <router-view />

@@ -10,7 +10,7 @@ withDefaults(
   }>(),
   {
     size: 18,
-  }
+  },
 );
 </script>
 

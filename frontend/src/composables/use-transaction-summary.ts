@@ -18,7 +18,7 @@ export interface UseTransactionSummaryOptions {
 
 export const useTransactionSummary = (
   userId: Ref<string | undefined>,
-  options?: UseTransactionSummaryOptions
+  options?: UseTransactionSummaryOptions,
 ) => {
   const summary = ref<TransactionSummary>();
   const isLoading = ref(false);
@@ -30,7 +30,7 @@ export const useTransactionSummary = (
     try {
       summary.value = await client.send(
         `api/collections/users/records/${userId.value}/summary/transactions`,
-        {}
+        {},
       );
     } finally {
       isLoading.value = false;

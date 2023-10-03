@@ -37,7 +37,7 @@ const getFlagSrc = (locale: string) => {
   const localeName = locale === "en" ? "us" : locale;
   return new URL(
     `../../../node_modules/svg-country-flags/png100px/${localeName}.png`,
-    import.meta.url
+    import.meta.url,
   ).href;
 };
 </script>
@@ -57,23 +57,23 @@ const getFlagSrc = (locale: string) => {
         <el-form-item :label="t('settings.language')">
           <el-select
             v-model="localeModel"
-            name="language"
             v-loading="isLocaleLoading"
+            name="language"
             :disabled="isLocaleLoading || disallowLocaleChange"
           >
             <el-option
-              v-for="locale in availableLocales"
-              :key="locale"
-              :value="locale"
-              :label="t(`global.locales.${locale}`)"
+              v-for="_locale in availableLocales"
+              :key="_locale"
+              :value="_locale"
+              :label="t(`global.locales.${_locale}`)"
             >
               <div class="locale">
                 <img
                   class="locale__flag"
-                  :src="getFlagSrc(locale)"
-                  :alt="locale"
+                  :src="getFlagSrc(_locale)"
+                  :alt="_locale"
                 />
-                <span>{{ t(`global.locales.${locale}`) }}</span>
+                <span>{{ t(`global.locales.${_locale}`) }}</span>
               </div>
             </el-option>
 
