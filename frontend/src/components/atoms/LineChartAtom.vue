@@ -33,7 +33,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  Filler
+  Filler,
 );
 
 const props = withDefaults(
@@ -47,7 +47,7 @@ const props = withDefaults(
   }>(),
   {
     color: "primary",
-  }
+  },
 );
 
 const primaryColor = useCssVar(computed(() => `--el-color-${props.color}-rgb`));
@@ -63,7 +63,7 @@ useMutationObserver(
   {
     attributes: true,
     attributeFilter: ["class"],
-  }
+  },
 );
 
 const chartData = computed<ChartData<"line">>(() => {

@@ -15,7 +15,7 @@ export default defineConfig({
       compositionOnly: true,
       include: resolve(
         dirname(fileURLToPath(import.meta.url)),
-        "./src/i18n/locales/**"
+        "./src/i18n/locales/**",
       ),
     }),
     ElementPlus(),

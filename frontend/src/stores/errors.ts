@@ -66,7 +66,9 @@ export const useErrorStore = defineStore("errors", () => {
         event.reason instanceof Error
           ? event.reason
           : new Error(
-              `Uncaught promise rejection for: ${JSON.stringify(event.promise)}`
+              `Uncaught promise rejection for: ${JSON.stringify(
+                event.promise,
+              )}`,
             );
 
       event.preventDefault();

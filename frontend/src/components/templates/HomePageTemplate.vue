@@ -36,7 +36,7 @@ const emit = defineEmits<{
   (event: "update:currentAccountPage", value: number): void;
   (
     event: "update:budgetDevelopmentSettings",
-    value: BudgetDevelopmentSettings
+    value: BudgetDevelopmentSettings,
   ): void;
 }>();
 
@@ -57,7 +57,7 @@ const currentAccountPage = useVModel(props, "currentAccountPage", emit);
 const budgetDevelopmentModel = useVModel(
   props,
   "budgetDevelopmentSettings",
-  emit
+  emit,
 );
 </script>
 
@@ -71,9 +71,9 @@ const budgetDevelopmentModel = useVModel(
 
         <FinanceItemListOrganism
           v-if="accounts.length || isAccountsLoading"
+          v-model:current-page="currentAccountPage"
           :items="accounts"
           :skeleton-count="isAccountsLoading ? 3 : 0"
-          v-model:current-page="currentAccountPage"
           :page-count="accountPageCount"
           :disabled="isAccountsLoading"
           @item-click="emit('itemClick', $event.id)"

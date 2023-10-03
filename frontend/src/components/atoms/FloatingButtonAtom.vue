@@ -16,7 +16,7 @@ withDefaults(
   {
     icon: Plus,
     type: "primary",
-  }
+  },
 );
 </script>
 

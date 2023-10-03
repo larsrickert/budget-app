@@ -20,7 +20,7 @@ const { items, currentPage, pageCount, isLoading } = usePagination<AccountDto>(
   "accounts",
   {
     query: { sort: "created" },
-  }
+  },
 );
 
 const accounts = computed<VueProps<typeof HomePageTemplate>["accounts"]>(() => {
@@ -35,7 +35,7 @@ const accounts = computed<VueProps<typeof HomePageTemplate>["accounts"]>(() => {
 
 const { summary, isLoading: isSummaryLoading } = useTransactionSummary(
   computed(() => authStore.user?.id),
-  { initialFetch: true }
+  { initialFetch: true },
 );
 
 const { budgetDevelopment, isLoading: isBudgetDevelopmentLoading } =
@@ -46,8 +46,8 @@ const { budgetDevelopment, isLoading: isBudgetDevelopmentLoading } =
         authStore.user?.budgetDevelopmentSettings ?? {
           checkLength: 6,
           includePast: true,
-        }
-    )
+        },
+    ),
   );
 
 const handleItemClick = async (id: string) => {
@@ -59,10 +59,10 @@ const handleItemClick = async (id: string) => {
   <div>
     <HomePageTemplate
       v-model:budget-development-settings="authStore.budgetDevelopmentSettings"
+      v-model:current-account-page="currentPage"
       :accounts="accounts"
       :account-page-count="pageCount"
       :is-accounts-loading="isLoading"
-      v-model:current-account-page="currentPage"
       :transaction-summary="summary"
       :is-transaction-summary-loading="isSummaryLoading"
       :budget-development="budgetDevelopment"

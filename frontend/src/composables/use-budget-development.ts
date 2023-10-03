@@ -20,7 +20,7 @@ export interface BudgetDevelopmentSettings {
 
 export const useBudgetDevelopment = (
   userId: Ref<string | undefined>,
-  settings: Ref<BudgetDevelopmentSettings>
+  settings: Ref<BudgetDevelopmentSettings>,
 ) => {
   const budgetDevelopment = ref<BudgetDevelopment>();
   const isLoading = ref(false);
@@ -38,7 +38,7 @@ export const useBudgetDevelopment = (
     try {
       budgetDevelopment.value = await client.send(
         `api/collections/users/records/${userId.value}/budget-development`,
-        { params: queryParams }
+        { params: queryParams },
       );
     } finally {
       isLoading.value = false;

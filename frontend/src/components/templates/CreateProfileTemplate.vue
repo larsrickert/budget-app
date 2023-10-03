@@ -60,8 +60,8 @@ const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
         if (!value || value === state.value.password) callback();
         callback(
           new Error(
-            t("validations.sameAs", { otherName: t("profile.password") })
-          )
+            t("validations.sameAs", { otherName: t("profile.password") }),
+          ),
         );
       },
     },
@@ -87,6 +87,7 @@ const reset = () => formRef.value?.resetFields();
 
     <div class="page__content">
       <el-form
+        ref="formRef"
         label-position="top"
         :disabled="disabled"
         require-asterisk-position="right"
@@ -95,23 +96,22 @@ const reset = () => formRef.value?.resetFields();
         status-icon
         scroll-to-error
         :validate-on-rule-change="false"
-        ref="formRef"
       >
         <div class="grid grid--2">
           <el-form-item :label="t('profile.username')" prop="username">
             <el-input
+              v-model.trim="state.username"
               :prefix-icon="User"
               name="username"
-              v-model.trim="state.username"
             />
           </el-form-item>
 
           <el-form-item :label="t('profile.email')" prop="email">
             <el-input
+              v-model.trim="state.email"
               :prefix-icon="Message"
               type="email"
               name="email"
-              v-model.trim="state.email"
             />
           </el-form-item>
         </div>
@@ -119,11 +119,11 @@ const reset = () => formRef.value?.resetFields();
         <div class="grid grid--2">
           <el-form-item :label="t('profile.password')" prop="password">
             <el-input
+              v-model="state.password"
               :prefix-icon="Key"
               type="password"
               show-password
               name="password"
-              v-model="state.password"
             />
           </el-form-item>
 
@@ -132,11 +132,11 @@ const reset = () => formRef.value?.resetFields();
             prop="passwordConfirm"
           >
             <el-input
+              v-model="state.passwordConfirm"
               :prefix-icon="Key"
               type="password"
               show-password
               name="passwordConfirm"
-              v-model="state.passwordConfirm"
             />
           </el-form-item>
         </div>
@@ -147,8 +147,8 @@ const reset = () => formRef.value?.resetFields();
               type="primary"
               :loading="loading"
               :disabled="disabled"
-              @click="handleSubmit"
               data-cy="submit"
+              @click="handleSubmit"
             >
               {{ t("profile.actions.create") }}
             </el-button>

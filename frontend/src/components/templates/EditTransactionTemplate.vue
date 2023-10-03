@@ -50,7 +50,7 @@ const props = withDefaults(
   }>(),
   {
     initialType: "outcome",
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -203,6 +203,8 @@ watch(shortcuts, async () => {
         </HeadlineAtom>
 
         <el-form
+          ref="formRef"
+          v-loading="loading"
           label-position="top"
           :disabled="disabled"
           require-asterisk-position="right"
@@ -211,8 +213,6 @@ watch(shortcuts, async () => {
           status-icon
           scroll-to-error
           :validate-on-rule-change="false"
-          ref="formRef"
-          v-loading="loading"
         >
           <el-form-item :label="t('transaction.type')" prop="type">
             <el-radio-group v-model="state.type" name="type">
@@ -229,9 +229,9 @@ watch(shortcuts, async () => {
           <div class="grid grid--2">
             <el-form-item :label="t('transaction.name')" prop="name">
               <el-input
+                v-model="state.name"
                 :prefix-icon="Wallet"
                 name="name"
-                v-model="state.name"
                 :maxlength="64"
                 show-word-limit
               />
@@ -286,8 +286,8 @@ watch(shortcuts, async () => {
 
           <el-form-item :label="t('transaction.notes')" prop="notes">
             <el-input
-              name="notes"
               v-model="state.notes"
+              name="notes"
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 16 }"
               :maxlength="512"

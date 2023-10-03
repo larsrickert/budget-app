@@ -31,7 +31,7 @@ const props = withDefaults(
   }>(),
   {
     allowEmailChange: true,
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -100,8 +100,8 @@ const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
         if (!value || value === state.value.password) callback();
         callback(
           new Error(
-            t("validations.sameAs", { otherName: t("profile.password") })
-          )
+            t("validations.sameAs", { otherName: t("profile.password") }),
+          ),
         );
       },
     },
@@ -144,6 +144,7 @@ const handleSubmit = async () => {
         />
 
         <el-form
+          ref="formRef"
           label-position="top"
           :disabled="disabled"
           require-asterisk-position="right"
@@ -152,24 +153,23 @@ const handleSubmit = async () => {
           status-icon
           scroll-to-error
           :validate-on-rule-change="false"
-          ref="formRef"
         >
           <div class="grid grid--2">
             <el-form-item :label="t('profile.username')" prop="username">
               <el-input
+                v-model.trim="state.username"
                 :prefix-icon="UserIcon"
                 name="username"
-                v-model.trim="state.username"
               />
             </el-form-item>
 
             <el-form-item :label="t('profile.email')" prop="email">
               <el-input
+                v-model.trim="state.email"
                 :disabled="!allowEmailChange"
                 :prefix-icon="Message"
                 type="email"
                 name="email"
-                v-model.trim="state.email"
               />
             </el-form-item>
           </div>
@@ -177,11 +177,11 @@ const handleSubmit = async () => {
           <div class="grid grid--2">
             <el-form-item :label="t('profile.password')" prop="password">
               <el-input
+                v-model="state.password"
                 :prefix-icon="Key"
                 type="password"
                 show-password
                 name="password"
-                v-model="state.password"
               />
             </el-form-item>
 
@@ -191,11 +191,11 @@ const handleSubmit = async () => {
                 prop="passwordConfirm"
               >
                 <el-input
+                  v-model="state.passwordConfirm"
                   :prefix-icon="Key"
                   type="password"
                   show-password
                   name="passwordConfirm"
-                  v-model="state.passwordConfirm"
                 />
               </el-form-item>
 
@@ -204,11 +204,11 @@ const handleSubmit = async () => {
                 prop="oldPassword"
               >
                 <el-input
+                  v-model="state.oldPassword"
                   :prefix-icon="Key"
                   type="password"
                   show-password
                   name="oldPassword"
-                  v-model="state.oldPassword"
                 />
               </el-form-item>
             </template>
@@ -218,8 +218,8 @@ const handleSubmit = async () => {
             <el-button
               type="primary"
               :loading="isSubmitLoading"
-              @click="handleSubmit"
               :disabled="disabled || !hasDataChanged"
+              @click="handleSubmit"
             >
               {{ t("global.update") }}
             </el-button>
