@@ -1,6 +1,7 @@
 import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { Primary as FinanceItemListStory } from "../organisms/FinanceItemListOrganism.stories";
+import { Primary as OverdueTransactionDialogOrganismPrimary } from "../organisms/OverdueTransactionDialogOrganism.stories";
 import Component from "./TransactionsTemplate.vue";
 
 type Args = VueProps<typeof Component>;
@@ -33,5 +34,13 @@ export const Loading: StoryObj<Args> = {
   args: {
     ...Primary.args,
     loading: true,
+  },
+};
+
+export const WithOverdueTransactions: StoryObj<Args> = {
+  args: {
+    ...Primary.args,
+    overdueTransactions:
+      OverdueTransactionDialogOrganismPrimary.args.transactions,
   },
 };

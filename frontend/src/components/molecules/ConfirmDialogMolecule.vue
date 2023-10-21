@@ -42,7 +42,6 @@ const handleConfirm = () => {
     :show-close="!loading"
     :close-on-click-modal="!loading"
     :close-on-press-escape="!loading"
-    class="confirm-dialog"
   >
     <slot>{{ description }}</slot>
 
@@ -61,9 +60,3 @@ const handleConfirm = () => {
     </template>
   </el-dialog>
 </template>
-
-<style lang="scss" scoped>
-:global(.confirm-dialog) {
-  max-width: 95%;
-}
-</style>
