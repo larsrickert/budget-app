@@ -107,7 +107,17 @@
   "transactions": {
     "pageName": "Transactions",
     "noItems": "No transactions found.",
-    "fabTooltip": "Add new transaction"
+    "fabTooltip": "Add new transaction",
+    "overdue": {
+      "title": "Overdue transaction | Overdue transactions",
+      "description": "You have 1 overdue transaction | You have {n} overdue transactions",
+      "button": "View now",
+      "dialog": {
+        "description": "Select the transactions for which you want to automatically adjust the booking date based on the frequency."
+      },
+      "success": "Successfully updated transaction | Successfully updated transactions",
+      "error": "Error while updating transaction | Error while updating transactions"
+    }
   },
   "transaction": {
     "addPageName": "New transaction",

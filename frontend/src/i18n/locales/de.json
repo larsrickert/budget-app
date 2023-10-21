@@ -103,7 +103,17 @@
   "transactions": {
     "pageName": "Buchungen",
     "noItems": "Keine Buchungen gefunden.",
-    "fabTooltip": "Neue Buchung anlegen"
+    "fabTooltip": "Neue Buchung anlegen",
+    "overdue": {
+      "title": "Überfällige Buchung | Überfällige Buchungen",
+      "description": "Du hast 1 überfällig Buchung | Du hast {n} überfällige Buchungen",
+      "button": "Jetzt ansehen",
+      "dialog": {
+        "description": "Wähle die Buchungen aus, für die du das Buchungsdatum automatisch je nach Häufigkeit anpassen möchtest."
+      },
+      "success": "Buchung erfolgreich aktualisiert | Buchungen erfolgreich aktualisiert",
+      "error": "Fehler beim Aktualisieren der Buchung | Fehler beim Aktualisieren der Buchungen"
+    }
   },
   "transaction": {
     "addPageName": "Neue Buchung",

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import {
-  TransactionFrequency,
   TRANSACTION_TYPES,
+  TransactionFrequency,
   type CreateTransactionDto,
   type TransactionType,
 } from "@/composables/use-transaction";
 import type { FormValidation } from "@/types/vue";
+import { getNextFrequencyDate } from "@/utils/dates";
 import { Refresh, Wallet, Warning } from "@element-plus/icons-vue";
 import {
   ElButton,
@@ -151,10 +152,10 @@ const shortcuts = computed(() => {
       Object.values(TransactionFrequency).indexOf(state.value.frequency)
     ];
 
-  const date = new Date(state.value.bookingDate);
-  const monthOffset = Number.parseInt(state.value.frequency);
-  if (isNaN(monthOffset)) return [];
-  date.setMonth(date.getMonth() + monthOffset);
+  const date = getNextFrequencyDate(
+    state.value.bookingDate,
+    state.value.frequency,
+  );
 
   return [
     {
