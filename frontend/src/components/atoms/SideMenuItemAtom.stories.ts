@@ -1,31 +1,31 @@
-import type { VueProps } from "@/types/vue";
 import { House } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./SideMenuItemAtom.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     label: "Nav Item 1",
     icon: House,
   },
-};
+} satisfies Story;
 
-export const WithImage: StoryObj<Args> = {
+export const WithImage = {
   args: {
     ...Primary.args,
     img: "https://picsum.photos/200/100",
   },
-};
+} satisfies Story;
 
-export const Active: StoryObj<Args> = {
+export const Active = {
   args: {
     ...Primary.args,
     active: true,
   },
-};
+} satisfies Story;

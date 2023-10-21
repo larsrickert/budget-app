@@ -32,12 +32,9 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "itemClick", id: string): void;
-  (event: "update:currentAccountPage", value: number): void;
-  (
-    event: "update:budgetDevelopmentSettings",
-    value: BudgetDevelopmentSettings,
-  ): void;
+  itemClick: [id: string];
+  "update:currentAccountPage": [value: number];
+  "update:budgetDevelopmentSettings": [value: BudgetDevelopmentSettings];
 }>();
 
 const { t, n, d } = useI18n();

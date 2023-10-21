@@ -19,7 +19,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "update:modelValue", value: BudgetDevelopmentSettings): void;
+  "update:modelValue": [value: BudgetDevelopmentSettings];
 }>();
 
 const { t } = useI18n();

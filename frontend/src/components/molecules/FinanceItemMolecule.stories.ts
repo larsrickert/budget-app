@@ -1,41 +1,41 @@
-import type { VueProps } from "@/types/vue";
 import { WalletFilled } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./FinanceItemMolecule.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     title: "Finance Item",
     subtitle: "Subtitle",
     value: "3.99 €",
     icon: WalletFilled,
   },
-};
+} satisfies Story;
 
-export const LongText: StoryObj<Args> = {
+export const LongText = {
   args: {
     ...Primary.args,
     title: "Title ".repeat(100),
     subtitle: "Subtitle ".repeat(100),
   },
-};
+} satisfies Story;
 
-export const Minimal: StoryObj<Args> = {
+export const Minimal = {
   args: {
     title: "Finance Item",
     value: "3.99 €",
   },
-};
+} satisfies Story;
 
-export const Skeleton: StoryObj<Args> = {
+export const Skeleton = {
   args: {
     ...Primary.args,
     skeleton: true,
   },
-};
+} satisfies Story;

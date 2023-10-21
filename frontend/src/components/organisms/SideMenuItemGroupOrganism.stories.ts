@@ -1,15 +1,18 @@
-import type { VueProps } from "@/types/vue";
 import { House } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./SideMenuItemGroupOrganism.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onItemClick: { action: "itemClick" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     items: [
       {
@@ -25,4 +28,4 @@ export const Primary: StoryObj<Args> = {
     ],
     activeHref: "/",
   },
-};
+} satisfies Story;

@@ -35,10 +35,10 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "submit", dto: UpdateUserDto): void;
-  (event: "requestEmailVerification"): void;
-  (event: "logout"): void;
-  (event: "deleteUser"): void;
+  submit: [dto: UpdateUserDto];
+  requestEmailVerification: [];
+  logout: [];
+  deleteUser: [];
 }>();
 
 const { t } = useI18n();

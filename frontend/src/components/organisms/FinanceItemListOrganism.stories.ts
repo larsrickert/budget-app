@@ -1,15 +1,19 @@
-import type { VueProps } from "@/types/vue";
 import { WalletFilled } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./FinanceItemListOrganism.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onItemClick: { action: "itemClick" },
+    "onUpdate:currentPage": { action: "update:currentPage" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     items: new Array(15).fill("").map((_, index) => ({
       id: index.toString(),
@@ -21,26 +25,26 @@ export const Primary: StoryObj<Args> = {
     pageCount: 10,
     currentPage: 3,
   },
-};
+} satisfies Story;
 
-export const WithTotal: StoryObj<Args> = {
+export const WithTotal = {
   args: {
     ...Primary.args,
     total: "123.99 €",
     totalLabel: "Total",
   },
-};
+} satisfies Story;
 
-export const Skeleton: StoryObj<Args> = {
+export const Skeleton = {
   args: {
     ...Primary.args,
     skeletonCount: 3,
   },
-};
+} satisfies Story;
 
-export const Disabled: StoryObj<Args> = {
+export const Disabled = {
   args: {
     ...Primary.args,
     disabled: true,
   },
-};
+} satisfies Story;

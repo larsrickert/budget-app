@@ -1,14 +1,18 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./ConfirmDialogMolecule.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onConfirm: { action: "confirm" },
+    "onUpdate:modelValue": { action: "update:modelValue" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     modelValue: true,
     title: "This is the title",
@@ -16,9 +20,9 @@ export const Primary: StoryObj<Args> = {
     confirmText: "Confirm",
     description: "Are you sure you want to do action XYZ?",
   },
-};
+} satisfies Story;
 
-export const WithCustomSlot: StoryObj<Args> = {
+export const WithCustomSlot = {
   args: {
     ...Primary.args,
   },
@@ -27,25 +31,25 @@ export const WithCustomSlot: StoryObj<Args> = {
     setup: () => ({ args }),
     template: `<Component v-bind="args">Custom slot content.</Component>`,
   }),
-};
+} satisfies Story;
 
-export const Disabled: StoryObj<Args> = {
+export const Disabled = {
   args: {
     ...Primary.args,
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;
 
-export const WithoutActions: StoryObj<Args> = {
+export const WithoutActions = {
   args: {
     ...Primary.args,
     showActions: false,
   },
-};
+} satisfies Story;

@@ -1,44 +1,49 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./FileSelectOrganism.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onChange: { action: "change" },
+    onExceedFileSize: { action: "exceedFileSize" },
+    onExceedLimit: { action: "exceedLimit" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {},
-};
+} satisfies Story;
 
-export const Disabled: StoryObj<Args> = {
+export const Disabled = {
   args: {
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const WithLimit: StoryObj<Args> = {
+export const WithLimit = {
   args: {
     limit: 1,
   },
-};
+} satisfies Story;
 
-export const WithReplace: StoryObj<Args> = {
+export const WithReplace = {
   args: {
     limit: 2,
     replace: true,
   },
-};
+} satisfies Story;
 
-export const WithAllowedFileTypes: StoryObj<Args> = {
+export const WithAllowedFileTypes = {
   args: {
     allowedFileTypes: [".jpg", ".png"],
   },
-};
+} satisfies Story;
 
-export const WithMaxSize: StoryObj<Args> = {
+export const WithMaxSize = {
   args: {
     maxSize: 4,
   },
-};
+} satisfies Story;

@@ -1,27 +1,29 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./CreateProfileTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onLogin: { action: "login" },
+    onSubmit: { action: "submit" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
-  args: {},
-};
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Disabled: StoryObj<Args> = {
+export const Primary = { args: {} } satisfies Story;
+
+export const Disabled = {
   args: {
     ...Primary.args,
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;

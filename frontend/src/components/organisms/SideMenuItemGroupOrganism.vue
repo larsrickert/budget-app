@@ -12,7 +12,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "itemClick", href: string): void;
+  itemClick: [href: string];
 }>();
 </script>
 

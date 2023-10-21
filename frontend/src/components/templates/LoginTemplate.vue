@@ -23,8 +23,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "submit", value: LoginPayload): void;
-  (event: "register"): void;
+  submit: [value: LoginPayload];
+  register: [];
 }>();
 
 const { t } = useI18n();

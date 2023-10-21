@@ -12,8 +12,8 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "back"): void;
-  (event: "rightIconClick"): void;
+  back: [];
+  rightIconClick: [];
 }>();
 
 const isDrawerOpen = inject(provideIsDrawerOpenSymbol);

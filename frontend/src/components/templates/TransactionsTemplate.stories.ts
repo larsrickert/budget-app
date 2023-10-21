@@ -1,16 +1,22 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { Primary as FinanceItemListStory } from "../organisms/FinanceItemListOrganism.stories";
 import { Primary as OverdueTransactionDialogOrganismPrimary } from "../organisms/OverdueTransactionDialogOrganism.stories";
 import Component from "./TransactionsTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onEditOverdue: { action: "editOverdue" },
+    onItemClick: { action: "itemClick" },
+    "onUpdate:currentPage": { action: "update:currentPage" },
+    "onUpdate:type": { action: "update:type" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     type: "income",
     transactions: FinanceItemListStory.args?.items ?? [],
@@ -21,26 +27,26 @@ export const Primary: StoryObj<Args> = {
       outcome: FinanceItemListStory.args?.items?.length ?? 0,
     },
   },
-};
+} satisfies Story;
 
-export const Empty: StoryObj<Args> = {
+export const Empty = {
   args: {
     ...Primary.args,
     transactions: [],
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;
 
-export const WithOverdueTransactions: StoryObj<Args> = {
+export const WithOverdueTransactions = {
   args: {
     ...Primary.args,
     overdueTransactions:
       OverdueTransactionDialogOrganismPrimary.args.transactions,
   },
-};
+} satisfies Story;

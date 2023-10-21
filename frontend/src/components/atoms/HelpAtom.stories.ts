@@ -1,22 +1,22 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./HelpAtom.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     content: "This is a help text.",
   },
-};
+} satisfies Story;
 
-export const WithSize: StoryObj<Args> = {
+export const WithSize = {
   args: {
     ...Primary.args,
     size: 64,
   },
-};
+} satisfies Story;

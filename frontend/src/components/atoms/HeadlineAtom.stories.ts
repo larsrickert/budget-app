@@ -1,26 +1,26 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./HeadlineAtom.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
   render: (args) => ({
     components: { Component },
     setup: () => ({ args }),
     template: `<Component v-bind="args">Slot content</Component>`,
   }),
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     headline: "My headline",
   },
-};
+} satisfies Story;
 
-export const LongText: StoryObj<Args> = {
+export const LongText = {
   args: {
     headline: "Test ".repeat(100),
   },
-};
+} satisfies Story;

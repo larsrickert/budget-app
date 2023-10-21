@@ -1,13 +1,19 @@
 import type { User } from "@/stores/auth";
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./MyProfileTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onDeleteUser: { action: "deleteUser" },
+    onLogout: { action: "logout" },
+    onRequestEmailVerification: { action: "requestEmailVerification" },
+    onSubmit: { action: "submit" },
+  },
+} satisfies Meta<typeof Component>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const user: User = {
   id: "1",
@@ -21,45 +27,43 @@ const user: User = {
   theme: "light",
 };
 
-export const Primary: StoryObj<Args> = {
+export const Primary = {
   args: {
     user,
   },
-};
+} satisfies Story;
 
-export const WithoutAvatar: StoryObj<Args> = {
+export const WithoutAvatar = {
   args: {
     user: {
       ...user,
       avatar: "",
     },
   },
-};
+} satisfies Story;
 
-export const NotVerified: StoryObj<Args> = {
+export const NotVerified = {
   args: {
     user: {
       ...user,
       verified: false,
     },
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     isSubmitLoading: true,
     isDeleteLoading: true,
   },
-};
+} satisfies Story;
 
-export const WithoutUser: StoryObj<Args> = {
-  args: {},
-};
+export const WithoutUser = { args: {} } satisfies Story;
 
-export const EmailChangeDisabled: StoryObj<Args> = {
+export const EmailChangeDisabled = {
   args: {
     ...Primary.args,
     allowEmailChange: false,
   },
-};
+} satisfies Story;

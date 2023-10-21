@@ -1,42 +1,46 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./EditAccountTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onDelete: { action: "delete" },
+    onSubmit: { action: "submit" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     headline: "New account",
     submitLabel: "Create",
   },
-};
+} satisfies Story;
 
-export const Disabled: StoryObj<Args> = {
+export const Disabled = {
   args: {
     ...Primary.args,
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const SubmitLoading: StoryObj<Args> = {
+export const SubmitLoading = {
   args: {
     ...Primary.args,
     submitLoading: true,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;
 
-export const WithInitialValue: StoryObj<Args> = {
+export const WithInitialValue = {
   args: {
     headline: "Edit account",
     submitLabel: "Update",
@@ -46,11 +50,11 @@ export const WithInitialValue: StoryObj<Args> = {
       notes: "These are some notes.",
     },
   },
-};
+} satisfies Story;
 
-export const NotFound: StoryObj<Args> = {
+export const NotFound = {
   args: {
     ...Primary.args,
     notFound: true,
   },
-};
+} satisfies Story;

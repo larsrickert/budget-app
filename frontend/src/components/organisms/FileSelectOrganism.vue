@@ -35,9 +35,9 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "change", value: File[]): void;
-  (event: "exceedLimit", exceededFiles: File[]): void;
-  (event: "exceedFileSize", file: File): void;
+  change: [value: File[]];
+  exceedLimit: [exceededFiles: File[]];
+  exceedFileSize: [file: File];
 }>();
 
 const { t } = useI18n();

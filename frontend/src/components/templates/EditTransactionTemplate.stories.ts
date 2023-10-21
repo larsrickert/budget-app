@@ -1,43 +1,47 @@
 import { TransactionFrequency } from "@/composables/use-transaction";
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./EditTransactionTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onDelete: { action: "delete" },
+    onSubmit: { action: "submit" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     headline: "New transaction",
     submitLabel: "Create",
   },
-};
+} satisfies Story;
 
-export const Disabled: StoryObj<Args> = {
+export const Disabled = {
   args: {
     ...Primary.args,
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const SubmitLoading: StoryObj<Args> = {
+export const SubmitLoading = {
   args: {
     ...Primary.args,
     submitLoading: true,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;
 
-export const WithInitialValue: StoryObj<Args> = {
+export const WithInitialValue = {
   args: {
     headline: "Edit transaction",
     submitLabel: "Update",
@@ -50,11 +54,11 @@ export const WithInitialValue: StoryObj<Args> = {
       frequency: TransactionFrequency.MONTHLY,
     },
   },
-};
+} satisfies Story;
 
-export const NotFound: StoryObj<Args> = {
+export const NotFound = {
   args: {
     ...Primary.args,
     notFound: true,
   },
-};
+} satisfies Story;

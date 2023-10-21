@@ -55,8 +55,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "submit", value: CreateTransactionDto): void;
-  (event: "delete"): void;
+  submit: [value: CreateTransactionDto];
+  delete: [];
 }>();
 
 const { t, locale } = useI18n();

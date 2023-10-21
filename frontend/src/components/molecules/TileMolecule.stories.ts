@@ -1,54 +1,54 @@
-import type { VueProps } from "@/types/vue";
 import { CreditCard } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./TileMolecule.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     title: "Title",
     subtitle: "Subtitle",
     icon: CreditCard,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     loading: true,
   },
-};
+} satisfies Story;
 
-export const LongText: StoryObj<Args> = {
+export const LongText = {
   args: {
     ...Primary.args,
     title: "Title ".repeat(10),
     subtitle: "Subtitle ".repeat(10),
   },
-};
+} satisfies Story;
 
-export const Success: StoryObj<Args> = {
+export const Success = {
   args: {
     ...Primary.args,
     color: "success",
   },
-};
+} satisfies Story;
 
-export const Danger: StoryObj<Args> = {
+export const Danger = {
   args: {
     ...Primary.args,
     color: "danger",
   },
-};
+} satisfies Story;
 
-export const WithPercentage: StoryObj<Args> = {
+export const WithPercentage = {
   args: {
     ...Primary.args,
     percentage: 75,
   },
-};
+} satisfies Story;

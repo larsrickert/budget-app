@@ -1,15 +1,15 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./BudgetDevelopmentSettingsMolecule.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
   argTypes: {
     "onUpdate:modelValue": { action: "update:modelValue" },
   },
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary = {
   args: {
@@ -17,4 +17,4 @@ export const Primary = {
       checkLength: 6,
     },
   },
-} satisfies StoryObj<Args>;
+} satisfies Story;

@@ -1,11 +1,8 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { Primary as FinanceItemListStory } from "../organisms/FinanceItemListOrganism.stories";
 import Component from "./HomePageTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
   argTypes: {
     onItemClick: { action: "itemClick" },
@@ -14,9 +11,12 @@ export default {
     },
     "onUpdate:currentAccountPage": { action: "update:currentAccountPage" },
   },
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     accounts: FinanceItemListStory.args?.items ?? [],
     transactionSummary: {
@@ -52,9 +52,9 @@ export const Primary: StoryObj<Args> = {
       includePast: true,
     },
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     ...Primary.args,
     isAccountsLoading: true,
@@ -62,14 +62,15 @@ export const Loading: StoryObj<Args> = {
     isBudgetDevelopmentLoading: true,
     budgetDevelopment: undefined,
   },
-};
+} satisfies Story;
 
-export const Empty: StoryObj<Args> = {
+export const Empty = {
   args: {
     accounts: [],
     budgetDevelopment: {
       items: [{ budget: 0, date: new Date().toISOString() }],
       min: { budget: 0, date: new Date().toISOString() },
     },
+    budgetDevelopmentSettings: {},
   },
-};
+} satisfies Story;

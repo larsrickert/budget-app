@@ -22,8 +22,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "itemClick", href: string): void;
-  (event: "update:isDrawerOpen", value: boolean): void;
+  itemClick: [href: string];
+  "update:isDrawerOpen": [value: boolean];
 }>();
 
 const isDrawerOpenModel = useVModel(props, "isDrawerOpen", emit);

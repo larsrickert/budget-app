@@ -31,10 +31,10 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "itemClick", id: string): void;
-  (event: "update:type", value: TransactionType): void;
-  (event: "update:currentPage", value: number): void;
-  (event: "editOverdue", transactionIds: string[]): void;
+  itemClick: [id: string];
+  "update:type": [value: TransactionType];
+  "update:currentPage": [value: number];
+  editOverdue: [transactionIds: string[]];
 }>();
 
 const { t } = useI18n();

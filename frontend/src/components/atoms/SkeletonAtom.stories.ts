@@ -1,13 +1,11 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./SkeletonAtom.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
-  args: {},
-};
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = { args: {} } satisfies Story;

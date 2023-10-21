@@ -10,7 +10,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "actionClick"): void;
+  actionClick: [];
 }>();
 
 const { t } = useI18n();

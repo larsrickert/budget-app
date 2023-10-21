@@ -24,8 +24,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "itemClick", item: ListItem): void;
-  (event: "update:currentPage", value: number): void;
+  itemClick: [item: ListItem];
+  "update:currentPage": [value: number];
 }>();
 
 const isSkeleton = computed(() => props.skeletonCount > 0);

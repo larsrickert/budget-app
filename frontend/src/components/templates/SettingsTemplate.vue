@@ -24,8 +24,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "update:isDark", value: boolean): void;
-  (event: "update:locale", value: string): void;
+  "update:isDark": [value: boolean];
+  "update:locale": [value: string];
 }>();
 
 const { t } = useI18n();

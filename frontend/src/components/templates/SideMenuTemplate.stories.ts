@@ -1,16 +1,20 @@
 import logoSrc from "@/assets/logo.svg";
-import type { VueProps } from "@/types/vue";
 import { House } from "@element-plus/icons-vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./SideMenuTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onItemClick: { action: "itemClick" },
+    "onUpdate:isDrawerOpen": { action: "update:isDrawerOpen" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     title: "Title",
     subtitle: "Subtitle",
@@ -41,18 +45,18 @@ export const Primary: StoryObj<Args> = {
     ],
     activeHref: "/test1",
   },
-};
+} satisfies Story;
 
-export const WithoutSubItems: StoryObj<Args> = {
+export const WithoutSubItems = {
   args: {
     ...Primary.args,
     subItems: [],
   },
-};
+} satisfies Story;
 
-export const WithDrawer: StoryObj<Args> = {
+export const WithDrawer = {
   args: {
     ...Primary.args,
     isDrawerOpen: true,
   },
-};
+} satisfies Story;

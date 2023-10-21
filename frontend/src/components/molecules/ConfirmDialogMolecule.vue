@@ -21,8 +21,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "update:modelValue", value: boolean): void;
-  (event: "confirm", close: () => void): void;
+  "update:modelValue": [value: boolean];
+  confirm: [close: () => void];
 }>();
 
 const isOpen = useVModel(props, "modelValue", emit);

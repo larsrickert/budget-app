@@ -1,14 +1,14 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./LineChartAtom.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary = {
   args: {
     xScaleLabel: "x scale label",
     yScaleLabel: "y scale label",
@@ -36,25 +36,25 @@ export const Primary: StoryObj<Args> = {
       },
     ],
   },
-};
+} satisfies Story;
 
-export const WithColor: StoryObj<Args> = {
+export const WithColor = {
   args: {
     ...Primary.args,
     color: "danger",
   },
-};
+} satisfies Story;
 
-export const WithYSTicksFormatter: StoryObj<Args> = {
+export const WithYSTicksFormatter = {
   args: {
     ...Primary.args,
     yTicksFormatter: (value) => `Value: ${value}`,
   },
-};
+} satisfies Story;
 
-export const WithLimitedXTicks: StoryObj<Args> = {
+export const WithLimitedXTicks = {
   args: {
     ...Primary.args,
     maxXTicks: 3,
   },
-};
+} satisfies Story;

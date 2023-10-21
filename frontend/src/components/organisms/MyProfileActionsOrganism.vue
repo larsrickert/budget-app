@@ -30,9 +30,9 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "requestEmailVerification"): void;
-  (event: "avatarSelect", value?: File): void;
-  (event: "deleteUser"): void;
+  requestEmailVerification: [];
+  avatarSelect: [value?: File];
+  deleteUser: [];
 }>();
 
 const { t, d } = useI18n();

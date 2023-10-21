@@ -28,8 +28,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "submit", value: CreateAccountDto): void;
-  (event: "delete"): void;
+  submit: [value: CreateAccountDto];
+  delete: [];
 }>();
 
 const { t } = useI18n();

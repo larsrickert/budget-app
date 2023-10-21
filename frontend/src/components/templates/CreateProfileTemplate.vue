@@ -22,8 +22,8 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "submit", dto: CreateUserDto, reset: () => void): void;
-  (event: "login"): void;
+  submit: [dto: CreateUserDto, reset: () => void];
+  login: [];
 }>();
 
 const { t } = useI18n();

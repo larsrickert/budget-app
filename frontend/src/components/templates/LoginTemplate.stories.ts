@@ -1,30 +1,32 @@
-import type { VueProps } from "@/types/vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Component from "./LoginTemplate.vue";
 
-type Args = VueProps<typeof Component>;
-
-export default {
+const meta = {
   component: Component,
-} as Meta<Args>;
+  argTypes: {
+    onRegister: { action: "register" },
+    onSubmit: { action: "submit" },
+  },
+} satisfies Meta<typeof Component>;
 
-export const Primary: StoryObj<Args> = {
-  args: {},
-};
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Disabled: StoryObj<Args> = {
+export const Primary = { args: {} } satisfies Story;
+
+export const Disabled = {
   args: {
     disabled: true,
   },
-};
+} satisfies Story;
 
-export const Loading: StoryObj<Args> = {
+export const Loading = {
   args: {
     loading: true,
   },
-};
+} satisfies Story;
 
-export const WithTestUser: StoryObj<Args> = {
+export const WithTestUser = {
   args: {
     ...Primary.args,
     testUser: {
@@ -32,4 +34,4 @@ export const WithTestUser: StoryObj<Args> = {
       password: "123456789",
     },
   },
-};
+} satisfies Story;
