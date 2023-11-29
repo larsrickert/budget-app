@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { provideIsDrawerOpenSymbol } from "@/types";
+import { provideIsDrawerOpenSymbol, type Icon } from "@/types";
 import { Back, Menu } from "@element-plus/icons-vue";
 import { ElButton, ElTooltip } from "element-plus";
-import { inject, type DefineComponent } from "vue";
+import { inject } from "vue";
 
 defineProps<{
   headline: string;
   showBack?: boolean;
-  rightIcon?: DefineComponent;
+  rightIcon?: Icon;
   rightIconText?: string;
 }>();
 

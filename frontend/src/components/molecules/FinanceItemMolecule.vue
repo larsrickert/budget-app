@@ -1,13 +1,13 @@
 <script lang="ts" setup>
+import type { Icon } from "@/types";
 import { ArrowRight } from "@element-plus/icons-vue";
 import { ElIcon } from "element-plus";
-import type { DefineComponent } from "vue";
 import SkeletonAtom from "../atoms/SkeletonAtom.vue";
 
 defineProps<{
   title: string;
   subtitle?: string;
-  icon?: DefineComponent;
+  icon?: Icon;
   value: string;
   skeleton?: boolean;
   hideArrow?: boolean;
