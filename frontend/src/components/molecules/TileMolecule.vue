@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import type { Icon } from "@/types";
 import { ElIcon, ElProgress } from "element-plus";
-import type { DefineComponent } from "vue";
 import SkeletonAtom from "../atoms/SkeletonAtom.vue";
 
 defineProps<{
   title: string;
   subtitle?: string;
-  icon?: DefineComponent;
+  icon?: Icon;
   color?: "success" | "danger";
   loading?: boolean;
   percentage?: number;

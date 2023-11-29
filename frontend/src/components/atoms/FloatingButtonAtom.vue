@@ -1,13 +1,13 @@
 <script lang="ts" setup>
+import type { Icon } from "@/types";
 import type { VueProps } from "@/types/vue";
 import { Plus } from "@element-plus/icons-vue";
 import { ElButton, ElIcon, ElTooltip } from "element-plus";
-import type { DefineComponent } from "vue";
 
 withDefaults(
   defineProps<{
     /** @default Plus */
-    icon?: DefineComponent;
+    icon?: Icon;
     /** @default primary */
     type?: VueProps<typeof ElButton>["type"];
     disabled?: boolean;
