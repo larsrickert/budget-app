@@ -69,13 +69,13 @@ const handleFabClick = async () => {
 
 const { state: overdueTransactions, execute: refetchOverdue } =
   useAsyncState(async () => {
-    const date = new Date();
-    date.setHours(23, 59, 59);
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
 
     const list = await client
       .collection("transactions")
       .getList<TransactionDto>(1, Number.MAX_SAFE_INTEGER, {
-        filter: `bookingDate != "" && bookingDate <= "${date.toISOString()}"`,
+        filter: `bookingDate != "" && bookingDate < "${todayStart.toISOString()}"`,
         sort,
       });
 
