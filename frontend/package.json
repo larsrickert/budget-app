@@ -35,7 +35,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@intlify/unplugin-vue-i18n": "^3.0.1",
+    "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@rushstack/eslint-patch": "^1.10.2",
     "@storybook/addon-essentials": "^8.0.8",
     "@storybook/vue3": "^8.0.8",
@@ -48,7 +48,7 @@
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "~0.5.1",
     "cypress": "^13.7.3",
-    "eslint": "^8.57.0",
+    "eslint": "^9.1.0",
     "eslint-plugin-storybook": "~0.8.0",
     "eslint-plugin-vue": "^9.25.0",
     "jsdom": "^24.0.0",
