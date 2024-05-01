@@ -12,21 +12,45 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v4
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          package_json_file: frontend/package.json
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: frontend/.node-version
           cache: pnpm
           cache-dependency-path: "frontend/pnpm-lock.yaml"
+
       - name: 📦 Install dependencies
         run: pnpm install
-      - name: Lint
+
+      - name: 🔍 Lint
         run: pnpm lint
-      - name: Run unit tests
+
+      - name: 🧪 Run unit tests
         run: pnpm test:unit
-      - name: ⚒️ Build
+
+      - name: 🛠️ Build
         run: pnpm build
+
+  check_backend:
+    name: Check backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+
+      - name: 🛠️ Build
+        run: go build -v cmd/app/main.go
