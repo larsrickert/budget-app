@@ -36,3 +36,21 @@ jobs:
 
       - name: 🛠️ Build
         run: pnpm build
+
+  check_backend:
+    name: Check backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+
+      - name: 🛠️ Build
+        run: go build -v cmd/app/main.go
