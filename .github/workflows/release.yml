@@ -41,4 +41,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           envs: GITHUB_SERVER_URL,GITHUB_REPOSITORY,GITHUB_REF_NAME
-          script: npx nginx-proxy-cli deploy $GITHUB_SERVER_URL/$GITHUB_REPOSITORY --dir=~/nginx-proxy/applications --branch=$GITHUB_REF_NAME
+          script: npx nginx-proxy-cli@3 deploy $GITHUB_SERVER_URL/$GITHUB_REPOSITORY --dir=~/nginx-proxy/applications --branch=$GITHUB_REF_NAME
