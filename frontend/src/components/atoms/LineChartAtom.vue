@@ -90,7 +90,7 @@ const chartData = computed<ChartData<"line">>(() => {
 });
 
 const chartOptions = computed<ChartOptions<"line">>(() => {
-  const gridColor = borderColor.value.color;
+  const gridColor = borderColor.value.color ?? undefined;
 
   return {
     responsive: true,
