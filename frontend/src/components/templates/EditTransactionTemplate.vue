@@ -94,6 +94,8 @@ const hasDataChanged = computed(() => {
   );
 });
 
+const MAX_NOTES_LENGTH = 2056 as const;
+
 const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
   name: [
     { required: true, message: t("validations.required") },
@@ -103,7 +105,12 @@ const rules = computed<FormValidation<UnwrapRef<typeof state>>>(() => ({
     { required: true, message: t("validations.required") },
     { type: "number", message: t("validations.number") },
   ],
-  notes: [{ max: 512, message: t("validations.maxLength", { max: 512 }) }],
+  notes: [
+    {
+      max: MAX_NOTES_LENGTH,
+      message: t("validations.maxLength", { max: MAX_NOTES_LENGTH }),
+    },
+  ],
   type: [
     { required: true, message: t("validations.required") },
     {
@@ -291,7 +298,7 @@ watch(shortcuts, async () => {
               name="notes"
               type="textarea"
               :autosize="{ minRows: 4, maxRows: 16 }"
-              :maxlength="512"
+              :maxlength="MAX_NOTES_LENGTH"
               show-word-limit
             />
           </el-form-item>
