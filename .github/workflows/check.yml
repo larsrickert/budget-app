@@ -1,0 +1,30 @@
+name: Check code
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Check code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🔍 Run eslint
+        run: pnpm lint
+
+      - name: 🔍 Check formatting
+        run: pnpm format:check
+
+      - name: 🛠️ Build
+        run: pnpm build

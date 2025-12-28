@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NUXT_DB_HOST: db # same name as db service below
+      VIRTUAL_HOST: &virtualHost "next.budget-app.de"
+      LETSENCRYPT_HOST: *virtualHost
+    depends_on:
+      - db
+    # ports:
+    #   - "3000:3000"
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_PASSWORD: ${NUXT_DB_PASSWORD?:}
+      POSTGRES_USER: ${NUXT_DB_USER?:}
+      POSTGRES_DB: ${NUXT_DB_NAME?:}
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - ./.db:/var/lib/postgresql/data
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true

@@ -1,0 +1,70 @@
+{
+  "name": "budget-app",
+  "private": true,
+  "type": "module",
+  "version": "3.0.0",
+  "packageManager": "pnpm@10.26.2",
+  "repository": {
+    "url": "https://github.com/larsrickert/budget-app-v2"
+  },
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "lint:fix": "pnpm run lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "prepare": "simple-git-hooks",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@fontsource-variable/source-code-pro": "^5.2.7",
+    "@fontsource-variable/source-sans-3": "^5.2.9",
+    "@nuxtjs/color-mode": "^4.0.0",
+    "@nuxtjs/i18n": "^10.2.1",
+    "@sit-onyx/chartjs-plugin": "^1.0.0",
+    "@sit-onyx/flags": "^1.0.0",
+    "@sit-onyx/icons": "^1.3.0",
+    "@sit-onyx/nuxt": "^1.0.1",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "^14.1.0",
+    "chart.js": "^4.5.1",
+    "drizzle-orm": "~0.45.1",
+    "drizzle-zod": "~0.8.3",
+    "nuxt": "^4.2.2",
+    "nuxt-auth-utils": "~0.5.26",
+    "pg": "^8.16.3",
+    "sit-onyx": "^1.5.0",
+    "vue": "^3.5.26",
+    "vue-chartjs": "^5.3.3",
+    "vue-router": "^4.6.4",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.12.1",
+    "@types/node": "^24.10.4",
+    "@types/pg": "^8.16.0",
+    "drizzle-kit": "~0.31.8",
+    "eslint": "^9.39.2",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "sass-embedded": "^1.97.1",
+    "simple-git-hooks": "^2.13.1",
+    "typescript": "~5.9.3",
+    "vue-tsc": "^3.2.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}

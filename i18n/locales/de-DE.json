@@ -1,0 +1,114 @@
+{
+  "error": {
+    "backToHome": "Zurück zur Startseite",
+    "technicalDetails": "Technische Fehler-Informationen"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "logout": "Abmelden"
+  },
+  "app": {
+    "name": "Budget App",
+    "version": "App Version",
+    "description": "App für die Verwaltung von persönlichen Finanzen und zur Übersicht des pro Tag verfügbaren Budgets."
+  },
+  "dashboard": "Übersicht",
+  "statistics": {
+    "monthlyOverview": "Monatsübersicht",
+    "income": "Einnahmen",
+    "outcome": "Ausgaben",
+    "balance": "Saldo",
+    "budgetDevelopment": {
+      "headline": "Budgetentwicklung",
+      "available": {
+        "label": "Tatsächlich verfügbar",
+        "tooltip": "Du könntest jetzt bis zu {n} ausgeben und hättest immer noch genug Geld übrig, um alle deine anstehenden Ausgaben zu bezahlen ohne deine Konten zu überziehen."
+      },
+      "empty": "Bitte füge weitere wiederholende Buchungen hinzu, um deine Budgetentwicklung hier zu sehen."
+    }
+  },
+  "accounts": {
+    "account": "Konto | Konten",
+    "notFound": "Konto nicht gefunden",
+    "toasts": {
+      "update": {
+        "success": "Konto wurde erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren des Kontos"
+      },
+      "create": {
+        "success": "Konto erfolgreich erstellt",
+        "error": "Fehler beim Erstellen des Kontos"
+      },
+      "delete": {
+        "success": "Konto erfolgreich gelöscht",
+        "error": "Fehler beim Löschen des Kontos"
+      }
+    },
+    "createNew": "Konto erstellen"
+  },
+  "name": "Name",
+  "value": "Betrag",
+  "notes": "Bemerkungen",
+  "save": "Speichern",
+  "create": "Erstellen",
+  "delete": "Löschen",
+  "confirmDelete": {
+    "confirm": "Löschen bestätigen",
+    "description": "Bist du sicher, dass du die ausgewählten Daten löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "cancel": "Abbrechen",
+  "contact": "Kontakt",
+  "transactions": {
+    "transaction": "Buchung | Buchungen",
+    "types": "Buchungsarten",
+    "income": "Einnahme | Einnahmen",
+    "outcome": "Ausgabe | Ausgaben",
+    "createNew": "Buchung erstellen",
+    "toasts": {
+      "create": {
+        "success": "Buchung erfolgreich erstellt",
+        "error": "Fehler beim Erstellen der Buchung"
+      },
+      "update": {
+        "success": "Buchung erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren der Buchung"
+      },
+      "delete": {
+        "success": "Buchung erfolgreich gelöscht",
+        "error": "Fehler beim Löschen der Buchung"
+      },
+      "updateOverdue": {
+        "error": "Fehler beim Aktualisieren der überfälligen Buchungen",
+        "success": "Überfällige Buchungen erfolgreich aktualisiert"
+      }
+    },
+    "bookingDate": "Buchungsdatum",
+    "frequency": "Häufigkeit",
+    "availableFrequency": "Verfügbare Häufigkeiten",
+    "frequencies": {
+      "none": "Einmalig",
+      "monthly": "Monatlich",
+      "quarterly": "Quartalsweise",
+      "semiannual": "Halbjährlich",
+      "annual": "Jährlich",
+      "biennial": "Zweijährlich"
+    },
+    "overdue": {
+      "headline": "Überfällige Buchungen",
+      "description": "Du hast 1 überfällige Buchung. | Du hast {n} überfällige Buchungen.",
+      "modal": {
+        "description": "Du kannst hier deine überfälligen Buchungen überprüfgen und deren Buchungsdatum automatisch anpassen lassen."
+      },
+      "checkNow": "Jetzt überprüfen",
+      "newBookingDate": "Neues Buchungsdatum",
+      "adjust": "Anpassen"
+    }
+  },
+  "noData": "Keine Daten gefunden",
+  "intro": {
+    "gettingStarted": {
+      "headline": "Erste Schritte",
+      "description": "Um diese Budget-App nutzen zu können, musst du dich anmelden und ein Konto erstellen, mit dem alle deine eingegebenen Daten verknüpft werden. Du kannst dich damit auch auf mehreren Geräten anmelden. Aktuell ist die Anmeldung nur über GitHub möglich."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+name: Release and deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ~/.ssh/deploy.key
+          chmod 600 ~/.ssh/deploy.key
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy
+        run: |
+          export DEPLOY_REPOSITORY="${GITHUB_REPOSITORY}"
+          ssh -i ~/.ssh/deploy.key -o SendEnv="DEPLOY_REPOSITORY" -T ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
