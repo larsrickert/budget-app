@@ -1,32 +1,29 @@
-version: "3"
-
 services:
-  backend:
-    build: ./backend
-    image: larsrickert/budget-app-backend
+  app:
+    build: .
     restart: unless-stopped
-    # ports:
-    #   - "8090:8090"
+    env_file: .env
     environment:
-      VIRTUAL_HOST: ${BACKEND_DOMAIN:?}
-      LETSENCRYPT_HOST: ${BACKEND_DOMAIN:?}
-    volumes:
-      - ./docker-data/pocketbase:/app/pb_data
-      - ./backend/migrations:/app/migrations
+      NUXT_DB_HOST: db # same name as db service below
+      VIRTUAL_HOST: &virtualHost "budget-app.de"
+      LETSENCRYPT_HOST: *virtualHost
+    depends_on:
+      - db
+    # ports:
+    #   - "3000:3000"
 
-  frontend:
-    build:
-      context: ./frontend
-      args:
-        API_HOST: https://${BACKEND_DOMAIN:?}
-    image: larsrickert/budget-app-frontend
+  db:
+    image: postgres:17
     restart: unless-stopped
-    # ports:
-    #   - "80:80"
+    env_file: .env
     environment:
-      VIRTUAL_HOST: ${FRONTEND_DOMAIN:?}
-      LETSENCRYPT_HOST: ${FRONTEND_DOMAIN:?}
-      NUXT_PUBLIC_API_HOST: ${BACKEND_DOMAIN:?}
+      POSTGRES_PASSWORD: ${NUXT_DB_PASSWORD?:}
+      POSTGRES_USER: ${NUXT_DB_USER?:}
+      POSTGRES_DB: ${NUXT_DB_NAME?:}
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - ./.db:/var/lib/postgresql/data
 
 networks:
   default:

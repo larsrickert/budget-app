@@ -1,0 +1,114 @@
+{
+  "error": {
+    "backToHome": "Back to home",
+    "technicalDetails": "Technical error details"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "app": {
+    "name": "Budget App",
+    "version": "App version",
+    "description": "App for managing personal finances and checking per-day available budget."
+  },
+  "dashboard": "Dashboard",
+  "statistics": {
+    "monthlyOverview": "Monthly overview",
+    "income": "Income",
+    "outcome": "Expenses",
+    "balance": "Balance",
+    "budgetDevelopment": {
+      "headline": "Budget development",
+      "available": {
+        "label": "Actually available",
+        "tooltip": "You could now spend up to {n} and still have enough money left over to pay all your upcoming expenses without overdrawing your accounts."
+      },
+      "empty": "Please add more repeated transactions to see the budget development here."
+    }
+  },
+  "accounts": {
+    "account": "Account | Accounts",
+    "notFound": "Account not found",
+    "toasts": {
+      "update": {
+        "success": "Successfully updated account",
+        "error": "Error while updating account"
+      },
+      "create": {
+        "success": "Successfully created account",
+        "error": "Error while creating account"
+      },
+      "delete": {
+        "success": "Successfully deleted account",
+        "error": "Error while deleting account"
+      }
+    },
+    "createNew": "Create account"
+  },
+  "name": "Name",
+  "value": "Value",
+  "notes": "Notes",
+  "save": "Save",
+  "create": "Create",
+  "delete": "Delete",
+  "confirmDelete": {
+    "confirm": "Confirm deletion",
+    "description": "Are you sure that you want to delete the selected data? This action can not be reverted."
+  },
+  "cancel": "Cancel",
+  "contact": "Contact",
+  "transactions": {
+    "transaction": "Transaction | Transactions",
+    "types": "Transaction types",
+    "income": "Income",
+    "outcome": "Expenses",
+    "createNew": "Create transaction",
+    "toasts": {
+      "create": {
+        "success": "Successfully created transaction",
+        "error": "Error while creating transaction"
+      },
+      "update": {
+        "success": "Successfully updated transaction",
+        "error": "Error while updating transaction"
+      },
+      "delete": {
+        "success": "Successfully deleted transaction",
+        "error": "Error while deleting transaction"
+      },
+      "updateOverdue": {
+        "error": "Error while updating overdue transactions",
+        "success": "Successfully updated overdue transactions"
+      }
+    },
+    "bookingDate": "Booking date",
+    "frequency": "Frequency",
+    "availableFrequency": "Available frequencies",
+    "frequencies": {
+      "none": "Onetime",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "semiannual": "Semiannual",
+      "annual": "Annual",
+      "biennial": "Biennial"
+    },
+    "overdue": {
+      "headline": "Overdue transactions",
+      "description": "You have one overdue transaction. | You have {n} overdue transactions.",
+      "modal": {
+        "description": "You can check all your overdue transactions here and automatically update the booking date accordingly."
+      },
+      "checkNow": "Check now",
+      "newBookingDate": "New booking date",
+      "adjust": "Adjust"
+    }
+  },
+  "noData": "No data found",
+  "intro": {
+    "gettingStarted": {
+      "headline": "Getting Started",
+      "description": "To start using this budget app, you need to login to create an account where all your entered data is connected to. It also allows you to login on multiple devices. Currently, login is only possible using an GitHub."
+    }
+  }
+}

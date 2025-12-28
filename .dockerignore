@@ -1,4 +1,5 @@
 # Nuxt dev/build outputs
+
 .output
 .data
 .nuxt
@@ -7,21 +8,13 @@
 dist
 
 # Node dependencies
+
 node_modules
 
-# Logs
-logs
-*.log
-
-# Misc
-.DS_Store
-.fleet
-.idea
-.vscode
-
 # Local env files
+
 .env
-.env.*
+.env.\*
 !.env.example
 
 .db
