@@ -5,7 +5,7 @@ services:
     env_file: .env
     environment:
       NUXT_DB_HOST: db # same name as db service below
-      VIRTUAL_HOST: &virtualHost "next.budget-app.de"
+      VIRTUAL_HOST: &virtualHost "budget-app.de"
       LETSENCRYPT_HOST: *virtualHost
     depends_on:
       - db
