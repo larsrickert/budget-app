@@ -57,18 +57,21 @@ export async function calculateBudgetDevelopment(
 
     for (const transaction of options.transactions) {
       if (!transaction.bookingDate) continue;
-      const value = transaction.value;
 
       const bookingDate = parseDatabaseDate(transaction.bookingDate);
+      const endDate = transaction.endDate
+        ? setTimeToDayEnd(parseDatabaseDate(transaction.endDate))
+        : undefined;
+      if (endDate && endDate.getTime() < checkDate.getTime()) continue;
 
-      //  only consider transactions that occur on the same day of the month as the current checkDate
+      // only consider transactions that occur on the same day of the month as the current checkDate
       if (bookingDate.getDate() !== checkDate.getDate()) {
         continue;
       }
 
       // Direct match: If the transaction date is the exact same as the checkDate.
       if (bookingDate.getTime() === checkDate.getTime()) {
-        budgetDiff += value;
+        budgetDiff += transaction.value;
         continue;
       }
 
@@ -88,7 +91,7 @@ export async function calculateBudgetDevelopment(
 
       // Check if the transaction recurs on the current month.
       if (monthDiff > 0 && monthDiff % transaction.frequency === 0) {
-        budgetDiff += value;
+        budgetDiff += transaction.value;
       }
     }
 
@@ -96,7 +99,7 @@ export async function calculateBudgetDevelopment(
     if (budgetDiff !== 0 || isFirstDay) {
       currentBudget += budgetDiff;
       items.push({
-        date: formatDate(checkDate),
+        date: formatToDateString(checkDate),
         budget: roundToDecimals(currentBudget, 2),
       });
       isFirstDay = false;
@@ -120,24 +123,4 @@ export async function calculateBudgetDevelopment(
     onetimeTotal,
     items,
   };
-}
-
-function removeTimeFromDate(date: Date | string) {
-  const newDate = new Date(date);
-  newDate.setHours(0, 0, 0, 0);
-  return newDate;
-}
-
-/**
- * Formats a Date object into a 'YYYY-MM-DD' string.
- * @param date The date to format.
- * @returns The formatted date string.
- */
-function formatDate(date: Date): string {
-  // `toISOString()` returns 'YYYY-MM-DDTHH:mm:ss.sssZ', we just need the date part.
-  return date.toISOString().split("T")[0]!;
-}
-
-function parseDatabaseDate(dateString: string) {
-  return new Date(dateString + "T00:00:00.000Z");
 }

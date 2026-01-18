@@ -42,6 +42,13 @@ watch(
   },
 );
 
+watch(
+  () => state.value.frequency,
+  (newFrequency) => {
+    if (!newFrequency) state.value.endDate = undefined;
+  },
+);
+
 const handleSubmit = () => {
   const transaction = state.value as NewTransaction;
   emit("submit", { ...transaction });
@@ -102,7 +109,7 @@ const frequencyOptions = computed(() => {
       :model-value="state.bookingDate"
       :class="gridSpan"
       :label="$t('transactions.bookingDate')"
-      @update:model-value="state.bookingDate = $event?.toString() || null"
+      @update:model-value="state.bookingDate = $event?.toString()"
     />
 
     <OnyxSelect
@@ -113,6 +120,15 @@ const frequencyOptions = computed(() => {
       :options="frequencyOptions"
       :placeholder="$t('transactions.frequencies.none')"
       @update:model-value="state.frequency = $event || null"
+    />
+
+    <OnyxDatePicker
+      v-if="state.frequency"
+      :model-value="state.endDate"
+      :class="gridSpan"
+      :label="$t('transactions.endDate.label')"
+      :label-tooltip="$t('transactions.endDate.info')"
+      @update:model-value="state.endDate = $event?.toString()"
     />
 
     <OnyxTextarea
