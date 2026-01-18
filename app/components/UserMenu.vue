@@ -5,9 +5,7 @@ import { version } from "~~/package.json";
 const { user, clear, ready } = useUserSession();
 const localePath = useLocalePath();
 
-const handleLogin = async () => {
-  await navigateTo("/auth/github", { external: true });
-};
+const handleLogin = () => navigateTo("/login", { external: true });
 
 const handleLogout = async () => {
   await clear();
