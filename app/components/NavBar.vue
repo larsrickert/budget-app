@@ -2,13 +2,14 @@
 import { repository } from "~~/package.json";
 
 const localePath = useLocalePath();
+const { loggedIn } = useUserSession();
 </script>
 
 <template>
   <OnyxNavBar
     logo-url="/favicon.svg"
     :app-name="$t('app.name')"
-    :app-area="{ link: localePath('/') }"
+    :app-area="{ link: localePath(loggedIn ? '/dashboard' : '/') }"
     with-back-button
     @navigate-back="$router.back"
   >

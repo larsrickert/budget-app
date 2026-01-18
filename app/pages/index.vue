@@ -6,9 +6,7 @@ definePageMeta({ layout: false });
 const { t } = useI18n();
 useHead({ titleTemplate: "%s", title: computed(() => t("app.name")) });
 
-const handleLogin = async () => {
-  await navigateTo("/auth/github", { external: true });
-};
+const handleLogin = () => navigateTo("/login", { external: true });
 </script>
 
 <template>
