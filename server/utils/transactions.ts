@@ -1,5 +1,3 @@
-import { setTimeToDayEnd } from "./dates";
-
 /**
  * Calculates the monthly statistics for the given transactions.
  *
