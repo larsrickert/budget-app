@@ -102,6 +102,10 @@
       "checkNow": "Jetzt überprüfen",
       "newBookingDate": "Neues Buchungsdatum",
       "adjust": "Anpassen"
+    },
+    "endDate": {
+      "label": "Wiederholen bis",
+      "info": "Falls ausgewählt wird die Buchung nur bis zum Enddatum (inklusive) wiederholt. Ansonsten wird sie unbegrenzt wiederholt."
     }
   },
   "noData": "Keine Daten gefunden",

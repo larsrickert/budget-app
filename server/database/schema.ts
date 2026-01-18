@@ -35,5 +35,6 @@ export const transactions = pgTable("transactions", {
   type: transactionTypeEnum().notNull(),
   frequency: integer(),
   bookingDate: date("booking_date", { mode: "string" }),
+  endDate: date("end_date", { mode: "string" }),
   notes: varchar(),
 });

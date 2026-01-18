@@ -102,6 +102,10 @@
       "checkNow": "Check now",
       "newBookingDate": "New booking date",
       "adjust": "Adjust"
+    },
+    "endDate": {
+      "label": "Repeat until",
+      "info": "Is selected, the transaction will only be repeated until (including) the given end date. Otherwise, it will be repeated unlimited."
     }
   },
   "noData": "No data found",
