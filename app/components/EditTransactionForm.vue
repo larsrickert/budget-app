@@ -109,7 +109,7 @@ const frequencyOptions = computed(() => {
       :model-value="state.bookingDate"
       :class="gridSpan"
       :label="$t('transactions.bookingDate')"
-      @update:model-value="state.bookingDate = $event?.toString()"
+      @update:model-value="state.bookingDate = $event?.toString() || null"
     />
 
     <OnyxSelect
@@ -128,7 +128,7 @@ const frequencyOptions = computed(() => {
       :class="gridSpan"
       :label="$t('transactions.endDate.label')"
       :label-tooltip="$t('transactions.endDate.info')"
-      @update:model-value="state.endDate = $event?.toString()"
+      @update:model-value="state.endDate = $event?.toString() || null"
     />
 
     <OnyxTextarea
