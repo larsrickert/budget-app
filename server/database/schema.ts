@@ -21,7 +21,7 @@ export const accounts = pgTable("accounts", {
   userId,
   name: varchar({ length: 255 }).notNull(),
   value: real().notNull(),
-  notes: varchar({ length: 2048 }),
+  notes: varchar(),
 });
 
 export const transactionTypeEnum = pgEnum("transactionType", ["income", "outcome"]);

@@ -51,13 +51,7 @@ const handleSubmit = () => {
       :format-number="(value) => $n(value, 'currency')"
     />
 
-    <OnyxTextarea
-      v-model="state.notes"
-      class="onyx-grid-span-8"
-      :label="$t('notes')"
-      :maxlength="2048"
-      with-counter
-    />
+    <TextEditor v-model="state.notes" class="onyx-grid-span-8" :label="$t('notes')" />
 
     <div class="onyx-grid-span-full actions">
       <OnyxButton
