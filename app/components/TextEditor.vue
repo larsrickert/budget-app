@@ -16,7 +16,7 @@ const extensions = [
 </script>
 
 <template>
-  <OnyxTextEditor v-model="value" :label="props.label" :extensions :autosize="{ max: 6, min: 6 }" />
+  <OnyxTextEditor v-model="value" :label="props.label" :extensions />
 </template>
 
 <style lang="scss" scoped>
