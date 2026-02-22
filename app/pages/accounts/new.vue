@@ -6,6 +6,7 @@ definePageMeta({ layout: false, middleware: ["authenticated"] });
 const { t } = useI18n();
 const toast = useToast();
 const localePath = useLocalePath();
+const formId = useId();
 
 useHead({
   title: computed(() => t("accounts.createNew")),
@@ -42,6 +43,12 @@ const { executeImmediate: handleSubmit, isLoading } = useAsyncState(
 
 <template>
   <NuxtLayout name="default" :headline="t('accounts.createNew')">
-    <EditAccountForm :loading="isLoading" @submit="handleSubmit" />
+    <EditAccountForm :id="formId" :disabled="isLoading" @submit="handleSubmit" />
+
+    <template #footer>
+      <OnyxBottomBar>
+        <OnyxButton :label="$t('create')" type="submit" :loading="isLoading" :form="formId" />
+      </OnyxBottomBar>
+    </template>
   </NuxtLayout>
 </template>

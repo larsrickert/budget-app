@@ -9,6 +9,7 @@ const toast = useToast();
 const localePath = useLocalePath();
 
 const id = useRouteParam("id");
+const formId = useId();
 const { data, status } = await useFetch(() => `/api/accounts/${id.value}`);
 
 useHead({
@@ -77,13 +78,15 @@ const { executeImmediate: handleDelete, isLoading: isDeleteLoading } = useAsyncS
 
     <EditAccountForm
       v-else
+      :id="formId"
       :account="data"
       :skeleton="status === 'pending'"
-      :loading="isSubmitLoading"
-      :disabled="isDeleteLoading"
+      :disabled="isSubmitLoading || isDeleteLoading"
       @submit="handleSubmit"
-    >
-      <template #actions>
+    />
+
+    <template #footer>
+      <OnyxBottomBar>
         <ConfirmDeleteModal @confirm="handleDelete">
           <template #default="{ trigger }">
             <OnyxButton
@@ -96,7 +99,9 @@ const { executeImmediate: handleDelete, isLoading: isDeleteLoading } = useAsyncS
             />
           </template>
         </ConfirmDeleteModal>
-      </template>
-    </EditAccountForm>
+
+        <OnyxButton :label="$t('save')" type="submit" :loading="isSubmitLoading" :form="formId" />
+      </OnyxBottomBar>
+    </template>
   </NuxtLayout>
 </template>
