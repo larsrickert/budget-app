@@ -15,6 +15,13 @@
       "when": 1768747254872,
       "tag": "0001_powerful_molly_hayes",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771606521295,
+      "tag": "0002_nappy_red_hulk",
+      "breakpoints": true
     }
   ]
 }

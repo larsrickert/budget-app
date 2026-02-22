@@ -131,13 +131,7 @@ const frequencyOptions = computed(() => {
       @update:model-value="state.endDate = $event?.toString() || null"
     />
 
-    <OnyxTextarea
-      v-model="state.notes"
-      class="onyx-grid-span-full"
-      :label="$t('notes')"
-      :maxlength="2048"
-      with-counter
-    />
+    <TextEditor v-model="state.notes" class="onyx-grid-span-full" :label="$t('notes')" />
 
     <div class="onyx-grid-span-full actions">
       <OnyxButton
