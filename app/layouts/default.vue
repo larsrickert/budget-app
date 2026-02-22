@@ -3,15 +3,19 @@ const props = defineProps<{
   headline?: string;
 }>();
 
-defineSlots<{
+const slots = defineSlots<{
   /**
    * Main page content.
    */
   default(): unknown;
   /**
-   * Optional header content
+   * Optional header content.
    */
   header?(): unknown;
+  /**
+   * Optional footer content.
+   */
+  footer?(): unknown;
 }>();
 </script>
 
@@ -28,6 +32,10 @@ defineSlots<{
     </template>
 
     <slot v-else></slot>
+
+    <template v-if="slots.footer" #footer>
+      <slot name="footer"></slot>
+    </template>
   </OnyxPageLayout>
 </template>
 

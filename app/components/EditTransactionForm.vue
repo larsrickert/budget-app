@@ -5,7 +5,6 @@ const props = defineProps<{
   type: TransactionType;
   transaction?: Transaction;
   skeleton?: boolean;
-  loading?: boolean;
   disabled?: boolean;
 }>();
 
@@ -78,7 +77,7 @@ const frequencyOptions = computed(() => {
 <template>
   <OnyxForm
     class="onyx-grid"
-    :disabled="props.loading || props.disabled"
+    :disabled="props.disabled"
     :skeleton="props.skeleton"
     @submit.prevent="handleSubmit"
   >
@@ -132,16 +131,6 @@ const frequencyOptions = computed(() => {
     />
 
     <TextEditor v-model="state.notes" class="onyx-grid-span-full" :label="$t('notes')" />
-
-    <div class="onyx-grid-span-full actions">
-      <OnyxButton
-        :label="$t(props.transaction ? 'save' : 'create')"
-        type="submit"
-        :loading="props.loading"
-      />
-
-      <slot name="actions"></slot>
-    </div>
   </OnyxForm>
 </template>
 

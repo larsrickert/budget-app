@@ -7,6 +7,7 @@ definePageMeta({ layout: false, middleware: ["authenticated"] });
 const { t } = useI18n();
 const toast = useToast();
 const localePath = useLocalePath();
+const formId = useId();
 
 const id = useRouteParam("id");
 const { data, status } = await useFetch(() => `/api/transactions/${id.value as ":id"}`);
@@ -84,14 +85,16 @@ const { executeImmediate: handleDelete, isLoading: isDeleteLoading } = useAsyncS
 
     <EditTransactionForm
       v-else
+      :id="formId"
       :transaction="data"
       :type="data?.type ?? 'outcome'"
       :skeleton="status === 'pending'"
-      :loading="isSubmitLoading"
-      :disabled="isDeleteLoading"
+      :disabled="isSubmitLoading || isDeleteLoading"
       @submit="handleSubmit"
-    >
-      <template #actions>
+    />
+
+    <template #footer>
+      <OnyxBottomBar>
         <ConfirmDeleteModal @confirm="handleDelete">
           <template #default="{ trigger }">
             <OnyxButton
@@ -104,7 +107,9 @@ const { executeImmediate: handleDelete, isLoading: isDeleteLoading } = useAsyncS
             />
           </template>
         </ConfirmDeleteModal>
-      </template>
-    </EditTransactionForm>
+
+        <OnyxButton :label="$t('save')" type="submit" :loading="isSubmitLoading" :form="formId" />
+      </OnyxBottomBar>
+    </template>
   </NuxtLayout>
 </template>

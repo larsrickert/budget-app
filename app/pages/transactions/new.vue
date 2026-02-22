@@ -6,6 +6,7 @@ definePageMeta({ layout: false, middleware: ["authenticated"] });
 const { t } = useI18n();
 const toast = useToast();
 const localePath = useLocalePath();
+const formId = useId();
 
 const type = useQueryParam({
   name: "type",
@@ -52,6 +53,12 @@ const { executeImmediate: handleSubmit, isLoading } = useAsyncState(
 
 <template>
   <NuxtLayout name="default" :headline="t('transactions.createNew')">
-    <EditTransactionForm :loading="isLoading" :type @submit="handleSubmit" />
+    <EditTransactionForm :id="formId" :disabled="isLoading" :type @submit="handleSubmit" />
+
+    <template #footer>
+      <OnyxBottomBar>
+        <OnyxButton :label="$t('create')" type="submit" :loading="isLoading" :form="formId" />
+      </OnyxBottomBar>
+    </template>
   </NuxtLayout>
 </template>

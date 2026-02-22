@@ -2,16 +2,11 @@
 const props = defineProps<{
   account?: Account;
   skeleton?: boolean;
-  loading?: boolean;
   disabled?: boolean;
 }>();
 
 const emit = defineEmits<{
   submit: [account: NewAccount];
-}>();
-
-defineSlots<{
-  actions?(): unknown;
 }>();
 
 const state = ref<Partial<NewAccount>>({ ...props.account });
@@ -28,7 +23,7 @@ const handleSubmit = () => {
 <template>
   <OnyxForm
     class="onyx-grid"
-    :disabled="props.loading || props.disabled"
+    :disabled="props.disabled"
     :skeleton="props.skeleton"
     @submit.prevent="handleSubmit"
   >
@@ -52,16 +47,6 @@ const handleSubmit = () => {
     />
 
     <TextEditor v-model="state.notes" class="onyx-grid-span-8" :label="$t('notes')" />
-
-    <div class="onyx-grid-span-full actions">
-      <OnyxButton
-        :label="$t(props.account ? 'save' : 'create')"
-        type="submit"
-        :loading="props.loading"
-      />
-
-      <slot name="actions"></slot>
-    </div>
   </OnyxForm>
 </template>
 
