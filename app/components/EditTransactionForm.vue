@@ -72,6 +72,24 @@ const frequencyOptions = computed(() => {
     { value: 24, label: t("transactions.frequencies.biennial") },
   ] satisfies SelectOption[];
 });
+
+const bookingDate = computed({
+  get: () => {
+    return state.value.bookingDate ? new Date(state.value.bookingDate) : undefined;
+  },
+  set: (newValue) => {
+    state.value.bookingDate = newValue ? toLocaleDateString(newValue) : null;
+  },
+});
+
+const endDate = computed({
+  get: () => {
+    return state.value.endDate ? new Date(state.value.endDate) : undefined;
+  },
+  set: (newValue) => {
+    state.value.endDate = newValue ? toLocaleDateString(newValue) : null;
+  },
+});
 </script>
 
 <template>
@@ -104,11 +122,10 @@ const frequencyOptions = computed(() => {
       @update:model-value="state.value = $event != undefined ? getValue($event) : undefined"
     />
 
-    <OnyxDatePicker
-      :model-value="state.bookingDate"
+    <OnyxUnstableDatePickerV2
+      v-model="bookingDate"
       :class="gridSpan"
       :label="$t('transactions.bookingDate')"
-      @update:model-value="state.bookingDate = $event?.toString() || null"
     />
 
     <OnyxSelect
@@ -121,13 +138,14 @@ const frequencyOptions = computed(() => {
       @update:model-value="state.frequency = $event || null"
     />
 
-    <OnyxDatePicker
+    <OnyxUnstableDatePickerV2
       v-if="state.frequency"
-      :model-value="state.endDate"
+      v-model="endDate"
       :class="gridSpan"
-      :label="$t('transactions.endDate.label')"
-      :label-tooltip="$t('transactions.endDate.info')"
-      @update:model-value="state.endDate = $event?.toString() || null"
+      :label="{
+        label: $t('transactions.bookingDate'),
+        tooltipText: $t('transactions.endDate.info'),
+      }"
     />
 
     <TextEditor v-model="state.notes" class="onyx-grid-span-full" :label="$t('notes')" />
