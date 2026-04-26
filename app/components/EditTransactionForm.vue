@@ -143,7 +143,7 @@ const endDate = computed({
       v-model="endDate"
       :class="gridSpan"
       :label="{
-        label: $t('transactions.bookingDate'),
+        label: $t('transactions.endDate.label'),
         tooltipText: $t('transactions.endDate.info'),
       }"
     />
