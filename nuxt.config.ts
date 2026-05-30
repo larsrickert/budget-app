@@ -3,7 +3,7 @@ import path from "node:path";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-12-20",
+  compatibilityDate: "2026-05-30",
   devtools: { enabled: true },
   typescript: { typeCheck: "build" },
   modules: [
