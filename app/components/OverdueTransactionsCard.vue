@@ -38,6 +38,7 @@ const width = "minmax(max-content, 1fr)";
 
 const columns: ColumnConfig<Entry, ColumnGroupConfig, CustomColumnTypes>[] = [
   { key: "name", label: t("name"), width },
+  { key: "value", label: t("value"), type: "currency", width },
   { key: "bookingDate", label: t("transactions.bookingDate"), type: "date", width },
   {
     key: "nextBookingDate",
@@ -45,12 +46,18 @@ const columns: ColumnConfig<Entry, ColumnGroupConfig, CustomColumnTypes>[] = [
     type: "nextBookingDate",
     width,
   },
-  { key: "value", label: t("value"), type: "currency", width },
 ];
 
 const selectionState = ref<DataGridFeatures.SelectionState>({
   selectMode: "include",
   contingent: new Set(),
+});
+
+// reset selection state if modal is closed to prevent leftover data
+watch(isOpen, (open) => {
+  if (!open) {
+    selectionState.value = { selectMode: "include", contingent: new Set() };
+  }
 });
 
 const withSelection = DataGridFeatures.useSelection<Entry>({
@@ -90,7 +97,11 @@ const withCustomTypes = createFeature(() => ({
   },
 }));
 
-const features = [withSelection, withSorting, withCustomTypes];
+const withStickyColumns = DataGridFeatures.useStickyColumns<Entry>({
+  columns: ["name"],
+});
+
+const features = [withSelection, withSorting, withCustomTypes, withStickyColumns];
 
 const handleSubmit = () => {
   emit("adjust", selectedIds.value.slice());
