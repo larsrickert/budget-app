@@ -30,13 +30,15 @@ const slots = defineSlots<{
 $after-height: var(--onyx-density-md);
 
 .header {
-  position: relative;
-  background: var(--onyx-color-base-primary-500);
-  background: linear-gradient(
-    90deg,
-    var(--onyx-color-base-primary-500) 0%,
-    var(--onyx-color-base-info-500) 100%
+  --background-from: light-dark(
+    var(--onyx-color-digits-mint-500),
+    var(--onyx-color-digits-mint-600)
   );
+  --background-to: var(--onyx-color-base-info-500);
+
+  position: relative;
+  background: var(--background-from);
+  background: linear-gradient(90deg, var(--background-from) 0%, var(--background-to) 100%);
   padding-top: $after-height;
   margin-bottom: calc(-1 * $after-height);
   color: #fff;
