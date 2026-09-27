@@ -47,7 +47,7 @@ const props = defineProps<{
   }
 
   &__label {
-    color: var(--onyx-color-text-icons-neutral-soft);
+    color: var(--onyx-color-text-icons-neutral-medium);
     margin-top: var(--onyx-density-3xs);
   }
 }

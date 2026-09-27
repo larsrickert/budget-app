@@ -20,7 +20,7 @@ const props = defineProps<
         <OnyxIcon class="item__icon" :icon="props.icon" />
         <div>
           <div>{{ props.name }}</div>
-          <div v-if="props.description" class="onyx-text--small text--soft">
+          <div v-if="props.description" class="onyx-text--small text--medium">
             {{ props.description }}
           </div>
         </div>
