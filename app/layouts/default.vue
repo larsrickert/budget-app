@@ -23,18 +23,18 @@ const slots = defineSlots<{
   <OnyxPageLayout :no-padding="!!props.headline">
     <template v-if="props.headline">
       <PageHeader :headline="props.headline">
-        <slot name="header"></slot>
+        <slot name="header" />
       </PageHeader>
 
       <div class="onyx-grid-layout">
-        <slot></slot>
+        <slot />
       </div>
     </template>
 
-    <slot v-else></slot>
+    <slot v-else />
 
     <template v-if="slots.footer" #footer>
-      <slot name="footer"></slot>
+      <slot name="footer" />
     </template>
   </OnyxPageLayout>
 </template>

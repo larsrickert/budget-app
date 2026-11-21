@@ -19,7 +19,7 @@ const slots = defineSlots<{
       </OnyxHeadline>
 
       <div v-if="slots.default" class="header__custom-content">
-        <slot></slot>
+        <slot />
       </div>
     </div>
   </section>
