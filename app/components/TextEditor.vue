@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { OnyxStarterKit, OnyxTextEditor, type OnyxTextEditorProps } from "@sit-onyx/tiptap";
-import "@sit-onyx/tiptap/style.css";
 import type { Nullable } from "sit-onyx";
 
 const props = defineProps<Pick<OnyxTextEditorProps, "label">>();

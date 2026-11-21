@@ -22,7 +22,7 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <slot :trigger></slot>
+  <slot :trigger />
 
   <OnyxAlertModal
     v-model:open="isOpen"
