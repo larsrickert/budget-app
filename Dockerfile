@@ -1,21 +1,24 @@
 # build stage
-FROM node:24-alpine AS build
+FROM node:26-alpine AS build
 WORKDIR /app
 
-COPY pnpm-lock.yaml package.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # install pnpm as defined in package.json
-RUN npm i -g $(node -p "require('./package.json').packageManager")
+RUN npm install -g corepack
+RUN corepack enable
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 COPY . ./
-RUN pnpm install --frozen-lockfile
-
+RUN pnpm run postinstall
 RUN pnpm build
 
 # production stage
-FROM node:24-alpine
+FROM node:26-alpine
 WORKDIR /app
 
-COPY --from=build /app/.output /app/.output
+USER node
+COPY --from=build --chown=node:node /app/.output ./.output
+
 EXPOSE 3000
 CMD ["node", ".output/server/index.mjs"]

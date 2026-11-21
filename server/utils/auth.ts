@@ -1,6 +1,7 @@
 import type { UserSession } from "#auth-utils";
 import { eq } from "drizzle-orm";
 import type { H3Event } from "h3";
+import { type RequestEvent, sendRedirect } from "nuxt/server";
 
 export const requireUser = async (event: H3Event) => {
   const session = await requireUserSession(event);
@@ -32,7 +33,7 @@ export const requireUser = async (event: H3Event) => {
  * Useful for handling multiple OAuth providers in the same way.
  */
 export const handleOAuthLoginSuccess = async (
-  event: H3Event,
+  event: RequestEvent,
   data: Parameters<typeof setUserSession>[1],
 ) => {
   const session = await setUserSession(event, data);

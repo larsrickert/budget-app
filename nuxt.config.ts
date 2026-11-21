@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "~/assets/css/index.scss",
     "@fontsource-variable/source-sans-3",
     "@fontsource-variable/source-code-pro",
+    "@sit-onyx/tiptap/style.css",
   ],
   app: {
     head: {
